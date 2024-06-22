@@ -12,6 +12,7 @@ export class AuthService {
 
   public user?: User;
   private baseUrl: string = environment.urlBaseJsonServer;
+  private token: string = 'userToken'
 
 
   constructor(private http: HttpClient) { }
@@ -61,10 +62,20 @@ export class AuthService {
     .pipe(
       tap( user => user[0].isLoged = true ),
       tap( user => this.user = user[0]),
-      tap( user => localStorage.setItem('token', JSON.stringify(user[0]))),
+      tap( user => localStorage.setItem(`${this.token}`, JSON.stringify(user[0]))),
       tap( () => console.log(`Usuario ${this.user?.username} logueado con exito`)),
       catchError( () => of( null )),        /* Si no se pudo loguear mandamos un null  */
     );
+
+  }
+
+  // AUTENTICACION
+
+  public checkAuthentication(): Observable<boolean> {
+
+    if( !localStorage.getItem( `${this.token}` ) ) return of(false);
+
+    return localStorage.getItem( `${ this.token }` ) ? of(true) : of(false)
 
   }
 
@@ -80,6 +91,7 @@ export class AuthService {
         filter( isValid => isValid ),
         switchMap( () => this.addUser(user)
           .pipe(
+                tap( user => localStorage.setItem(` ${this.token} `, JSON.stringify(user))),
                 map( () => true ),
                 tap( () => console.log(`Usuario ${user.username} registrado con exito`)),
           )),

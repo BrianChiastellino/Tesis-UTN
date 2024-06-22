@@ -49,14 +49,13 @@ export class RegisterPageComponent {
     this.authService.registerUser(this.user).subscribe( register => {
       if( !register ) return;
 
-      this.router.navigateByUrl('auth/login');
+      this.goToLogin();
     });
 
+  }
 
-
-
-
-
+  public goToLogin(): void{
+    this.router.navigateByUrl('auth/login');
   }
 
 

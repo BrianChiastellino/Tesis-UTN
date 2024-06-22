@@ -40,14 +40,17 @@ export class LoginPageComponent {
     const email = this.loginForm.controls['email'].value;
     const password = this.loginForm.controls['password'].value;
 
-    // console.log({ email,password });
+    console.log({ email,password });
 
     this.authService.login(email, password).subscribe( login => {
       if( !login ) return;
 
-      this.router.navigateByUrl('auth/register');
+      this.router.navigateByUrl('/landing');
     })
+  }
 
+  public goToRegister(): void{
+    this.router.navigateByUrl('auth/register');
   }
 
 
