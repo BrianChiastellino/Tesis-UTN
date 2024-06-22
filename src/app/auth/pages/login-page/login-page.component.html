@@ -1,0 +1,34 @@
+
+<div class="d-flex flex-column">
+
+  <h2 class="text-center text-uppercase">Login</h2>
+
+  <form class="d-flex flex-column" [formGroup]="loginForm" (submit)="onSubmit()" >
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="text"
+        matInput
+        placeholder="Usuario"
+        formControlName="email"
+        >
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input type="text"
+        matInput
+        placeholder="Contraseña"
+        formControlName="password"
+        >
+    </mat-form-field>
+
+    <button mat-button mat-flat-button color="primary" type="submit">Iniciar Sesion</button>
+
+
+  </form>
+
+
+
+
+</div>

@@ -1,0 +1,37 @@
+<div class="d-flex flex-column">
+
+  <h2 class="text-center text-uppercase">Registro</h2>
+
+  <form class="d-flex flex-column" [formGroup]="registerForm" (submit)="onSubmit()">
+
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input type="text" matInput placeholder="Nombre" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="text" matInput placeholder="Email" formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Documento</mat-label>
+      <input type="text" matInput placeholder="Documento" formControlName="document">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Nombre de usuario</mat-label>
+      <input type="text" matInput placeholder="Usuario" formControlName="username">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input type="text" matInput placeholder="contraseña" formControlName="password">
+    </mat-form-field>
+
+    <button mat-button mat-flat-button color="primary" type="submit">Registrarme!</button>
+
+
+  </form>
+
+</div>

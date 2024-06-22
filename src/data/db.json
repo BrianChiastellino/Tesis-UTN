@@ -1,0 +1,74 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Brian",
+      "email": "chaste@gmail.com",
+      "username": "johndoe",
+      "password": "12345",
+      "document": "A12345678",
+      "isLoged": false
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "username": "janesmith",
+      "password": "password123",
+      "document": "B98765432",
+      "isLoged": false
+    },
+    {
+      "id": "3",
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com",
+      "username": "alicejohnson",
+      "password": "password123",
+      "document": "C13579246",
+      "isLoged": false
+    },
+    {
+      "id": "6299",
+      "name": "asdkj",
+      "email": "laksjd",
+      "username": "laslkdj",
+      "password": "aslkdj",
+      "document": "lkasjd"
+    },
+    {
+      "id": "5d0e",
+      "name": "añlsdk",
+      "email": "ñlaksd",
+      "username": "añslkd",
+      "password": "asñldk",
+      "document": "añsldk"
+    },
+    {
+      "id": "2b65",
+      "name": "12983",
+      "email": "192083",
+      "username": "129038",
+      "password": "120938",
+      "document": "120938",
+      "isLoged": false
+    },
+    {
+      "id": "77e8",
+      "name": "999",
+      "email": "9",
+      "username": "99",
+      "password": "9",
+      "document": "9",
+      "isLoged": false
+    },
+    {
+      "id": "3bfe",
+      "name": "19",
+      "email": "9",
+      "username": "9",
+      "password": "9",
+      "document": "9",
+      "isLoged": false
+    }
+  ]
+}
