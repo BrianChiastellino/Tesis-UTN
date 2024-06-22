@@ -4,16 +4,13 @@ import { environment } from '../../../environments/environment';
 import { Observable, catchError, filter, map, of, switchMap, tap } from 'rxjs';
 import { User } from '../core/user.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({  providedIn: 'root' })
 
 export class AuthService {
 
   public user?: User;
   private baseUrl: string = environment.urlBaseJsonServer;
-  private token: string = 'userToken'
-
+  private token: string = environment.userToken
 
   constructor(private http: HttpClient) { }
 

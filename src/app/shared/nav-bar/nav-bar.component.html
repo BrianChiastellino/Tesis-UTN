@@ -1,1 +1,12 @@
-<p>nav-bar works!</p>
+
+  <mat-toolbar color="primary">
+
+    <button mat-icon-button (click)="home()"> <mat-icon>home</mat-icon> </button>
+
+    <span class="spacer"></span>
+    <button mat-button (click)="logout()" *ngIf="isLogin" class=""> Logout </button>
+    <button mat-button (click)="login()" *ngIf="!isLogin" class=""> Login </button>
+
+
+  </mat-toolbar>
+
