@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { catchError, pipe, tap } from 'rxjs';
+import { catchError, filter, pipe, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -42,10 +42,10 @@ export class LoginPageComponent {
 
     // console.log({ email,password });
 
-    this.authService.login(email, password)
-    .subscribe( user => {
-      if( !user ) return;
-      console.log('Usuario logueado');
+    this.authService.login(email, password).subscribe( login => {
+      if( !login ) return;
+
+      this.router.navigateByUrl('auth/register');
     })
 
   }

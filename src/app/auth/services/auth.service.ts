@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Observable, catchError, map, of, tap } from 'rxjs';
+import { Observable, catchError, filter, map, of, switchMap, tap } from 'rxjs';
 import { User } from '../core/user.model';
 
 @Injectable({
@@ -18,17 +18,17 @@ export class AuthService {
 
   // CRUD
 
-  public get allUsers(): Observable<User[]> {
+  public get users(): Observable<User[]> {
 
     return this.http.get<User[]>(`${ this.baseUrl }/users`)
 
   }
 
-  public addUser(user: User): Observable<User[] | null>{
+  public addUser(user: User): Observable<User | null>{
 
     if( !user) return of(null);
 
-    return this.http.post<User[]>(`${ this.baseUrl }/users`, user);
+    return this.http.post<User>(`${ this.baseUrl }/users`, user);
 
   }
 
@@ -51,7 +51,7 @@ export class AuthService {
 
   }
 
-  // LOGIN
+  // LOGUEO USUARIO
 
   public login (email: string, password: string): Observable<User[] | null> {
 
@@ -62,23 +62,41 @@ export class AuthService {
       tap( user => user[0].isLoged = true ),
       tap( user => this.user = user[0]),
       tap( user => localStorage.setItem('token', JSON.stringify(user[0]))),
-      catchError( () => of( null )),          /* Si no se pudo loguard mandamos un null  */
+      tap( () => console.log(`Usuario ${this.user?.username} logueado con exito`)),
+      catchError( () => of( null )),        /* Si no se pudo loguear mandamos un null  */
     );
 
   }
 
-  // REGISTER
+  // REGISTRO USUARIO
 
   public registerUser (user: User): Observable<boolean> {
 
     if( !user ) return of(false);
 
-    this.allUsers
-    .pipe(
-      tap( data => console.log(data))
-    )
-    .subscribe( data => of( ))
+    return this.validateUser(user)
+      .pipe(
+        tap( data => { if( !data ) console.log(`Usuario ${user.username} registrado sin exito`) } ),
+        filter( isValid => isValid ),
+        switchMap( () => this.addUser(user)
+          .pipe(
+                map( () => true ),
+                tap( () => console.log(`Usuario ${user.username} registrado con exito`)),
+          )),
+      )
 
   }
+
+  public validateUser(user : User ): Observable<boolean> {
+
+    return this.users.pipe(
+      map( users => {
+        const isValid = users.find( u => u.username === user.username || u.email === user.email || u.document === user.document);
+        return !isValid;        /* No es una negacion - quiere decir que nunca va a ser undefinded */
+      })
+    )
+
+  }
+
 
 }

@@ -15,6 +15,8 @@ export class RegisterPageComponent {
 
   public registerForm: FormGroup = this.fb.group({
 
+    //todo: Usar validaciones de Devtalles para el mail
+
     name: ['', Validators.required],
     email: ['', Validators.required],
     document: ['', Validators.required],
@@ -44,11 +46,14 @@ export class RegisterPageComponent {
 
     this.user = new User({ ...this.registerForm.value as User })
 
-    this.authService.getAllUsers.pipe(
-      tap( users => console.log(users)),
-    ).subscribe()
+    this.authService.registerUser(this.user).subscribe( register => {
+      if( !register ) return;
 
-    // console.log({ user });
+      this.router.navigateByUrl('auth/login');
+    });
+
+
+
 
 
 
