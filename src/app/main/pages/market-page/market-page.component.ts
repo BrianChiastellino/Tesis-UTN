@@ -15,15 +15,25 @@ export class MarketPageComponent implements OnInit {
   constructor (private coinGeckoService: CoinGeckoService) {}
 
   ngOnInit(): void {
-    this.getCoinGecko();
+    this.getCoinGeckoTest();
+    // this.getCoinGecko();
+  }
+
+  private getCoinGeckoTest (): void {
+
+    this.coinGeckoService.coinGeckoTest()
+    .pipe(
+      tap( coins  => console.log( { coins } )),
+    )
+    .subscribe( coins => this.coinsGecko = coins );
+
   }
 
   private getCoinGecko (): void {
 
-    this.coinGeckoService.coinGeckoTest()
+    this.coinGeckoService.coinsGecko()
     .pipe(
       tap( data  => console.log( { data } )),
-      tap( coins => this.coinsGecko = coins )
     )
     .subscribe( coins => this.coinsGecko = coins );
 

@@ -1,5 +1,11 @@
+
+<mat-form-field  >
+  <mat-label>Buscar</mat-label>
+  <input matInput (keyup)="searchCoin($event)" placeholder="Escriba para buscar...">
+</mat-form-field>
+
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="coinsGecko" class="mat-elevation-z8" matSort>
+  <table mat-table [dataSource]="coinsTableData" class="mat-elevation-z8" matSort>
 
     <!-- Index Column -->
     <ng-container matColumnDef="index">
@@ -44,6 +50,22 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Ultima Actualizacion </th>
       <td mat-cell *matCellDef="let coin"> {{ coin.last_updated | date:'short' }} </td>
     </ng-container>
+
+    <ng-container matColumnDef="buy">
+      <th mat-header-cell *matHeaderCellDef> Comprar </th>
+      <td mat-cell *matCellDef="let coin">
+        <button color="primary" (click)="buy(coin)">Comprar</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sell">
+      <th mat-header-cell *matHeaderCellDef> Vender </th>
+      <td mat-cell *matCellDef="let coin">
+        <button color="accent" (click)="sell(coin)"> Vender </button>
+      </td>
+    </ng-container>
+
+
 
     <!-- Header Row Definition -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
