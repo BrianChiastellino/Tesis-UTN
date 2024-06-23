@@ -2,5 +2,9 @@
 
 <h1>Mercado de criptomonedas!</h1>
 
-<app-list-coin-gecko [coinsGecko]="coinsGecko"></app-list-coin-gecko>
+<app-list-coin-gecko
+  [coinsGecko]="coinsGecko"
+  (onBuyCoin)="onBuyCoinGecko($event)"
+  (onSellCoin)="onSellCoinGecko($event)"
+></app-list-coin-gecko>
 

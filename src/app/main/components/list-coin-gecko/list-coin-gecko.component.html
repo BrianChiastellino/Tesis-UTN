@@ -54,14 +54,14 @@
     <ng-container matColumnDef="buy">
       <th mat-header-cell *matHeaderCellDef> Comprar </th>
       <td mat-cell *matCellDef="let coin">
-        <button color="primary" (click)="buy(coin)">Comprar</button>
+        <button mat-button color="primary" (click)="buy(coin)"> Comprar </button>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="sell">
       <th mat-header-cell *matHeaderCellDef> Vender </th>
       <td mat-cell *matCellDef="let coin">
-        <button color="accent" (click)="sell(coin)"> Vender </button>
+        <button mat-button color="accent" (click)="sell(coin)"> Vender </button>
       </td>
     </ng-container>
 

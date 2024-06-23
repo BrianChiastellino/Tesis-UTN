@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { CoinGecko } from '../../../coin-gecko/interface/coin-gecko.models';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -12,8 +12,13 @@ export class ListCoinGeckoComponent implements OnChanges {
   @Input()
   public coinsGecko: CoinGecko[] = [];
 
-  public displayedColumns: string[] = ['index', 'id', 'name', 'symbol', 'image', 'current_price', 'last_updated', 'buy', 'sell'];
+  @Output()
+  public onBuyCoin: EventEmitter<CoinGecko> = new EventEmitter();
+
+  @Output() onSellCoin: EventEmitter<CoinGecko> = new EventEmitter();
+
   public coinsTableData = new MatTableDataSource<CoinGecko>();
+  public displayedColumns: string[] = ['index', 'id', 'name', 'symbol', 'image', 'current_price', 'last_updated', 'buy', 'sell'];
 
   constructor() { }
 
@@ -28,11 +33,11 @@ export class ListCoinGeckoComponent implements OnChanges {
   }
 
   public buy ( coin: CoinGecko ): void {
-    console.log('Buy', coin);
+    this.onBuyCoin.emit(coin);
   }
 
   public sell ( coin: CoinGecko ): void {
-    console.log('Sell', coin);
+    this.onSellCoin.emit(coin);
   }
 
 
