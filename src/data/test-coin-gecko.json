@@ -1,0 +1,40 @@
+{
+  "CoinGeckoTest": [
+    {
+      "id": "bitcoin",
+      "symbol": "btc",
+      "name": "Bitcoin",
+      "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+      "current_price": 64444,
+      "price_change_percentage_24h": 0.39803,
+      "last_updated": "2024-06-23T02:02:55.282Z"
+    },
+    {
+      "id": "ethereum",
+      "symbol": "eth",
+      "name": "Ethereum",
+      "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+      "current_price": 3506.41,
+      "price_change_percentage_24h": 0.0664,
+      "last_updated": "2024-06-23T02:03:00.434Z"
+    },
+    {
+      "id": "tether",
+      "symbol": "usdt",
+      "name": "Tether",
+      "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+      "current_price": 0.999554,
+      "price_change_percentage_24h": 0.08776,
+      "last_updated": "2024-06-23T02:00:30.990Z"
+    },
+    {
+      "id": "binancecoin",
+      "symbol": "bnb",
+      "name": "BNB",
+      "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+      "current_price": 588.75,
+      "price_change_percentage_24h": 1.01399,
+      "last_updated": "2024-06-23T02:02:47.209Z"
+    }
+  ]
+}

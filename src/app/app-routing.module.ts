@@ -12,11 +12,17 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(a => a.AuthModule),
-    canActivate:[PublicGuard],
-    canMatch:[PublicGuard]
+    canActivate: [PublicGuard],
+    canMatch: [PublicGuard]
   },
   {
-    path:'**',
+    path: 'main',
+    loadChildren: () => import('./main/main.module').then(m => m.MainModule),
+    // canActivate: [AuthGuard], //todo:
+    // canMatch: [AuthGuard]
+  },
+  {
+    path: '**',
     redirectTo: 'landing',
   },
 ];
@@ -25,4 +31,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

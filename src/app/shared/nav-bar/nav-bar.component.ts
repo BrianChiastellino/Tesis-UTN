@@ -24,8 +24,12 @@ export class NavBarComponent implements OnInit {
     this.isLogin = isLoged ? true : false
   }
 
-  public home (): void {
+  public landing (): void {
     this.router.navigateByUrl('landing');
+  }
+
+  public main (): void{
+    this.router.navigateByUrl('main')
   }
 
   public login (): void{
@@ -39,7 +43,7 @@ export class NavBarComponent implements OnInit {
   public logout (): void {
     localStorage.clear();
     this.isLogin = !this.isLogin;
-    this.home();
+    this.landing();
   }
 
 
