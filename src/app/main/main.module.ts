@@ -8,6 +8,7 @@ import { MainRoutingModule } from './main-routing.module';
 import { ListCoinGeckoComponent } from './components/list-coin-gecko/list-coin-gecko.component';
 import { DialogBuyComponent } from './components/dialog/dialog-buy/dialog-buy.component';
 import { DialogSellComponent } from './components/dialog/dialog-sell/dialog-sell.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { DialogSellComponent } from './components/dialog/dialog-sell/dialog-sell
     CommonModule,
     SharedModule,
     MainRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 

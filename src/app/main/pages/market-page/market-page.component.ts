@@ -1,10 +1,16 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { CoinGeckoService } from '../../../coin-gecko/services/coin-gecko.service';
-import { CoinGecko } from '../../../coin-gecko/interface/coin-gecko.models';
-import { tap } from 'rxjs';
+
+import { filter, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBuyComponent } from '../../components/dialog/dialog-buy/dialog-buy.component';
 import { DialogSellComponent } from '../../components/dialog/dialog-sell/dialog-sell.component';
+import { CoinGeckoService } from '../../../models/coin-gecko/services/coin-gecko.service';
+import { CoinGecko } from '../../../models/coin-gecko/interface/coin-gecko.models';
+import { WalletService } from '../../../wallet/services/wallet.service';
+import { User } from '../../../auth/models/user.model';
+import { environment } from '../../../../environments/environment';
+import { Wallet } from '../../../models/wallet/wallet.models';
+import { Coin } from '../../../models/coin-user/interface/coin-user.models';
 
 @Component({
   selector: 'app-market-page',
@@ -14,9 +20,14 @@ import { DialogSellComponent } from '../../components/dialog/dialog-sell/dialog-
 export class MarketPageComponent implements OnInit, OnChanges {
 
   public coinsGecko: CoinGecko[] = [];
-  public coinBuy: CoinGecko | null = null;
+  private token: string = environment.userToken;
+  private user: User | null = null;
 
-  constructor (private coinGeckoService: CoinGeckoService, private dialog: MatDialog) {}
+  constructor (
+    private coinGeckoService: CoinGeckoService,
+    private dialog: MatDialog,
+    private walletService: WalletService,
+  ) {}
 
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -24,6 +35,7 @@ export class MarketPageComponent implements OnInit, OnChanges {
   }
 
   public ngOnInit(): void {
+    this.getUserFromLocalStorage();
     this.getCoinGeckoTest();
     // this.getCoinGecko();
   }
@@ -38,7 +50,7 @@ export class MarketPageComponent implements OnInit, OnChanges {
     .pipe(
       tap( data =>  console.log({data})),
     )
-    .subscribe();
+    .subscribe( coin => this.createWallet( coin ));
 
   }
 
@@ -53,6 +65,26 @@ export class MarketPageComponent implements OnInit, OnChanges {
       tap( data =>  console.log({data})),
     )
     .subscribe();
+  }
+
+  private createWallet (coin: Coin): void{
+
+    const wallet = new Wallet({
+      idUser: this.user!.id,
+      funds: 100,
+      coins: [coin]
+    });
+
+    this.walletService.addWallet(wallet)
+    .pipe(
+      tap( wallet => console.log('Create wallet: ',{wallet}))
+    )
+    .subscribe();
+
+  }
+
+  private getUserFromLocalStorage (): void{
+    this.user = new User(JSON.parse(localStorage.getItem(this.token)!));
   }
 
   private getCoinGeckoTest (): void {

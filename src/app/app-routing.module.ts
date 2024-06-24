@@ -22,6 +22,12 @@ const routes: Routes = [
     // canMatch: [AuthGuard]
   },
   {
+    path: 'wallet',
+    loadChildren: () => import('./wallet/wallet.module').then(w => w.WalletModule),
+    // canActivate: [AuthGuard], //todo:
+    // canMatch: [AuthGuard]
+  },
+  {
     path: '**',
     redirectTo: 'landing',
   },

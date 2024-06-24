@@ -1,5 +1,30 @@
-<h1>Compra</h1>
-<h2>{{ data.id | uppercase }}</h2>
+<form [formGroup]="formBuy" (ngSubmit)="onConfirm()">
 
-<button (click)="onCancel()"> cancelar </button>
-<button (click)="onConfirm()"> confirmar </button>
+  <h2 mat-dialog-title> {{ coinGecko.id | uppercase }} </h2>
+
+  <h3 mat-dialog-title> {{ coinGecko.current_price | number }} </h3>
+
+  <div class="col">
+    <button mat-button type="button" (click)="setCurrency( 'usd' )"
+      [ngClass]=" currencyTypeButton == 'usd' ? 'button-touched ' : 'button-untouched' "> USD </button>
+    <button mat-button type="button" (click)="setCurrency( 'crypto' )"
+      [ngClass]=" currencyTypeButton == 'crypto' ? 'button-touched ' : 'button-untouched' "> CRYPTO </button>
+  </div>
+
+  <div class="mg-3 row">
+    <input type="text" class="form-control" formControlName="amountTobuy" placeholder="Cantidad">
+  </div>
+
+  <div class="row">
+    <button class="btn btn-primary float-end" type="submit" (click)="onCancel()" >Cancelar</button>
+    <button class="btn btn-primary float-end" type="submit">Confirmar</button>
+  </div>
+
+
+
+
+
+
+
+
+</form>

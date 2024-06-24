@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { CoinGecko } from '../../../coin-gecko/interface/coin-gecko.models';
 import { MatTableDataSource } from '@angular/material/table';
+import { CoinGecko } from '../../../models/coin-gecko/interface/coin-gecko.models';
 
 @Component({
   selector: 'app-list-coin-gecko',

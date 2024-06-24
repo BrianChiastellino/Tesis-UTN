@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CoinGecko } from '../../../../coin-gecko/interface/coin-gecko.models';
+import { CoinGecko } from '../../../../models/coin-gecko/interface/coin-gecko.models';
 
 @Component({
   selector: 'app-dialog-sell',

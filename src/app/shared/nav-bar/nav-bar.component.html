@@ -1,7 +1,8 @@
 <mat-toolbar color="primary">
 
-  <button mat-icon-button (click)="landing()"> <mat-icon>landing</mat-icon> </button>
-  <button mat-icon-button (click)="main()"> main </button>
+  <button (click)="landing()"> landing </button>
+  <button (click)="main()"> main </button>
+  <button (click)="wallet()"> wallet </button>
 
   <span class="spacer"></span>
   <button mat-button (click)="logout()" *ngIf="isLogin" class=""> Logout </button>

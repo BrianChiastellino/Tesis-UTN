@@ -42,7 +42,7 @@
     <!-- Current Price Column -->
     <ng-container matColumnDef="current_price">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio Actual </th>
-      <td mat-cell *matCellDef="let coin"> {{ coin.current_price | currency:'USD':'symbol' }} </td>
+      <td mat-cell *matCellDef="let coin"> {{ coin.current_price }} </td>
     </ng-container>
 
     <!-- Last Updated Column -->

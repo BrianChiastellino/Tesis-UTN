@@ -27,5 +27,35 @@
       "document": "12345678",
       "isLoged": false
     }
+  ],
+  "wallets": [
+    {
+      "id": "de76",
+      "idUser": "44a7",
+      "funds": 100,
+      "coins": [
+        {
+          "id": "binancecoin",
+          "coinAmount": 1177.5,
+          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          "symbol": "bnb",
+          "date": "24/6/2024, 01:54:58"
+        }
+      ]
+    },
+    {
+      "id": "a2da",
+      "idUser": "44a7",
+      "funds": 100,
+      "coins": [
+        {
+          "id": "bitcoin",
+          "coinAmount": 64444,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "24/6/2024, 01:55:08"
+        }
+      ]
+    }
   ]
 }

@@ -28,8 +28,12 @@ export class NavBarComponent implements OnInit {
     this.router.navigateByUrl('landing');
   }
 
-  public main (): void{
+  public main (): void {
     this.router.navigateByUrl('main')
+  }
+
+  public wallet (): void {
+    this.router.navigateByUrl('wallet');
   }
 
   public login (): void{

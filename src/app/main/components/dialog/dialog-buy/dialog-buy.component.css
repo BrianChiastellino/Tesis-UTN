@@ -1,0 +1,9 @@
+.button-touched {
+  background-color: blue;
+  color: white;
+}
+
+.button-untouched {
+  background-color: red;
+  color: white;
+}
