@@ -56,6 +56,20 @@
           "date": "24/6/2024, 01:55:08"
         }
       ]
+    },
+    {
+      "id": "f6f5",
+      "idUser": "",
+      "funds": -10,
+      "coins": [
+        {
+          "id": "tether",
+          "coinAmount": 9.99554,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "24/6/2024, 12:23:42"
+        }
+      ]
     }
   ]
 }

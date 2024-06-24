@@ -12,11 +12,17 @@ import { Coin } from '../../../../models/coin-user/interface/coin-user.models';
 })
 export class DialogBuyComponent {
 
-  public currencyTypeButton: string = 'usd'
+    /** //todo:
+   * Terminar
+   * Validaciones
+   * Testing
+   */
+
+  public currencyTypeButton: string = 'usd';
   public coin: Coin | null = null;
 
   public formBuy: FormGroup = this.fb.group({
-    amountTobuy: ['', [Validators.required, Validators.min(0.1)]],
+    amountTobuy: ['', [Validators.required, Validators.min(-0)]],
     currencyType: [Currency.USD, [Validators.required]],
   })
 
@@ -32,7 +38,6 @@ export class DialogBuyComponent {
 
   }
 
-
   public onCancel(): void {
     this.dialogRef.close(null);
   }
@@ -45,19 +50,19 @@ export class DialogBuyComponent {
 
     currency == Currency.USD ? this.buyCoinGeckoCurrencyUsd() : this.buyCoinGeckoCurrencyCrypto();
 
-    this.dialogRef.close(this.coin);
+    this.dialogRef.close([this.coin, this.formBuy.controls['amountTobuy'].value ]);
   }
 
   private buyCoinGeckoCurrencyUsd (): void {
 
-    const coin = this.creatCoinCurrencyUsd();
+    const coin = this.createCoinCurrencyUsd();
 
     console.log({coin});
 
 
   }
 
-  private creatCoinCurrencyUsd (): void {
+  private createCoinCurrencyUsd (): void {
 
     this.coin = new Coin ( { ...this.coinGecko } );
     const amountTobuy = this.formBuy.controls['amountTobuy'].value;

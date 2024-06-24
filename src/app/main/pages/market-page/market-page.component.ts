@@ -50,7 +50,12 @@ export class MarketPageComponent implements OnInit, OnChanges {
     .pipe(
       tap( data =>  console.log({data})),
     )
-    .subscribe( coin => this.createWallet( coin ));
+    .subscribe( data => {
+      const [coin, amountTobuy ] = data as [Coin, number];
+      console.log({coin})
+      console.log({amountTobuy})
+      this.createWallet(coin, amountTobuy);
+    });
 
   }
 
@@ -62,16 +67,16 @@ export class MarketPageComponent implements OnInit, OnChanges {
 
     dialogRef.afterClosed()
     .pipe(
-      tap( data =>  console.log({data})),
+      tap( data =>  console.log(data[0], data[1])),
     )
     .subscribe();
   }
 
-  private createWallet (coin: Coin): void{
+  private createWallet (coin: Coin, amountToBuy: number): void{
 
     const wallet = new Wallet({
       idUser: this.user!.id,
-      funds: 100,
+      funds: -amountToBuy,
       coins: [coin]
     });
 
