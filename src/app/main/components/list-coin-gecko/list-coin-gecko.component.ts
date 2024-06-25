@@ -9,13 +9,11 @@ import { CoinGecko } from '../../../models/coin-gecko/interface/coin-gecko.model
 })
 export class ListCoinGeckoComponent implements OnChanges {
 
-  @Input()
-  public coinsGecko: CoinGecko[] = [];
+  @Input()  public coinsGecko: CoinGecko[] = [];
 
-  @Output()
-  public onBuyCoin: EventEmitter<CoinGecko> = new EventEmitter();
+  @Output() public onBuyCoin: EventEmitter<CoinGecko> = new EventEmitter();
 
-  @Output() onSellCoin: EventEmitter<CoinGecko> = new EventEmitter();
+  @Output() public onSellCoin: EventEmitter<CoinGecko> = new EventEmitter();
 
   public coinsTableData = new MatTableDataSource<CoinGecko>();
   public displayedColumns: string[] = ['index', 'id', 'name', 'symbol', 'image', 'current_price', 'last_updated', 'buy', 'sell'];

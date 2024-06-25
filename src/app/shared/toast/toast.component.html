@@ -1,6 +1,6 @@
 
 <!-- Posicion -->
-<div class="wrapper">
+<div *ngIf="openToast" class="wrapper">
   <!-- tipo de toast -->
   <div class="toast success">
     <!-- Contenedor izquierdo -->
@@ -9,8 +9,8 @@
     </div>
     <!-- Contenedor central -->
     <div class="container-2">
-      <p>  </p>
-      <p>  </p>
+      <p> {{ messageTitle }} </p>
+      <p> {{ messageBody }} </p>
     </div>
     <!-- Boton final -->
     <button> <mat-icon>close</mat-icon> </button>

@@ -3,10 +3,14 @@
 <h1>Mercado de criptomonedas!</h1>
 
 <app-list-coin-gecko
+
   [coinsGecko]="coinsGecko"
   (onBuyCoin)="onBuyCoinGecko($event)"
   (onSellCoin)="onSellCoinGecko($event)"
+
 ></app-list-coin-gecko>
 
-<shared-toast></shared-toast>
+<shared-toast
+[typeToast]="typeToast"
+></shared-toast>
 

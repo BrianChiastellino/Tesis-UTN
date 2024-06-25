@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
-import { filter, tap } from 'rxjs';
+import {  filter, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBuyComponent } from '../../components/dialog/dialog-buy/dialog-buy.component';
 import { DialogSellComponent } from '../../components/dialog/dialog-sell/dialog-sell.component';
@@ -19,7 +19,10 @@ import { Coin } from '../../../models/coin-user/interface/coin-user.models';
 })
 export class MarketPageComponent implements OnInit, OnChanges {
 
+
+
   public coinsGecko: CoinGecko[] = [];
+  public typeToast: string | null = null;
   private token: string = environment.userToken;
   private user: User | null = null;
 
@@ -40,6 +43,10 @@ export class MarketPageComponent implements OnInit, OnChanges {
     // this.getCoinGecko();
   }
 
+  private getUserFromLocalStorage (): void{
+    this.user = new User(JSON.parse(localStorage.getItem(this.token)!));
+  }
+
   public onBuyCoinGecko (coin: CoinGecko): void {
 
     if( !coin ) return;
@@ -48,16 +55,18 @@ export class MarketPageComponent implements OnInit, OnChanges {
 
     dialogRef.afterClosed()
     .pipe(
+      tap( data => { if(!data) this.typeToast = 'error' }),
+      filter( data => !!data ),
       tap( data =>  console.log({data})),
+      tap( () => this.typeToast = 'success')
     )
     .subscribe( data => {
       const [coin, amountTobuy ] = data as [Coin, number];
-      console.log({coin})
-      console.log({amountTobuy})
       this.createWallet(coin, amountTobuy);
     });
 
   }
+
 
   public onSellCoinGecko (coin: CoinGecko): void {
 
@@ -86,10 +95,6 @@ export class MarketPageComponent implements OnInit, OnChanges {
     )
     .subscribe();
 
-  }
-
-  private getUserFromLocalStorage (): void{
-    this.user = new User(JSON.parse(localStorage.getItem(this.token)!));
   }
 
   private getCoinGeckoTest (): void {
