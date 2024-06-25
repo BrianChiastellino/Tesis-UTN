@@ -280,6 +280,286 @@
           "date": "25/6/2024, 00:16:50"
         }
       ]
+    },
+    {
+      "id": "c9c9",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "ethereum",
+          "coinAmount": 350641,
+          "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+          "symbol": "eth",
+          "date": "25/6/2024, 11:15:19"
+        }
+      ]
+    },
+    {
+      "id": "e23d",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "tether",
+          "coinAmount": 99.95540000000001,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "25/6/2024, 11:50:52"
+        }
+      ]
+    },
+    {
+      "id": "76af",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "tether",
+          "coinAmount": 99.95540000000001,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "25/6/2024, 11:54:52"
+        }
+      ]
+    },
+    {
+      "id": "739b",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "tether",
+          "coinAmount": 99.95540000000001,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "25/6/2024, 11:59:36"
+        }
+      ]
+    },
+    {
+      "id": "94c4",
+      "idUser": "",
+      "funds": -10,
+      "coins": [
+        {
+          "id": "tether",
+          "coinAmount": 9.99554,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "25/6/2024, 12:01:53"
+        }
+      ]
+    },
+    {
+      "id": "e5fd",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "tether",
+          "coinAmount": 99.95540000000001,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "25/6/2024, 12:02:11"
+        }
+      ]
+    },
+    {
+      "id": "c492",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "tether",
+          "coinAmount": 99.95540000000001,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "25/6/2024, 12:02:17"
+        }
+      ]
+    },
+    {
+      "id": "3cba",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "binancecoin",
+          "coinAmount": 58875,
+          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          "symbol": "bnb",
+          "date": "25/6/2024, 12:05:46"
+        }
+      ]
+    },
+    {
+      "id": "e560",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "ethereum",
+          "coinAmount": 350641,
+          "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+          "symbol": "eth",
+          "date": "25/6/2024, 02:51:24"
+        }
+      ]
+    },
+    {
+      "id": "4c14",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "bitcoin",
+          "coinAmount": 6444400,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "25/6/2024, 03:14:39"
+        }
+      ]
+    },
+    {
+      "id": "ceaa",
+      "idUser": "",
+      "funds": -10,
+      "coins": [
+        {
+          "id": "bitcoin",
+          "coinAmount": 644440,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "25/6/2024, 03:15:58"
+        }
+      ]
+    },
+    {
+      "id": "7a4d",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "bitcoin",
+          "coinAmount": 6444400,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "25/6/2024, 03:16:23"
+        }
+      ]
+    },
+    {
+      "id": "4df1",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "binancecoin",
+          "coinAmount": 58875,
+          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          "symbol": "bnb",
+          "date": "25/6/2024, 03:28:46"
+        }
+      ]
+    },
+    {
+      "id": "9f52",
+      "idUser": "",
+      "funds": -10,
+      "coins": [
+        {
+          "id": "bitcoin",
+          "coinAmount": 644440,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "25/6/2024, 03:29:25"
+        }
+      ]
+    },
+    {
+      "id": "7716",
+      "idUser": "",
+      "funds": -10,
+      "coins": [
+        {
+          "id": "tether",
+          "coinAmount": 9.99554,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "25/6/2024, 04:40:12"
+        }
+      ]
+    },
+    {
+      "id": "69f9",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "binancecoin",
+          "coinAmount": 58875,
+          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          "symbol": "bnb",
+          "date": "25/6/2024, 04:41:07"
+        }
+      ]
+    },
+    {
+      "id": "725f",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "binancecoin",
+          "coinAmount": 58875,
+          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          "symbol": "bnb",
+          "date": "25/6/2024, 04:41:32"
+        }
+      ]
+    },
+    {
+      "id": "f7cf",
+      "idUser": "",
+      "funds": -100,
+      "coins": [
+        {
+          "id": "binancecoin",
+          "coinAmount": 58875,
+          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          "symbol": "bnb",
+          "date": "25/6/2024, 04:45:25"
+        }
+      ]
+    },
+    {
+      "id": "bab3",
+      "idUser": "",
+      "funds": -99,
+      "coins": [
+        {
+          "id": "tether",
+          "coinAmount": 98.95584600000001,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "25/6/2024, 04:46:30"
+        }
+      ]
+    },
+    {
+      "id": "2097",
+      "idUser": "",
+      "funds": -2,
+      "coins": [
+        {
+          "id": "binancecoin",
+          "coinAmount": 1177.5,
+          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          "symbol": "bnb",
+          "date": "25/6/2024, 04:54:57"
+        }
+      ]
     }
   ]
 }

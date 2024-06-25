@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
-import {  filter, tap } from 'rxjs';
+import {  BehaviorSubject, filter, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBuyComponent } from '../../components/dialog/dialog-buy/dialog-buy.component';
 import { DialogSellComponent } from '../../components/dialog/dialog-sell/dialog-sell.component';
@@ -22,7 +22,8 @@ export class MarketPageComponent implements OnInit, OnChanges {
 
 
   public coinsGecko: CoinGecko[] = [];
-  public typeToast: string | null = null;
+  public typeToast$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+
   private token: string = environment.userToken;
   private user: User | null = null;
 
@@ -55,10 +56,10 @@ export class MarketPageComponent implements OnInit, OnChanges {
 
     dialogRef.afterClosed()
     .pipe(
-      tap( data => { if(!data) this.typeToast = 'error' }),
+      tap( data => { if(!data) this.typeToast$.next('error') }),
       filter( data => !!data ),
       tap( data =>  console.log({data})),
-      tap( () => this.typeToast = 'success')
+      tap( () => this.typeToast$.next('success')),
     )
     .subscribe( data => {
       const [coin, amountTobuy ] = data as [Coin, number];

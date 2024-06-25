@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MaterialModule } from '../material/material.module';
 import { ToastComponent } from './toast/toast.component';
-
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -13,11 +15,16 @@ import { ToastComponent } from './toast/toast.component';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    ToastModule,
+    ButtonModule
   ],
   exports:[
     NavBarComponent,
     ToastComponent
-  ]
+  ],
+  providers: [
+    MessageService
+  ],
 })
 export class SharedModule { }

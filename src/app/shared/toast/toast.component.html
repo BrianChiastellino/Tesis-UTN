@@ -1,18 +1,3 @@
-
-<!-- Posicion -->
-<div *ngIf="openToast" class="wrapper">
-  <!-- tipo de toast -->
-  <div class="toast success">
-    <!-- Contenedor izquierdo -->
-    <div class="container-1">
-      <i class="fas fa-check-circle"> <mat-icon> check-circle </mat-icon> </i>
-    </div>
-    <!-- Contenedor central -->
-    <div class="container-2">
-      <p> {{ messageTitle }} </p>
-      <p> {{ messageBody }} </p>
-    </div>
-    <!-- Boton final -->
-    <button> <mat-icon>close</mat-icon> </button>
-  </div>
+<div class="card flex justify-content-center gap-2">
+  <p-toast position="bottom-right" />
 </div>
