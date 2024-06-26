@@ -6,6 +6,5 @@ export interface IUser {
   username: string;
   password: string;
   document: string;
-  isLoged:  boolean;
 
 }

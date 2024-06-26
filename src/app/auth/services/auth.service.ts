@@ -57,7 +57,6 @@ export class AuthService {
 
     return this.http.get<User[]>(`${ this.baseUrl }/users?email=${ email }&password=${ password }`)
     .pipe(
-      tap( user => user[0].isLoged = true ),
       tap( user => this.user = user[0]),
       tap( user => localStorage.setItem(`${this.token}`, JSON.stringify(user[0]))),
       tap( () => console.log(`Usuario ${this.user?.username} logueado con exito`)),

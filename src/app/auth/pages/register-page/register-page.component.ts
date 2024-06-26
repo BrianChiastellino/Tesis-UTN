@@ -22,7 +22,6 @@ export class RegisterPageComponent {
     document: ['', Validators.required],
     username: ['', Validators.required],
     password: ['', Validators.required],
-    isLoged: [false],
 
   })
 

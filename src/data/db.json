@@ -1,38 +1,19 @@
 {
   "users": [
     {
-      "id": "44a7",
-      "name": "Brian",
+      "id": "fdeb",
+      "name": "Brian Chiastellino",
       "email": "chaste@gmail.com",
       "username": "chaste",
       "password": "12345",
-      "document": "41853675",
-      "isLoged": false
-    },
-    {
-      "id": "b004",
-      "name": "Candela",
-      "email": "cande@gmail.com",
-      "username": "cande",
-      "password": "12345",
-      "document": "41899061",
-      "isLoged": false
-    },
-    {
-      "id": "4c0d",
-      "name": "Prueba",
-      "email": "prueba@",
-      "username": "prubita123",
-      "password": "123",
-      "document": "12345678",
-      "isLoged": false
+      "document": "41853675"
     }
   ],
   "wallets": [
     {
-      "id": "df82",
-      "idUser": "44a7",
-      "funds": 0
+      "id": "c1b8",
+      "idUser": "fdeb",
+      "funds": 3110
     }
   ]
 }

@@ -16,7 +16,7 @@ export class ToastComponent implements OnInit {
   public typeToastValue: string | null = null;
   public toggleToast: boolean = false;
 
-  private messages: { [key: string]: { type: string,  title: string, body: string } } = {
+  private messages: { [key: string]: { type: string, title: string, body: string } } = {
     success: {
       type: 'success',
       title: 'Éxito!',
@@ -29,36 +29,46 @@ export class ToastComponent implements OnInit {
     },
     info: {
       type: 'info',
-      title: 'Fondos insuficientes',
+      title: 'Informacion!',
       body: '¡Deposite fondos en su billetera para continuar!'
     },
     warning: {
       type: 'warm',
       title: 'Advertencia',
       body: 'Algo no está del todo bien. Tenga precaución'
-    }
+    },
+    'funds-success':{
+      type: 'success',
+      title: 'Exito!',
+      body: '¡Fondos depositados exitosamente!'
+    },
+    'funds-negative': {
+      type: 'info',
+      title: 'Informacion!',
+      body: '¡No posee los fondos suficientes para retirar!'
+    },
   };
 
   constructor(private messageService: MessageService) { }
 
-  public showMessage ( type: string) {
+  public showMessage(type: string) {
     this.messageService.add({
       severity: this.messages[type].type,
-      summary:  this.messages[type].title,
+      summary: this.messages[type].title,
       detail: this.messages[type].body,
     })
   }
 
-  public ngOnInit (): void {
+  public ngOnInit(): void {
 
     this.typeToast$
-    .pipe(
-      filter( data => !!data),
-      tap( data => console.log({data})),
-    )
-    .subscribe( type => {
-      this.showMessage( type! )
-    });
+      .pipe(
+        filter(data => !!data),
+        tap(data => console.log({ data })),
+      )
+      .subscribe(type => {
+        this.showMessage(type!)
+      });
 
   }
 

@@ -1,3 +1,13 @@
 <shared-nav-bar></shared-nav-bar>
 
 <h1>Bienvenido wallet</h1>
+
+<form [formGroup]="formFunds">
+  <input type="text" formControlName="funds" (input)="removeLetters($event)">
+  <button mat-button type="submit" (click)="depositFunds()"  [disabled]="formFunds.invalid"> Depositar </button>
+  <button mat-button type="submit" (click)="withdrawFunds()" [disabled]="formFunds.invalid"> Retirar </button>
+</form>
+
+<shared-toast
+[typeToast$]="typeToast$"
+></shared-toast>

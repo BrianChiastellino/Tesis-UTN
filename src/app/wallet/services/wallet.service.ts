@@ -27,7 +27,7 @@ export class WalletService {
 
     if( !wallet.id ) return of(null)
 
-    return this.http.patch<Wallet>(`${this.baseUrl}/${wallet.id}`, wallet)
+    return this.http.patch<Wallet>(`${this.baseUrl}/wallets/${wallet.id}`, wallet);
   }
 
   public getWalletByIdUser(idUser: string): Observable<Wallet[] | null> {

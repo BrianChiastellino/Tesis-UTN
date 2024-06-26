@@ -53,8 +53,8 @@ export class MarketPageComponent implements OnInit, OnChanges {
 
     this.walletService.getWalletByIdUser( this.user.id )
     .pipe(
-      tap( wallet => console.log({ wallet }) ),
-      filter ( wallet => !!wallet![0].id ),
+      tap( wallet => {debugger} ),
+      filter ( wallet => wallet?.length != 0 ),
     )
     .subscribe( wallet => this.wallet = wallet![0])
   }
