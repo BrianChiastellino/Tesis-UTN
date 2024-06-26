@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Wallet } from '../../models/wallet/wallet.models';
-import { Observable, of } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
@@ -30,11 +30,12 @@ export class WalletService {
     return this.http.patch<Wallet>(`${this.baseUrl}/${wallet.id}`, wallet)
   }
 
-  public getWalletByIdUser(idUser: number): Observable<Wallet | null> {
+  public getWalletByIdUser(idUser: string): Observable<Wallet[] | null> {
 
     if( !idUser) return of(null);
 
-    return this.http.get<Wallet>(`${this.baseUrl}/wallets/?idUser=${idUser}`);
+    return this.http.get<Wallet[]>(`${this.baseUrl}/wallets/?idUser=${idUser}`);
+
   }
 
 

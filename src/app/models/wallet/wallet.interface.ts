@@ -5,6 +5,6 @@ export interface IWallet {
   id?        :string;
   idUser    :string;
   funds     :number;
-  coins     :ICoin[];
+  coins?     :ICoin[];
 
 }

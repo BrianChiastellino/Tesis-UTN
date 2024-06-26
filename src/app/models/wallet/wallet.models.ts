@@ -6,7 +6,7 @@ export class Wallet implements IWallet {
   id?       :string;
   idUser   :string;
   funds    :number;
-  coins    :Coin[];
+  coins?    :Coin[];
 
   constructor(wallet: Wallet) {
 

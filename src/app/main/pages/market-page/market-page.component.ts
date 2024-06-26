@@ -19,13 +19,12 @@ import { Coin } from '../../../models/coin-user/interface/coin-user.models';
 })
 export class MarketPageComponent implements OnInit, OnChanges {
 
-
-
   public coinsGecko: CoinGecko[] = [];
   public typeToast$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   private token: string = environment.userToken;
   private user: User | null = null;
+  private wallet: Wallet | null = null;
 
   constructor (
     private coinGeckoService: CoinGeckoService,
@@ -41,6 +40,7 @@ export class MarketPageComponent implements OnInit, OnChanges {
   public ngOnInit(): void {
     this.getUserFromLocalStorage();
     this.getCoinGeckoTest();
+    this.getWallet();
     // this.getCoinGecko();
   }
 
@@ -48,22 +48,35 @@ export class MarketPageComponent implements OnInit, OnChanges {
     this.user = new User(JSON.parse(localStorage.getItem(this.token)!));
   }
 
+  private getWallet () : void {
+    if( !this.user ) return;
+
+    this.walletService.getWalletByIdUser( this.user.id )
+    .pipe(
+      tap( wallet => console.log({ wallet }) ),
+      filter ( wallet => !!wallet![0].id ),
+    )
+    .subscribe( wallet => this.wallet = wallet![0])
+  }
+
   public onBuyCoinGecko (coin: CoinGecko): void {
 
-    if( !coin ) return;
+    if( !coin || !this.wallet ) {
+      this.typeToast$.next('info');
+      return;
+    }
 
     const dialogRef = this.dialog.open(DialogBuyComponent, { data: coin });
 
     dialogRef.afterClosed()
     .pipe(
-      tap( data => { if(!data) this.typeToast$.next('error') }),
       filter( data => !!data ),
       tap( data =>  console.log({data})),
       tap( () => this.typeToast$.next('success')),
     )
     .subscribe( data => {
       const [coin, amountTobuy ] = data as [Coin, number];
-      this.createWallet(coin, amountTobuy);
+      // this.updateWallet(coin, amountTobuy);
     });
 
   }
@@ -82,19 +95,9 @@ export class MarketPageComponent implements OnInit, OnChanges {
     .subscribe();
   }
 
-  private createWallet (coin: Coin, amountToBuy: number): void{
+  private updateWallet (coin: Coin, amountToBuy: number): void{
 
-    const wallet = new Wallet({
-      idUser: this.user!.id,
-      funds: -amountToBuy,
-      coins: [coin]
-    });
 
-    this.walletService.addWallet(wallet)
-    .pipe(
-      tap( wallet => console.log('Create wallet: ',{wallet}))
-    )
-    .subscribe();
 
   }
 

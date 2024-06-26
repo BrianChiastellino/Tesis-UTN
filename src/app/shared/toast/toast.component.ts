@@ -16,10 +16,6 @@ export class ToastComponent implements OnInit {
   public typeToastValue: string | null = null;
   public toggleToast: boolean = false;
 
-  //todo: terminar toast, hacer eficiente, crear mensajes en ts y pasarlos al html
-
-  // idea : crear un enum para ponerlo como key es decir, Toast.error, emitir un valor mediante el padre,
-
   private messages: { [key: string]: { type: string,  title: string, body: string } } = {
     success: {
       type: 'success',
@@ -33,8 +29,8 @@ export class ToastComponent implements OnInit {
     },
     info: {
       type: 'info',
-      title: 'TItulo de la info',
-      body: 'Body de la info'
+      title: 'Fondos insuficientes',
+      body: '¡Deposite fondos en su billetera para continuar!'
     },
     warning: {
       type: 'warm',
@@ -49,7 +45,7 @@ export class ToastComponent implements OnInit {
     this.messageService.add({
       severity: this.messages[type].type,
       summary:  this.messages[type].title,
-      detail: this.messages[type].body
+      detail: this.messages[type].body,
     })
   }
 
@@ -65,33 +61,5 @@ export class ToastComponent implements OnInit {
     });
 
   }
-
-  private openToast ( type: string): void {
-    this.typeToastValue = type;
-    this.toggleToast = true;
-  }
-
-  public closeToast(time: number): void {
-
-    setTimeout(() => {
-      this.typeToastValue = null;
-      this.typeToast = null;
-      this.toggleToast = false;
-    }, time);
-
-  }
-
-  public get messageTitle(): string {
-    return this.messages[this.typeToastValue!].title;
-  }
-
-  public get messageBody(): string {
-    return this.messages[this.typeToastValue!].body;
-  }
-
-
-
-
-
 
 }
