@@ -13,7 +13,7 @@ export class Wallet implements IWallet {
     this.id = wallet == undefined ? '' : wallet.id;
     this.idUser = wallet == undefined ? '' : wallet.idUser;
     this.funds = wallet == undefined ? 0 : wallet.funds;
-    this.coins = wallet == undefined ? [] : wallet.coins;
+    this.coins = wallet == undefined ? [] : [];
 
   }
 

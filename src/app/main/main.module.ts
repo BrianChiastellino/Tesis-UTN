@@ -9,6 +9,8 @@ import { ListCoinGeckoComponent } from './components/list-coin-gecko/list-coin-g
 import { DialogBuyComponent } from './components/dialog/dialog-buy/dialog-buy.component';
 import { DialogSellComponent } from './components/dialog/dialog-sell/dialog-sell.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BuyCoinGeckoComponent } from './components/buy-coin-gecko/buy-coin-gecko.component';
+import { SellCoinGeckoComponent } from './components/sell-coin-gecko/sell-coin-gecko.component';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListCoinGeckoComponent,
     DialogBuyComponent,
     DialogSellComponent,
+    BuyCoinGeckoComponent,
+    SellCoinGeckoComponent,
 
   ],
   imports: [

@@ -1,9 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CoinGecko } from '../../../../models/coin-gecko/interface/coin-gecko.models';
-import {  FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {  AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Currency } from '../../../../models/enum/currency.enum';
 import { Coin } from '../../../../models/coin-user/interface/coin-user.models';
+import { Dialogdata } from '../../../../models/coin-gecko/dialog/dialog.interface';
+import { Wallet } from '../../../../models/wallet/wallet.models';
 
 @Component({
   selector: 'app-dialog-buy',
@@ -13,27 +15,31 @@ import { Coin } from '../../../../models/coin-user/interface/coin-user.models';
 export class DialogBuyComponent {
 
     /** //todo:
-   * Terminar
-   * Validaciones
-   * Testing
+   * Ahora tengo la wallet y tengo la coin
+   * Hago todas las validaciones en el dialog, si hay exito mando la wallet para que en market llamar al update
+   * Si algo paso mal uso rxjs y mando null,
+   *
    */
 
   public currencyTypeButton: string = 'usd';
   public coin: Coin | null = null;
 
   public formBuy: FormGroup = this.fb.group({
-    amountTobuy: ['', [Validators.required, Validators.min(-0)]],
+    amountTobuy: ['', [Validators.required, Validators.min(-0), this.fundsValidator(this.data.wallet)]],
     currencyType: [Currency.USD, [Validators.required]],
   })
 
   constructor(
-    private dialogRef: MatDialogRef<DialogBuyComponent>, @Inject(MAT_DIALOG_DATA) public coinGecko: CoinGecko,
+    private dialogRef: MatDialogRef<DialogBuyComponent, Wallet | null>, @Inject(MAT_DIALOG_DATA) public data: Dialogdata,
     private fb: FormBuilder,
   ) {}
 
+
   public setCurrency( currency: string ): void{
 
-    currency == 'usd' ? this.formBuy.controls['currencyType'].setValue(Currency.USD) : this.formBuy.controls['currencyType'].setValue(Currency.CRYPTO);
+    currency == 'usd' ?
+     this.formBuy.controls['currencyType'].setValue(Currency.USD) : this.formBuy.controls['currencyType'].setValue(Currency.CRYPTO);
+
     this.currencyTypeButton = currency;
 
   }
@@ -44,40 +50,76 @@ export class DialogBuyComponent {
 
   public onConfirm(): void {
 
-    if( !this.formBuy.valid) return;
+    if( !this.formBuy.valid ) return
 
-    const currency = this.formBuy.controls['currencyType'].value;
+    const wallet: Wallet =  { ...this.data.wallet };
+    const coinGecko: CoinGecko = { ...this.data.coinGecko };
+    const currency: Currency = this.formBuy.controls['currencyType'].value;
 
-    currency == Currency.USD ? this.buyCoinGeckoCurrencyUsd() : this.buyCoinGeckoCurrencyCrypto();
+    const coin = this.createCoin(coinGecko, currency);
 
-    this.dialogRef.close([this.coin, this.formBuy.controls['amountTobuy'].value ]);
-  }
-
-  private buyCoinGeckoCurrencyUsd (): void {
-
-    const coin = this.createCoinCurrencyUsd();
-
-    console.log({coin});
-
+    this.updatWallet(coin, wallet);
 
   }
 
-  private createCoinCurrencyUsd (): void {
+  private updatWallet ( coin: Coin, wallet: Wallet ): void {
 
-    this.coin = new Coin ( { ...this.coinGecko } );
+    const index = this.getIndexCoinInWallet(coin, wallet);
     const amountTobuy = this.formBuy.controls['amountTobuy'].value;
 
-    this.coin.coinAmount = this.coinGecko.current_price * amountTobuy;
-    this.coin.date = new Date().toLocaleString();
+    if ( index != -1 ) {
+      wallet.coins![index].coinAmount += coin.coinAmount
+      wallet.coins![index].date = new Date().toLocaleString();
+    } else {
+      wallet.coins!.push(coin);
+    }
+
+    wallet.funds -= amountTobuy;
+
+    console.log({index});
+    console.log({wallet});
+
+    this.sendWalletToMarket(wallet);
+
+
+    // Si sale todo bien, envio la wallet para el update, si sale algo mal y no pasa las validaciones envio null
+  }
+
+  private sendWalletToMarket(wallet: Wallet) : void {
+    this.dialogRef.close(wallet);
+  }
+
+  private createCoin (coinGecko: CoinGecko, currency: Currency): Coin {
+
+    const coin = new Coin({...coinGecko});
+    const amountTobuy = this.formBuy.controls['amountTobuy'].value;
+    coin.date = new Date().toLocaleString();
+
+
+    if( currency == Currency.USD) {
+      coin.coinAmount = this.data.coinGecko.current_price * amountTobuy;
+     }
+
+    return coin;
 
   }
 
-  private buyCoinGeckoCurrencyCrypto (): void {
+  private getIndexCoinInWallet (coin: Coin, wallet: Wallet) : number {
 
+    if(!wallet.coins) return -1;
+
+    return wallet.coins.findIndex(c => c.id == coin.id);
   }
 
-  private createCoinCurrencyCrypto (): void {
 
+  private fundsValidator(wallet: Wallet): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const amountTobuy = control.value;
+      if ( amountTobuy > wallet.funds ) {
+        return { funds: true };
+      }
+      return null;
+    };
   }
 
 }

@@ -21,7 +21,6 @@ export class ListCoinGeckoComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log({ changes })
     this.coinsTableData.data = this.coinsGecko;
   }
 

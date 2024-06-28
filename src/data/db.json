@@ -11,9 +11,39 @@
   ],
   "wallets": [
     {
-      "id": "c1b8",
+      "id": "1623",
       "idUser": "fdeb",
-      "funds": 3110
+      "funds": 29,
+      "coins": [
+        {
+          "id": "ethereum",
+          "coinAmount": 350641,
+          "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+          "symbol": "eth",
+          "date": "28/6/2024, 11:37:45"
+        },
+        {
+          "id": "bitcoin",
+          "coinAmount": 16111000,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "28/6/2024, 04:25:32"
+        },
+        {
+          "id": "tether",
+          "coinAmount": 10.995094,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "28/6/2024, 04:28:04"
+        },
+        {
+          "id": "binancecoin",
+          "coinAmount": 5887.5,
+          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          "symbol": "bnb",
+          "date": "28/6/2024, 04:27:39"
+        }
+      ]
     }
   ]
 }

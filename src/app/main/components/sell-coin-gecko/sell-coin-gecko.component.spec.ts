@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToastComponent } from './toast.component';
+import { SellCoinGeckoComponent } from './sell-coin-gecko.component';
 
-describe('ToastComponent', () => {
-  let component: ToastComponent;
-  let fixture: ComponentFixture<ToastComponent>;
+describe('SellCoinGeckoComponent', () => {
+  let component: SellCoinGeckoComponent;
+  let fixture: ComponentFixture<SellCoinGeckoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ToastComponent]
+      declarations: [SellCoinGeckoComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ToastComponent);
+    fixture = TestBed.createComponent(SellCoinGeckoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
