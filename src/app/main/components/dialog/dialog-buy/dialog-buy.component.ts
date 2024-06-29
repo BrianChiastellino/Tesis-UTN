@@ -58,11 +58,11 @@ export class DialogBuyComponent {
 
     const coin = this.createCoin(coinGecko, currency);
 
-    this.updatWallet(coin, wallet);
+    this.updateWallet(coin, wallet);
 
   }
 
-  private updatWallet ( coin: Coin, wallet: Wallet ): void {
+  private updateWallet ( coin: Coin, wallet: Wallet ): void {
 
     const index = this.getIndexCoinInWallet(coin, wallet);
     const amountTobuy = this.formBuy.controls['amountTobuy'].value;

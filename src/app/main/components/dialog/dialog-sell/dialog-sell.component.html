@@ -1,5 +1,34 @@
-<h1>Venta</h1>
+<form [formGroup]="formSell" (ngSubmit)="onConfirm()" class="p-lg-5 bg-light rounded">
 
+  <h2 class="text-center mb-4 fs-2">{{ data.coinGecko.id | uppercase }}</h2>
 
-<button (click)="onCancel()"> cancelar </button>
-<button (click)="onConfirm()"> confirmar </button>
+  <p class="text-center text-muted fs-4">{{ data.coinGecko.current_price }}</p>
+
+  <div class="d-flex flex-column align-items-center mb-4">
+
+    <div class="btn-group mb-3">
+      <button type="button" (click)="setCurrency('usd')"
+        [ngClass]="currencyTypeButton == 'usd' ? 'btn btn-primary' : 'btn btn-outline-primary'">
+        <mat-icon class="icon material-icons md-48">attach_money</mat-icon>
+      </button>
+
+      <button type="button" (click)="setCurrency('crypto')"
+        [ngClass]="currencyTypeButton == 'crypto' ? 'btn btn-primary' : 'btn btn-outline-primary'">
+        <mat-icon class="icon">currency_bitcoin</mat-icon>
+      </button>
+    </div>
+
+    <h3 class="fs-5">ELIGE EL TIPO DE CAMBIO</h3>
+    <span class="mb-2">Mis fondos: {{ data.wallet.funds | number }}</span>
+  </div>
+
+  <div class="form-group mb-4">
+    <input type="text" formControlName="amountTobuy" class="form-control" placeholder="Cantidad">
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-secondary mx-2" (click)="onCancel()">Cancelar</button>
+    <button type="submit" class="btn btn-primary mx-2" [disabled]="formSell.invalid">Confirmar</button>
+  </div>
+
+</form>

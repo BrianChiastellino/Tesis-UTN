@@ -3,14 +3,20 @@
 <h1>Mercado de criptomonedas!</h1>
 
 <app-list-coin-gecko
-(onBuyCoin)=" sendCoin($event) "
+(onBuyCoin)=" sendCoinBuy($event) "
+(onSellCoin)=" sendCoinSell($event) "
 [coinsGecko]=" coinsGecko "
 ></app-list-coin-gecko>
 
 <app-buy-coin-gecko
 [user]="user"
 [wallet]="wallet"
-[coin$]="coin$"
+[coin$]="coinBuy$"
 ></app-buy-coin-gecko>
+
+<app-sell-coin-gecko
+[wallet]="wallet"
+[coin$]="coinSell$"
+></app-sell-coin-gecko>
 
 

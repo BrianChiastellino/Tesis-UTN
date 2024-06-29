@@ -18,12 +18,13 @@ export class MarketPageComponent implements OnInit {
 
 
   private token: string = environment.userToken;
-  
+
   public coinsGecko: CoinGecko[] = [];
   public user: User | null = null;
   public wallet: Wallet | null = null;
   public coin: CoinGecko | null = null;
-  public coin$: BehaviorSubject<CoinGecko | null> = new BehaviorSubject<CoinGecko | null>(null);
+  public coinBuy$: BehaviorSubject<CoinGecko | null> = new BehaviorSubject<CoinGecko | null>(null);
+  public coinSell$: BehaviorSubject<CoinGecko | null> = new BehaviorSubject<CoinGecko | null>(null);
 
 
   constructor(
@@ -39,8 +40,12 @@ export class MarketPageComponent implements OnInit {
 
   }
 
-  public sendCoin( coin: CoinGecko) : void {
-    this.coin$.next(coin);
+  public sendCoinBuy(coin: CoinGecko): void {
+    this.coinBuy$.next(coin);
+  }
+
+  public sendCoinSell(coin: CoinGecko): void {
+    this.coinSell$.next(coin);
   }
   private getUserFromLocalStorage(): void {
     this.user = new User(JSON.parse(localStorage.getItem(this.token)!));
@@ -60,7 +65,7 @@ export class MarketPageComponent implements OnInit {
 
     this.coinGeckoService.coinGeckoTest()
       .pipe(
-        tap( () => console.log('Coins cargadas con exito')),
+        tap(() => console.log('Coins cargadas con exito')),
       )
       .subscribe(coins => this.coinsGecko = coins);
 

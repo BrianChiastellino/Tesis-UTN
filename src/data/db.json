@@ -13,7 +13,7 @@
     {
       "id": "1623",
       "idUser": "fdeb",
-      "funds": 29,
+      "funds": 1019,
       "coins": [
         {
           "id": "ethereum",
@@ -31,10 +31,10 @@
         },
         {
           "id": "tether",
-          "coinAmount": 10.995094,
+          "coinAmount": 20.990634,
           "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
           "symbol": "usdt",
-          "date": "28/6/2024, 04:28:04"
+          "date": "28/6/2024, 08:49:20"
         },
         {
           "id": "binancecoin",
