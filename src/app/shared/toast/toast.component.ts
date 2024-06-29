@@ -45,7 +45,7 @@ export class ToastComponent implements OnInit {
     'funds-negative': {
       type: 'info',
       title: 'Informacion!',
-      body: '¡No posee los fondos suficientes para retirar!'
+      body: '¡No posee los fondos suficientes!'
     },
   };
 
