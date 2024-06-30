@@ -51,6 +51,10 @@ export class MarketPageComponent implements OnInit {
     this.user = new User(JSON.parse(localStorage.getItem(this.token)!));
   }
 
+  public updateWalletByEmiter (wallet: Wallet) : void {
+    this.updateWallet(wallet);
+  }
+
   private getWallet(): void {
     if (!this.user) return;
 
@@ -59,6 +63,15 @@ export class MarketPageComponent implements OnInit {
         filter(wallet => wallet?.length != 0),
       )
       .subscribe(wallet => this.wallet = wallet![0])
+  }
+
+  public updateWallet (wallet : Wallet ) : void {
+    this.walletService.updateWallet( wallet )
+    .pipe(
+      filter( data => !!data),
+      tap( wallet => this.wallet = wallet),
+    )
+    .subscribe();
   }
 
   private getCoinGeckoTest(): void {

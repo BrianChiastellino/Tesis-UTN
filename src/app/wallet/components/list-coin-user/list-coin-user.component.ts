@@ -8,12 +8,10 @@ import { Coin } from '../../../models/coin-user/interface/coin-user.models';
   styleUrl: './list-coin-user.component.css'
 })
 
-//todo:
-
 export class ListCoinUserComponent   {
 
   @Input() coins: Coin[] = [];
-  
+
 
 
 

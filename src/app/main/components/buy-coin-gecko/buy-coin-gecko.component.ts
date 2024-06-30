@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterContentInit, Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { WalletService } from '../../../wallet/services/wallet.service';
 import { Wallet } from '../../../models/wallet/wallet.models';
@@ -16,8 +16,8 @@ import { BehaviorSubject, filter, tap } from 'rxjs';
 
 export class BuyCoinGeckoComponent implements OnInit {
 
+  @Output() public onBuyCoin: EventEmitter<Wallet> = new EventEmitter<Wallet>;
   @Input() public wallet: Wallet | null = null;
-  @Input() public user: User | null = null;
   @Input() public coin$: BehaviorSubject<CoinGecko | null> = new BehaviorSubject<CoinGecko | null>(null);
   public toast$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
@@ -34,8 +34,8 @@ export class BuyCoinGeckoComponent implements OnInit {
 
       this.coin$.subscribe(coin => {
 
-        if (this.wallet?.funds! > 0 && this.user && coin != null) { this.openDialog(this.wallet!, coin); }
-        else if (this.wallet?.funds! <= 0) { this.toast$.next('info') }
+        if (this.wallet?.funds! > 0 && coin != null) { this.openDialog(this.wallet!, coin); }
+        else if (this.wallet?.funds! <= 0 || !this.wallet) { this.toast$.next('info') }
 
     });
 
@@ -56,21 +56,14 @@ export class BuyCoinGeckoComponent implements OnInit {
       tap( data => console.log({ data })),
     )
     .subscribe( wallet => {
-      this.updateWallet( wallet );
-    });
-
-  }
-
-  private updateWallet (wallet : Wallet ) : void {
-    this.walletService.updateWallet( wallet )
-    .pipe(
-      filter( data => !!data),
-      tap( wallet => this.wallet = wallet),
-    )
-    .subscribe( () => {
       this.toast$.next('success');
+      this.onBuyCoin.emit(wallet);
+      // this.updateWallet( wallet );
     });
+
   }
+
+
 
 
 }

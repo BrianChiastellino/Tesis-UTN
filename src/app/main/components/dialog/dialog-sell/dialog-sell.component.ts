@@ -1,11 +1,14 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoinGecko } from '../../../../models/coin-gecko/interface/coin-gecko.models';
 import { Coin } from '../../../../models/coin-user/interface/coin-user.models';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Currency } from '../../../../models/enum/currency.enum';
 import { Wallet } from '../../../../models/wallet/wallet.models';
-import { Dialogdata } from '../../../../models/dialog/dialog.interface';
+import { DialogConfirmData, Dialogdata } from '../../../../models/dialog/dialog.interface';
+import { Operation } from '../../../../models/enum/dialog.enum';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-sell',
@@ -26,13 +29,15 @@ export class DialogSellComponent {
   public coin: Coin | null = null;
 
   public formSell: FormGroup = this.fb.group({
-    amountToSell: ['',[Validators.required]],
+    amountToSell: ['',[Validators.required, this.fundsValidator(this.data.wallet)]],
     currencyType: [Currency.USD, [Validators.required]],
   })
 
   constructor(
     private dialogRef: MatDialogRef<DialogSellComponent, Wallet | null>, @Inject(MAT_DIALOG_DATA) public data: Dialogdata,
     private fb: FormBuilder,
+    private dialog: MatDialog,
+
   ) {}
 
   public setCurrency( currency: string ): void {
@@ -51,15 +56,19 @@ export class DialogSellComponent {
     const wallet: Wallet = { ...this.data.wallet };
     const coinGecko: CoinGecko ={ ...this.data.coinGecko };
     const currency = this.formSell.controls['currencyType'].value;
+    const amountTobuy = this.formSell.controls['amountTobuy'].value;
 
-    const coin = this.createCoin(coinGecko, currency);
+    const coin = this.createCoin(coinGecko, currency, amountTobuy);
 
-    this.updateWallet(coin, wallet);
+    this.openDialog(amountTobuy,coin)
+    .subscribe( data => {
+      if( data ) this.updateWallet(coin, wallet);
+    })
 
-    this.dialogRef.close(null);
 
   }
 
+  //venta
   private updateWallet ( coin: Coin, wallet: Wallet ): void {
 
     const index = this.getIndexCoinInWallet(coin, wallet);
@@ -81,16 +90,29 @@ export class DialogSellComponent {
 
   }
 
+  private openDialog ( amountTobuy: number, coin: Coin) : Observable<boolean>  {
+
+    const dialogConfirmData: DialogConfirmData = {
+      funds: amountTobuy,
+      coin: coin,
+      operation: Operation.SELL
+    }
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: dialogConfirmData });
+
+    return dialogRef.afterClosed()
+
+  }
+
   private sendWalletToMarket(wallet: Wallet) : void {
     this.dialogRef.close(wallet);
   }
 
   //todo: Crear la coin al ser tipo de venta
 
-  private createCoin (coinGecko: CoinGecko, currency: Currency): Coin {
+  private createCoin (coinGecko: CoinGecko, currency: Currency, amountTobuy: number): Coin {
 
     const coin = new Coin({...coinGecko});
-    const amountTobuy = this.formSell.controls['amountTobuy'].value;
     coin.date = new Date().toLocaleString();
 
 
@@ -119,6 +141,33 @@ export class DialogSellComponent {
       }
       return null;
     };
+  }
+
+  public isValidField(field: string): boolean | null {
+    return this.formSell.controls[field].errors && this.formSell.controls[field].touched;
+  }
+
+  public messageFieldError (field: string) : string | null {
+
+    if (!this.formSell.controls[field]) return null;
+
+    const errors = this.formSell.controls[field].errors || {};
+
+    for( const key of Object.keys(errors)){
+
+      switch ( key ) {
+
+        case 'required':
+          return 'Este campo es requerido';
+
+        case 'funds':
+          return 'Fondos insuficientes';
+      }
+
+    }
+
+    return null;
+
   }
 
 

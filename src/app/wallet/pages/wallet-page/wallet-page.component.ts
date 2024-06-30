@@ -140,7 +140,7 @@ export class WalletPageComponent implements OnInit {
 
     this.walletService.updateWallet(this.wallet)
       .pipe(
-        tap(wallet => console.log({ wallet })),
+        tap(wallet => this.wallet = wallet),
         tap( () => this.typeToast$.next('funds-success')),
       )
       .subscribe();

@@ -2,20 +2,22 @@
 
 <h1 class="display-4 text-center mt-4 mb-4" >Mercado de criptomonedas</h1>
 
+<h1>mis fondos {{wallet?.funds}}</h1>
 
 <app-list-coin-gecko
-(onBuyCoin)=" sendCoinBuy($event) "
-(onSellCoin)=" sendCoinSell($event) "
+(onBuyCoin)=" coinBuy$.next($event) "
+(onSellCoin)=" coinSell$.next($event) "
 [coinsGecko]=" coinsGecko "
 ></app-list-coin-gecko>
 
 <app-buy-coin-gecko
-[user]="user"
+(onBuyCoin)="updateWallet($event)"
 [wallet]="wallet"
 [coin$]="coinBuy$"
 ></app-buy-coin-gecko>
 
 <app-sell-coin-gecko
+(onSellCoin)="updateWallet($event)"
 [wallet]="wallet"
 [coin$]="coinSell$"
 ></app-sell-coin-gecko>

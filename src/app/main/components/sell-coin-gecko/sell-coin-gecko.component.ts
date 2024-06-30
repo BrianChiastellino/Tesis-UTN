@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { WalletService } from '../../../wallet/services/wallet.service';
 import { Wallet } from '../../../models/wallet/wallet.models';
@@ -15,6 +15,7 @@ import { Dialogdata } from '../../../models/dialog/dialog.interface';
 })
 export class SellCoinGeckoComponent implements OnInit{
 
+  @Output() public onSellCoin: EventEmitter<Wallet> = new EventEmitter<Wallet>;
   @Input() public wallet: Wallet | null = null;
   @Input() public coin$: BehaviorSubject<CoinGecko | null> = new BehaviorSubject<CoinGecko | null>(null);
   public toast$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
@@ -52,20 +53,12 @@ private openDialog ( wallet: Wallet, coinGecko: CoinGecko ): void {
     tap( data => console.log({ data })),
   )
   .subscribe( wallet => {
-    this.updateWallet( wallet );
-  });
-
-}
-
-private updateWallet (wallet : Wallet ) : void {
-  this.walletService.updateWallet( wallet )
-  .pipe(
-    filter( data => !!data),
-    tap( wallet => this.wallet = wallet),
-  )
-  .subscribe( () => {
     this.toast$.next('success');
+    this.onSellCoin.emit(wallet);
   });
+
 }
+
+
 
 }

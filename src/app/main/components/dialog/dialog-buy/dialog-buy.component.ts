@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoinGecko } from '../../../../models/coin-gecko/interface/coin-gecko.models';
-import {  AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Currency } from '../../../../models/enum/currency.enum';
 import { Coin } from '../../../../models/coin-user/interface/coin-user.models';
 import { DialogConfirmData, Dialogdata } from '../../../../models/dialog/dialog.interface';
@@ -31,13 +31,13 @@ export class DialogBuyComponent {
     private dialogRef: MatDialogRef<DialogBuyComponent, Wallet | null>, @Inject(MAT_DIALOG_DATA) public data: Dialogdata,
     private fb: FormBuilder,
     private dialog: MatDialog,
-  ) {}
+  ) { }
 
 
-  public setCurrency( currency: string ): void{
+  public setCurrency(currency: string): void {
 
     currency == 'usd' ?
-     this.formBuy.controls['currencyType'].setValue(Currency.USD) : this.formBuy.controls['currencyType'].setValue(Currency.CRYPTO);
+      this.formBuy.controls['currencyType'].setValue(Currency.USD) : this.formBuy.controls['currencyType'].setValue(Currency.CRYPTO);
 
     this.currencyTypeButton = currency;
 
@@ -49,48 +49,42 @@ export class DialogBuyComponent {
 
   public onConfirm(): void {
 
-    if( !this.formBuy.valid ) return
+    if (!this.formBuy.valid) return
 
-    const wallet: Wallet =  { ...this.data.wallet };
+    const wallet: Wallet = { ...this.data.wallet };
     const coinGecko: CoinGecko = { ...this.data.coinGecko };
     const currency: Currency = this.formBuy.controls['currencyType'].value;
-    const amountTobuy = this.formBuy.controls['amountTobuy'].value;
+    const amountTobuy: number = Number.parseFloat(this.formBuy.controls['amountTobuy'].value);
 
     const coin = this.createCoin(coinGecko, currency, amountTobuy);
 
-    this.openDialog(amountTobuy,coin)
+    this.openDialog(amountTobuy, coin)
       .subscribe(data => {
-        if (data) this.updateWallet(coin, wallet);
+        if (data) this.updateWallet(coin, wallet, currency);
       })
 
 
   }
 
-  private updateWallet ( coin: Coin, wallet: Wallet ): void {
+  private createCoin(coinGecko: CoinGecko, currency: Currency, amountTobuy: number): Coin {
 
-    const index = this.getIndexCoinInWallet(coin, wallet);
-    const amountTobuy = this.formBuy.controls['amountTobuy'].value;
+    const coin = new Coin({ ...coinGecko });
+    coin.date = new Date().toLocaleString();
 
-    if ( index != -1 ) {
-      wallet.coins![index].coinAmount += coin.coinAmount
-      wallet.coins![index].date = new Date().toLocaleString();
-    } else {
-      wallet.coins!.push(coin);
+
+    if (currency == Currency.USD) {
+      coin.coinAmount = amountTobuy / this.data.coinGecko.current_price;
+    } else if (currency == Currency.CRYPTO) {
+      coin.coinAmount = amountTobuy;
     }
 
-    wallet.funds -= amountTobuy;
+    console.log({coin})
 
-    console.log({index});
-    console.log({wallet});
-
-    this.sendWalletToMarket(wallet);
-
+    return coin;
 
   }
 
-  private openDialog ( amountTobuy: number, coin: Coin) : Observable<boolean>  {
-
-    let confirm: boolean = false;
+  private openDialog(amountTobuy: number, coin: Coin): Observable<boolean> {
 
     const dialogConfirmData: DialogConfirmData = {
       funds: amountTobuy,
@@ -104,26 +98,38 @@ export class DialogBuyComponent {
 
   }
 
-  private sendWalletToMarket(wallet: Wallet) : void {
+  private updateWallet(coin: Coin, wallet: Wallet, currency: Currency): void {
+
+    const index = this.getIndexCoinInWallet(coin, wallet);
+    const amountTobuy = this.formBuy.controls['amountTobuy'].value;
+
+
+    if (index != -1) {
+
+      wallet.coins![index].coinAmount += coin.coinAmount
+      wallet.coins![index].date = new Date().toLocaleString();
+
+    } else { wallet.coins!.push(coin) };
+
+    if (currency == Currency.USD) { wallet.funds -= amountTobuy; }
+    else { wallet.funds -= (amountTobuy * this.data.coinGecko.current_price); }
+
+
+    this.sendWalletToMarket(wallet);
+
+  }
+
+  private getIndexCoinInWallet(coin: Coin, wallet: Wallet): number {
+
+    if (!wallet.coins) return -1;
+
+    return wallet.coins.findIndex(c => c.id === coin.id);
+  }
+
+
+  private sendWalletToMarket(wallet: Wallet): void {
     this.dialogRef.close(wallet);
   }
-
-  private createCoin (coinGecko: CoinGecko, currency: Currency, amountTobuy: number): Coin {
-
-    const coin = new Coin({...coinGecko});
-    coin.date = new Date().toLocaleString();
-
-
-    if( currency == Currency.USD) {
-      coin.coinAmount = amountTobuy / this.data.coinGecko.current_price;
-     } else if( currency == Currency.CRYPTO) {
-      coin.coinAmount = amountTobuy * this.data.coinGecko.current_price;
-     }
-
-    return coin;
-
-  }
-
 
 
   public removeLetters(event: any): void {
@@ -136,18 +142,10 @@ export class DialogBuyComponent {
     input.value = value;
   }
 
-  private getIndexCoinInWallet (coin: Coin, wallet: Wallet) : number {
-
-    if(!wallet.coins) return -1;
-
-    return wallet.coins.findIndex(c => c.id == coin.id);
-  }
-
-
   private fundsValidator(wallet: Wallet): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const amountTobuy = control.value;
-      if ( amountTobuy > wallet.funds ) {
+      if (amountTobuy > wallet.funds) {
         return { funds: true };
       }
       return null
@@ -158,15 +156,15 @@ export class DialogBuyComponent {
     return this.formBuy.controls[field].errors && this.formBuy.controls[field].touched;
   }
 
-  public messageFieldError (field: string) : string | null {
+  public messageFieldError(field: string): string | null {
 
     if (!this.formBuy.controls[field]) return null;
 
     const errors = this.formBuy.controls[field].errors || {};
 
-    for( const key of Object.keys(errors)){
+    for (const key of Object.keys(errors)) {
 
-      switch ( key ) {
+      switch (key) {
 
         case 'required':
           return 'Este campo es requerido';
