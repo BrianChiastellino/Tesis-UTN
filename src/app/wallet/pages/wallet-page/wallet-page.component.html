@@ -1,12 +1,26 @@
 <shared-nav-bar></shared-nav-bar>
 
-<h1>Bienvenido wallet</h1>
+<h1 class="display-4 text-center mt-4 mb-4">Mi Billetera</h1>
 
-<form [formGroup]="formFunds">
-  <input type="text" formControlName="funds" (input)="removeLetters($event)">
-  <button mat-button type="submit" (click)="depositFunds()"  [disabled]="formFunds.invalid"> Depositar </button>
-  <button mat-button type="submit" (click)="withdrawFunds()" [disabled]="formFunds.invalid"> Retirar </button>
+
+<form [formGroup]="formFunds" class="p-4 border rounded bg-light">
+  <div class="form-group mb-3">
+    <label for="fundsInput" class="form-label">Mis fondos: {{ wallet?.funds }}</label>
+    <input type="text" id="fundsInput" autocomplete="off" class="form-control" formControlName="funds" (input)="removeLetters($event)" placeholder="Ingrese la cantidad">
+    <div *ngIf="isValidField('funds')" class="mt-2 text-danger">
+      {{ messageFieldError('funds') }}
+    </div>
+  </div>
+  <div class="d-flex justify-content-between">
+    <button mat-button type="submit" class="btn btn-secondary" (click)="withdrawFunds()" [disabled]="formFunds.invalid">Retirar</button>
+    <button mat-button type="submit" class="btn btn-primary" (click)="depositFunds()" [disabled]="formFunds.invalid">Depositar</button>
+  </div>
 </form>
+
+<app-list-coin-user class="mt-3"
+[coins]="wallet?.coins!"
+></app-list-coin-user>
+
 
 <shared-toast
 [typeToast$]="typeToast$"

@@ -15,12 +15,12 @@ export class WalletPageComponent implements OnInit {
 
   public typeToast$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   private token: string = environment.userToken;
-  private wallet: Wallet | null = null;
+  public wallet: Wallet | null = null;
   private user: User | null = null;
 
 
   public formFunds: FormGroup = new FormGroup({
-    funds: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$'),])
+    funds: new FormControl('', [Validators.required, Validators.min(100), Validators.max(100000)])
   });
 
   constructor(
@@ -85,6 +85,37 @@ export class WalletPageComponent implements OnInit {
     this.wallet.funds -= funds;
 
     this.updateWallet();
+
+  }
+
+  public isValidField(field: string): boolean | null {
+    return this.formFunds.controls[field].errors && this.formFunds.controls[field].touched;
+  }
+
+  public messageFieldError (field: string) : string | null {
+
+    if (!this.formFunds.controls[field]) return null;
+
+
+    const errors = this.formFunds.controls[field].errors || {};
+    console.log(errors)
+
+    for( const key of Object.keys(errors)){
+
+      switch ( key ) {
+
+        case 'min':
+          return `Monto minimo ${errors['min'].min}`;
+
+        case 'max':
+          return `Monto maximo ${errors['max'].max}`
+
+      }
+
+
+    }
+
+    return null;
 
   }
 

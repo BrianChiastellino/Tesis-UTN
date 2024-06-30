@@ -34,9 +34,8 @@ export class BuyCoinGeckoComponent implements OnInit {
 
       this.coin$.subscribe(coin => {
 
-      if(this.wallet && this.user && coin != null) {
-        this.openDialog( this.wallet, coin);
-      }
+        if (this.wallet?.funds! > 0 && this.user && coin != null) { this.openDialog(this.wallet!, coin); }
+        else if (this.wallet?.funds! <= 0) { this.toast$.next('info') }
 
     });
 

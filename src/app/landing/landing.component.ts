@@ -7,6 +7,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [ CommonModule, SharedModule ],
   selector: 'alone-landing',
   templateUrl: './landing.component.html',
+  styleUrl: './landing.componente.css'
+
 })
 
 export class LandingComponent {

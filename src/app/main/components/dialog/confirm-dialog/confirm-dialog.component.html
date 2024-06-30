@@ -1,0 +1,52 @@
+<ng-container *ngIf="data.operation == 'buy'">
+
+  <h1 mat-dialog-title align="center">Confirmacion de  compra</h1>
+  <div mat-dialog-content>
+    <p>Comprando ${{data.funds}}USD de {{data.coin.id}}</p>
+    <p>obtendras un total de {{data.coin.coinAmount}}</p>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onConfirm()">Confirmar</button>
+  </div>
+
+</ng-container>
+
+<ng-container *ngIf="data.operation == 'sell'">
+
+  <h1 mat-dialog-title align="center">Confirmacion de enta</h1>
+  <div mat-dialog-content>
+    <p>Vendiendo</p>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onConfirm()">Confirmar</button>
+  </div>
+
+</ng-container>
+
+<ng-container *ngIf="data.operation == 'deposit-funds'">
+
+  <h1 mat-dialog-title align="center">Confirmarcion de deposito</h1>
+  <div mat-dialog-content>
+    <p>Depositaras ${{data.funds}}USD a tu cuenta.</p>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onConfirm()">Confirmar</button>
+  </div>
+
+</ng-container>
+
+<ng-container *ngIf="data.operation == 'withdraw-funds'">
+
+  <h1 mat-dialog-title align="center">Confirmacion de extraccion</h1>
+  <div mat-dialog-content>
+    <p>Retiraras ${{data.funds}}USD de tu cuenta.</p>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onConfirm()">Confirmar</button>
+  </div>
+
+</ng-container>

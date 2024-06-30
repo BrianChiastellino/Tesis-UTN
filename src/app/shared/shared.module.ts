@@ -6,7 +6,7 @@ import { ToastComponent } from './toast/toast.component';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../main/components/dialog/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({

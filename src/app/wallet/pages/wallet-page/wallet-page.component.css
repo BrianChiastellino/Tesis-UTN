@@ -1,0 +1,12 @@
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.btn-primary, .btn-secondary {
+  width: 48%;
+}

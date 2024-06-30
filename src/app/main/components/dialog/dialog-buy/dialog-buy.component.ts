@@ -9,7 +9,7 @@ import { Wallet } from '../../../../models/wallet/wallet.models';
 
 import { Observable, tap } from 'rxjs';
 import { Operation } from '../../../../models/enum/dialog.enum';
-import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-dialog-buy',
