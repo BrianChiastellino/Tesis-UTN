@@ -6,7 +6,7 @@ import { BehaviorSubject, filter, tap } from 'rxjs';
 import { User } from '../../../auth/models/user.model';
 import { CoinGecko } from '../../../models/coin-gecko/interface/coin-gecko.models';
 import { DialogSellComponent } from '../dialog/dialog-sell/dialog-sell.component';
-import { Dialogdata } from '../../../models/coin-gecko/dialog/dialog.interface';
+import { Dialogdata } from '../../../models/dialog/dialog.interface';
 
 @Component({
   selector: 'app-sell-coin-gecko',
@@ -18,7 +18,7 @@ export class SellCoinGeckoComponent implements OnInit{
   @Input() public wallet: Wallet | null = null;
   @Input() public coin$: BehaviorSubject<CoinGecko | null> = new BehaviorSubject<CoinGecko | null>(null);
   public toast$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
-  
+
 
   constructor(
     private dialog: MatDialog,

@@ -1,11 +1,15 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoinGecko } from '../../../../models/coin-gecko/interface/coin-gecko.models';
 import {  AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Currency } from '../../../../models/enum/currency.enum';
 import { Coin } from '../../../../models/coin-user/interface/coin-user.models';
-import { Dialogdata } from '../../../../models/coin-gecko/dialog/dialog.interface';
+import { DialogConfirmData, Dialogdata } from '../../../../models/dialog/dialog.interface';
 import { Wallet } from '../../../../models/wallet/wallet.models';
+
+import { Observable, tap } from 'rxjs';
+import { Operation } from '../../../../models/enum/dialog.enum';
+import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-dialog-buy',
@@ -14,12 +18,6 @@ import { Wallet } from '../../../../models/wallet/wallet.models';
 })
 export class DialogBuyComponent {
 
-    /** //todo:
-   * Ahora tengo la wallet y tengo la coin
-   * Hago todas las validaciones en el dialog, si hay exito mando la wallet para que en market llamar al update
-   * Si algo paso mal uso rxjs y mando null,
-   *
-   */
 
   public currencyTypeButton: string = 'usd';
   public coin: Coin | null = null;
@@ -32,6 +30,7 @@ export class DialogBuyComponent {
   constructor(
     private dialogRef: MatDialogRef<DialogBuyComponent, Wallet | null>, @Inject(MAT_DIALOG_DATA) public data: Dialogdata,
     private fb: FormBuilder,
+    private dialog: MatDialog,
   ) {}
 
 
@@ -55,10 +54,15 @@ export class DialogBuyComponent {
     const wallet: Wallet =  { ...this.data.wallet };
     const coinGecko: CoinGecko = { ...this.data.coinGecko };
     const currency: Currency = this.formBuy.controls['currencyType'].value;
+    const amountTobuy = this.formBuy.controls['amountTobuy'].value;
 
-    const coin = this.createCoin(coinGecko, currency);
+    const coin = this.createCoin(coinGecko, currency, amountTobuy);
 
-    this.updateWallet(coin, wallet);
+    this.openDialog(amountTobuy,coin)
+      .subscribe(data => {
+        if (data) this.updateWallet(coin, wallet);
+      })
+
 
   }
 
@@ -82,26 +86,54 @@ export class DialogBuyComponent {
     this.sendWalletToMarket(wallet);
 
 
-    // Si sale todo bien, envio la wallet para el update, si sale algo mal y no pasa las validaciones envio null
+  }
+
+  private openDialog ( amountTobuy: number, coin: Coin) : Observable<boolean>  {
+
+    let confirm: boolean = false;
+
+    const dialogConfirmData: DialogConfirmData = {
+      funds: amountTobuy,
+      coin: coin,
+      operation: Operation.BUY
+    }
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: dialogConfirmData });
+
+    return dialogRef.afterClosed()
+
   }
 
   private sendWalletToMarket(wallet: Wallet) : void {
     this.dialogRef.close(wallet);
   }
 
-  private createCoin (coinGecko: CoinGecko, currency: Currency): Coin {
+  private createCoin (coinGecko: CoinGecko, currency: Currency, amountTobuy: number): Coin {
 
     const coin = new Coin({...coinGecko});
-    const amountTobuy = this.formBuy.controls['amountTobuy'].value;
     coin.date = new Date().toLocaleString();
 
 
     if( currency == Currency.USD) {
-      coin.coinAmount = this.data.coinGecko.current_price * amountTobuy;
+      coin.coinAmount = amountTobuy / this.data.coinGecko.current_price;
+     } else if( currency == Currency.CRYPTO) {
+      coin.coinAmount = amountTobuy * this.data.coinGecko.current_price;
      }
 
     return coin;
 
+  }
+
+
+
+  public removeLetters(event: any): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value;
+
+    value = value.replace(/[^\d,.]/g, '');
+    value = value.replace(',', '.');
+
+    input.value = value;
   }
 
   private getIndexCoinInWallet (coin: Coin, wallet: Wallet) : number {
@@ -118,8 +150,35 @@ export class DialogBuyComponent {
       if ( amountTobuy > wallet.funds ) {
         return { funds: true };
       }
-      return null;
+      return null
     };
+  }
+
+  public isValidField(field: string): boolean | null {
+    return this.formBuy.controls[field].errors && this.formBuy.controls[field].touched;
+  }
+
+  public messageFieldError (field: string) : string | null {
+
+    if (!this.formBuy.controls[field]) return null;
+
+    const errors = this.formBuy.controls[field].errors || {};
+
+    for( const key of Object.keys(errors)){
+
+      switch ( key ) {
+
+        case 'required':
+          return 'Este campo es requerido';
+
+        case 'funds':
+          return 'Fondos insuficientes';
+      }
+
+    }
+
+    return null;
+
   }
 
 }

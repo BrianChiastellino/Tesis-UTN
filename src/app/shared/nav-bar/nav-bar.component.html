@@ -1,12 +1,8 @@
 <mat-toolbar color="primary">
-
-  <button (click)="landing()"> landing </button>
-  <button (click)="main()"> main </button>
-  <button (click)="wallet()"> wallet </button>
-
+  <button mat-button (click)="landing()">Inicio</button>
+  <button mat-button (click)="main()">Market</button>
+  <button mat-button (click)="wallet()">Mi billetera</button>
   <span class="spacer"></span>
-  <button mat-button (click)="logout()" *ngIf="isLogin" class=""> Logout </button>
-  <button mat-button (click)="login()" *ngIf="!isLogin" class=""> Login </button>
-
-
+  <button mat-button *ngIf="isLogin" (click)="logout()">Logout</button>
+  <button mat-button *ngIf="!isLogin" (click)="login()">Loguarme</button>
 </mat-toolbar>

@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'shared-nav-bar',
   templateUrl: './nav-bar.component.html',
+  styleUrl: './nav-bar.components.css'
 })
 
 export class NavBarComponent implements OnInit {

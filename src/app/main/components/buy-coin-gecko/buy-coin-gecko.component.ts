@@ -4,7 +4,7 @@ import { WalletService } from '../../../wallet/services/wallet.service';
 import { Wallet } from '../../../models/wallet/wallet.models';
 import { User } from '../../../auth/models/user.model';
 import { CoinGecko } from '../../../models/coin-gecko/interface/coin-gecko.models';
-import { Dialogdata } from '../../../models/coin-gecko/dialog/dialog.interface';
+import { Dialogdata } from '../../../models/dialog/dialog.interface';
 import { DialogBuyComponent } from '../dialog/dialog-buy/dialog-buy.component';
 import { BehaviorSubject, filter, tap } from 'rxjs';
 

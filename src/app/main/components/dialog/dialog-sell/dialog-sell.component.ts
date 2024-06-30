@@ -5,7 +5,7 @@ import { Coin } from '../../../../models/coin-user/interface/coin-user.models';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Currency } from '../../../../models/enum/currency.enum';
 import { Wallet } from '../../../../models/wallet/wallet.models';
-import { Dialogdata } from '../../../../models/coin-gecko/dialog/dialog.interface';
+import { Dialogdata } from '../../../../models/dialog/dialog.interface';
 
 @Component({
   selector: 'app-dialog-sell',
