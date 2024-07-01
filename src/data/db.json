@@ -13,14 +13,14 @@
     {
       "id": "6f3b",
       "idUser": "fdeb",
-      "funds": 0,
+      "funds": 64444,
       "coins": [
         {
           "id": "bitcoin",
-          "coinAmount": 2.0015517348395506,
+          "coinAmount": 1,
           "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
           "symbol": "btc",
-          "date": "30/6/2024, 14:22:51"
+          "date": "1/7/2024, 01:23:33"
         }
       ]
     }

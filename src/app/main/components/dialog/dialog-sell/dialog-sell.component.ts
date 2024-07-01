@@ -29,7 +29,7 @@ export class DialogSellComponent {
   public coin: Coin | null = null;
 
   public formSell: FormGroup = this.fb.group({
-    amountToSell: ['',[Validators.required, this.fundsValidator(this.data.wallet)]],
+    amountToSell: ['', [Validators.required, this.fundsValidator(this.data.wallet)]],
     currencyType: [Currency.USD, [Validators.required]],
   })
 
@@ -38,11 +38,12 @@ export class DialogSellComponent {
     private fb: FormBuilder,
     private dialog: MatDialog,
 
-  ) {}
+  ) { }
 
-  public setCurrency( currency: string ): void {
-    currency == 'usd' ? this.formSell.controls['currencyType'].setValue(Currency.USD) :  this.formSell.controls['currencyType'].setValue(Currency.CRYPTO);
+  public setCurrency(currency: string): void {
+    currency == 'usd' ? this.formSell.controls['currencyType'].setValue(Currency.USD) : this.formSell.controls['currencyType'].setValue(Currency.CRYPTO);
     this.currencyTypeButton = currency;
+    this.formSell.get('amountToSell')?.reset();
   }
 
   public onCancel(): void {
@@ -51,49 +52,48 @@ export class DialogSellComponent {
 
   public onConfirm(): void {
 
-    if( !this.formSell.valid) return;
+    if (!this.formSell.valid) return;
+
 
     const wallet: Wallet = { ...this.data.wallet };
-    const coinGecko: CoinGecko ={ ...this.data.coinGecko };
-    const currency = this.formSell.controls['currencyType'].value;
-    const amountTobuy = this.formSell.controls['amountTobuy'].value;
+    const coinGecko: CoinGecko = { ...this.data.coinGecko };
+    const currency: Currency = this.formSell.controls['currencyType'].value;
+    const amountToSell: number = Number.parseFloat(this.formSell.controls['amountToSell'].value)
+    const index = this.getIndexCoinInWallet(coinGecko, wallet);
 
-    const coin = this.createCoin(coinGecko, currency, amountTobuy);
 
-    this.openDialog(amountTobuy,coin)
-    .subscribe( data => {
-      if( data ) this.updateWallet(coin, wallet);
-    })
+    const coin = this.createCoin(coinGecko, currency, amountToSell);
+
+    this.openDialog(amountToSell, coin)
+      .subscribe(data => {
+        if (data) this.updateWallet(coin, wallet, currency, amountToSell, index);
+      })
 
 
   }
 
-  //venta
-  private updateWallet ( coin: Coin, wallet: Wallet ): void {
+  private createCoin(coinGecko: CoinGecko, currency: Currency, amountToSell: number): Coin {
 
-    const index = this.getIndexCoinInWallet(coin, wallet);
-    const amountTobuy = this.formSell.controls['amountTobuy'].value;
+    const coin = new Coin({ ...coinGecko });
+    coin.date = new Date().toLocaleString();
 
-    if ( index != -1 ) {
-      wallet.coins![index].coinAmount += coin.coinAmount
-      wallet.coins![index].date = new Date().toLocaleString();
-    } else {
-      wallet.coins!.push(coin);
+    if (currency == Currency.USD) {
+      coin.coinAmount = amountToSell / coinGecko.current_price;
+    } else if (currency == Currency.CRYPTO) {
+      coin.coinAmount = amountToSell;
     }
 
-    wallet.funds -= amountTobuy;
 
-    console.log({index});
-    console.log({wallet});
 
-    this.sendWalletToMarket(wallet);
+
+    return coin;
 
   }
 
-  private openDialog ( amountTobuy: number, coin: Coin) : Observable<boolean>  {
+  private openDialog(amountToSell: number, coin: Coin): Observable<boolean> {
 
     const dialogConfirmData: DialogConfirmData = {
-      funds: amountTobuy,
+      funds: amountToSell,
       coin: coin,
       operation: Operation.SELL
     }
@@ -104,64 +104,76 @@ export class DialogSellComponent {
 
   }
 
-  private sendWalletToMarket(wallet: Wallet) : void {
-    this.dialogRef.close(wallet);
-  }
-
-  //todo: Crear la coin al ser tipo de venta
-
-  private createCoin (coinGecko: CoinGecko, currency: Currency, amountTobuy: number): Coin {
-
-    const coin = new Coin({...coinGecko});
-    coin.date = new Date().toLocaleString();
+  //venta
+  private updateWallet(coin: Coin, wallet: Wallet, currency: Currency, amountToSell: number, index: number): void {
 
 
-    if( currency == Currency.USD) {
-      coin.coinAmount = this.data.coinGecko.current_price * amountTobuy;
-     }
+    if (currency == Currency.USD) { wallet.funds += amountToSell; }
+    else if (currency == Currency.CRYPTO) { wallet.funds += (amountToSell * this.data.coinGecko.current_price); }
 
-    return coin;
+
+    wallet.coins![index].coinAmount -= coin.coinAmount;
+
+    if (wallet.coins![index].coinAmount <= 0) { wallet.coins?.splice(index, 1) }
+
+    this.sendWalletToMarket(wallet);
 
   }
 
-  private getIndexCoinInWallet (coin: Coin, wallet: Wallet) : number {
+  private getIndexCoinInWallet(coin: CoinGecko, wallet: Wallet): number {
 
-    if(!wallet.coins) return -1;
+    if (!wallet.coins) return -1;
 
     return wallet.coins.findIndex(c => c.id == coin.id);
   }
 
-  //todo: validar la coin a vender
+  private sendWalletToMarket(wallet: Wallet): void {
+    this.dialogRef.close(wallet);
+  }
 
   private fundsValidator(wallet: Wallet): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const amountTobuy = control.value;
-      if ( amountTobuy < wallet.funds ) {
-        return { funds: true };
+
+      const amountToSell: number = control.value;
+      const currency: Currency | undefined = control.parent?.get('currencyType')?.value;
+      const coin: CoinGecko = this.data.coinGecko;
+      const wallet: Wallet = this.data.wallet;
+      const index = this.getIndexCoinInWallet(coin, wallet);
+
+      if (currency === Currency.USD) {
+        const requiredAmount = amountToSell / coin.current_price;
+        if (wallet.coins && index >= 0 && wallet.coins[index].coinAmount < requiredAmount) {
+          return { funds: true };
+        }
+      } else if (currency === Currency.CRYPTO) {
+        if (wallet.coins && index >= 0 && wallet.coins[index].coinAmount < amountToSell) {
+          return { funds: true };
+        }
       }
+
       return null;
+
     };
   }
 
+
   public isValidField(field: string): boolean | null {
-    return this.formSell.controls[field].errors && this.formSell.controls[field].touched;
+    return !!this.formSell.controls[field].errors;
   }
 
-  public messageFieldError (field: string) : string | null {
+  public messageFieldError(field: string): string | null {
 
     if (!this.formSell.controls[field]) return null;
 
     const errors = this.formSell.controls[field].errors || {};
 
-    for( const key of Object.keys(errors)){
+    for (const key of Object.keys(errors)) {
 
-      switch ( key ) {
-
-        case 'required':
-          return 'Este campo es requerido';
+      switch (key) {
 
         case 'funds':
           return 'Fondos insuficientes';
+          
       }
 
     }

@@ -23,7 +23,6 @@ export class SellCoinGeckoComponent implements OnInit{
 
   constructor(
     private dialog: MatDialog,
-    private walletService: WalletService
   ) {}
 
   public ngOnInit(): void {
@@ -32,7 +31,7 @@ export class SellCoinGeckoComponent implements OnInit{
 
     if(this.wallet && coin != null) {
       this.openDialog( this.wallet, coin);
-    }
+    } 
 
   });
 

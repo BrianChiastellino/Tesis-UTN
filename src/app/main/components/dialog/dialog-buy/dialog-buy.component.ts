@@ -38,8 +38,8 @@ export class DialogBuyComponent {
 
     currency == 'usd' ?
       this.formBuy.controls['currencyType'].setValue(Currency.USD) : this.formBuy.controls['currencyType'].setValue(Currency.CRYPTO);
-
     this.currencyTypeButton = currency;
+    this.formBuy.get('amountTobuy')?.setValue('');
 
   }
 
@@ -50,6 +50,7 @@ export class DialogBuyComponent {
   public onConfirm(): void {
 
     if (!this.formBuy.valid) return
+
 
     const wallet: Wallet = { ...this.data.wallet };
     const coinGecko: CoinGecko = { ...this.data.coinGecko };
@@ -78,7 +79,7 @@ export class DialogBuyComponent {
       coin.coinAmount = amountTobuy;
     }
 
-    console.log({coin})
+    console.log({ coin })
 
     return coin;
 
@@ -101,7 +102,7 @@ export class DialogBuyComponent {
   private updateWallet(coin: Coin, wallet: Wallet, currency: Currency): void {
 
     const index = this.getIndexCoinInWallet(coin, wallet);
-    const amountTobuy = this.formBuy.controls['amountTobuy'].value;
+    const amountTobuy = Number.parseFloat(this.formBuy.controls['amountTobuy'].value);
 
 
     if (index != -1) {
@@ -142,13 +143,37 @@ export class DialogBuyComponent {
     input.value = value;
   }
 
+
   private fundsValidator(wallet: Wallet): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const amountTobuy = control.value;
-      if (amountTobuy > wallet.funds) {
-        return { funds: true };
+
+      const amountTobuy: number = Number.parseFloat(control.value);
+      const currency: Currency | undefined = control.parent?.get('currencyType')?.value;
+      const coin: CoinGecko = this.data.coinGecko;
+      const wallet: Wallet = this.data.wallet;
+
+      if (currency === Currency.USD) {
+        if ( wallet.funds >= amountTobuy) {
+          return { funds: true };
+        }
+      } else if (currency === Currency.CRYPTO) {
+
+        console.log({ currency })
+        console.log(wallet.funds)
+        console.log(amountTobuy)
+        console.log(coin.current_price)
+
+        console.log((amountTobuy * coin.current_price))
+        console.log(wallet.funds >= (amountTobuy * coin.current_price))
+
+        if ( amountTobuy != 0 && wallet.funds >= (amountTobuy * coin.current_price)) {
+          return { funds: true }
+        }
+
       }
-      return null
+
+      return null;
+
     };
   }
 
@@ -166,11 +191,9 @@ export class DialogBuyComponent {
 
       switch (key) {
 
-        case 'required':
-          return 'Este campo es requerido';
-
         case 'funds':
           return 'Fondos insuficientes';
+
       }
 
     }
