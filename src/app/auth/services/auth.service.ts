@@ -16,7 +16,7 @@ export class AuthService {
 
   // CRUD
 
-  public get users(): Observable<User[]> {
+  public get getAllUsers(): Observable<User[]> {
 
     return this.http.get<User[]>(`${ this.baseUrl }/users`)
 
@@ -75,29 +75,42 @@ export class AuthService {
 
   }
 
-  // REGISTRO USUARIO
+  public checkAuthenticationAdmin() : Observable<boolean> {
 
-  public registerUser (user: User): Observable<boolean> {
+    const user: User = JSON.parse( localStorage.getItem( `${this.token}` )!)
 
-    if( !user ) return of(false);
+    if ( !user ) return of(false);
 
-    return this.validateUser(user)
-      .pipe(
-        tap( data => { if( !data ) console.log(`Usuario ${user.username} registrado sin exito`) } ),
-        filter( isValid => isValid ),
-        switchMap( () => this.addUser(user)
-          .pipe(
-                tap( user => localStorage.setItem(` ${this.token} `, JSON.stringify(user))),
-                map( () => true ),
-                tap( () => console.log(`Usuario ${user.username} registrado con exito`)),
-          )),
-      )
+    return user.admin == true ? of(true) : of(false);
 
   }
 
+  // REGISTRO USUARIO
+
+  public registerUser(user: User): Observable<boolean> {
+
+    if (!user) return of(false);
+
+    return this.getAllUsers.pipe(
+      switchMap( users => {
+        if ( users.length === 0 ) {
+          user.admin = true;
+        } else {
+          user.admin = false
+        }
+        return this.validateUser(user);
+      }),
+        filter(isValid => isValid),
+        switchMap(() => this.addUser(user).pipe(
+            tap(user => localStorage.setItem(`${this.token}`, JSON.stringify(user))),
+            map(() => true),
+        ))
+    );
+}
+
   public validateUser(user : User ): Observable<boolean> {
 
-    return this.users.pipe(
+    return this.getAllUsers.pipe(
       map( users => {
         const isValid = users.find( u => u.username === user.username || u.email === user.email || u.document === user.document);
         return !isValid;        /* No es una negacion - quiere decir que nunca va a ser undefinded */

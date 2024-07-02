@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { PublicGuard } from './auth/guards/public.guard';
+import { AdminGuard } from './admin/guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -28,8 +29,14 @@ const routes: Routes = [
     canMatch: [AuthGuard]
   },
   {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(a => a.AdminModule),
+    canActivate: [AdminGuard],
+    canMatch: [AdminGuard]
+  },
+  {
     path: '**',
-    redirectTo: 'landing',
+    redirectTo: 'www.google.com',
   },
 ];
 

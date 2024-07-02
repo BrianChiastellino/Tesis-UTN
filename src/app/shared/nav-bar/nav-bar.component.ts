@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { User } from '../../auth/models/user.model';
 
 @Component({
   selector: 'shared-nav-bar',
@@ -12,6 +13,7 @@ export class NavBarComponent implements OnInit {
 
   private token: string = environment.userToken;
   public isLogin: boolean = false;
+  public isAdmin: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -20,9 +22,13 @@ export class NavBarComponent implements OnInit {
   }
 
   private isUserLoged (): void {
-    const isLoged = localStorage.getItem( this.token );
 
-    this.isLogin = isLoged ? true : false
+    const isLoged = localStorage.getItem( this.token );
+    const user: User = JSON.parse(localStorage.getItem( this.token )!);
+
+    user ? this.isLogin = true : this.isLogin = false;
+    user ? this.isAdmin = user.admin : this.isAdmin = false;
+    console.log(this.isAdmin)
   }
 
   public landing (): void {
@@ -37,6 +43,10 @@ export class NavBarComponent implements OnInit {
     this.router.navigateByUrl('wallet');
   }
 
+  public transictions () : void {
+    this.router.navigateByUrl('/admin/transactions');
+  }
+
   public login (): void{
     this.router.navigateByUrl('/auth/login')
   }
@@ -48,6 +58,7 @@ export class NavBarComponent implements OnInit {
   public logout (): void {
     localStorage.clear();
     this.isLogin = !this.isLogin;
+    this.isAdmin = false;
     this.landing();
   }
 

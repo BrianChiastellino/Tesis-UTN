@@ -1,28 +1,36 @@
 {
   "users": [
     {
-      "id": "fdeb",
-      "name": "Brian Chiastellino",
+      "id": "e51c",
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "username": "admin",
+      "password": "admin123",
+      "document": "12345",
+      "admin": true
+    },
+    {
+      "id": "3a5f",
+      "name": "Brian",
       "email": "chaste@gmail.com",
       "username": "chaste",
       "password": "12345",
-      "document": "41853675"
+      "document": "41853675",
+      "admin": false
     }
   ],
   "wallets": [
     {
-      "id": "6f3b",
-      "idUser": "fdeb",
-      "funds": 64444,
-      "coins": [
-        {
-          "id": "bitcoin",
-          "coinAmount": 1,
-          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
-          "symbol": "btc",
-          "date": "1/7/2024, 01:23:33"
-        }
-      ]
+      "id": "badc",
+      "idUser": "3a5f",
+      "funds": 0,
+      "coins": []
+    },
+    {
+      "id": "b0f8",
+      "idUser": "e51c",
+      "funds": 0,
+      "coins": []
     }
   ]
 }

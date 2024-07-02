@@ -6,5 +6,8 @@ export interface IUser {
   username: string;
   password: string;
   document: string;
+  admin:  boolean;
 
 }
+
+//apellido

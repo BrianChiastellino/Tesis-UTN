@@ -8,6 +8,7 @@ export class User implements IUser {
   username: string;
   password: string;
   document: string;
+  admin: boolean;
 
   constructor(user: User) {
 
@@ -17,6 +18,7 @@ export class User implements IUser {
     this.username = user == undefined ? '' : user.username;
     this.password = user == undefined ? '' : user.password;
     this.document = user == undefined ? '' : user.document;
+    this.admin = user == undefined ? false : user.admin;
   }
 
 }
