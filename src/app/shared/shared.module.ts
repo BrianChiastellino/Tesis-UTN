@@ -7,13 +7,15 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ConfirmDialogComponent } from '../main/components/dialog/confirm-dialog/confirm-dialog.component';
+import { SearchCoinComponent } from './search-coin/search-coin.component';
 
 
 @NgModule({
   declarations: [
     NavBarComponent,
     ToastComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    SearchCoinComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { ConfirmDialogComponent } from '../main/components/dialog/confirm-dialog
   exports:[
     NavBarComponent,
     ToastComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    SearchCoinComponent
   ],
   providers: [
     MessageService

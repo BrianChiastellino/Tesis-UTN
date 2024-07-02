@@ -1,0 +1,29 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-input {
+  width: 50vw; /* 50% del ancho de la ventana */
+}
+
+.search-input-field {
+  padding-right: 32px; /* Ajuste para el icono de búsqueda */
+  border: none; /* Eliminar todos los bordes */
+  box-shadow: none; /* Eliminar sombras del campo de entrada */
+}
+
+/* Estilos específicos para el borde inferior */
+.mat-form-field-appearance-standard .mat-form-field-underline {
+  background-color: #3f51b5; /* Color del borde inferior */
+  height: 2px; /* Altura del borde inferior */
+}
+
+.mat-form-field-appearance-standard .mat-form-field-underline:hover {
+  background-color: #303f9f; /* Color del borde inferior al pasar el cursor */
+}
+
+.mat-form-field-appearance-standard .mat-form-field-subscript-wrapper {
+  margin-top: 0; /* Ajusta el espacio debajo del campo de entrada */
+}
