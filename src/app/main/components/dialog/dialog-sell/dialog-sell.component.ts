@@ -131,13 +131,21 @@ export class DialogSellComponent {
     this.dialogRef.close(wallet);
   }
 
+  public removeLetters(event: any): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value;
+
+    value = value.replace(/[^\d,.]/g, '');
+    value = value.replace(',', '.');
+
+    input.value = value;
+  }
+
   private fundsValidator(wallet: Wallet): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-
       const amountToSell: number = control.value;
       const currency: Currency | undefined = control.parent?.get('currencyType')?.value;
       const coin: CoinGecko = this.data.coinGecko;
-      const wallet: Wallet = this.data.wallet;
       const index = this.getIndexCoinInWallet(coin, wallet);
 
       if (currency === Currency.USD) {
@@ -152,35 +160,27 @@ export class DialogSellComponent {
       }
 
       return null;
-
     };
   }
 
-
-  public isValidField(field: string): boolean | null {
-    return !!this.formSell.controls[field].errors;
+  public isValidField(field: string): boolean {
+    const control = this.formSell.controls[field];
+    return control.errors !== null;
   }
 
   public messageFieldError(field: string): string | null {
+    const control = this.formSell.controls[field];
+    if (!control) return null;
 
-    if (!this.formSell.controls[field]) return null;
+    const errors = control.errors || {};
 
-    const errors = this.formSell.controls[field].errors || {};
-
-    for (const key of Object.keys(errors)) {
-
-      switch (key) {
-
-        case 'funds':
-          return 'Fondos insuficientes';
-          
-      }
-
+    if (errors['funds']) {
+      return 'Fondos insuficientes';
     }
 
     return null;
-
   }
+
 
 
 }

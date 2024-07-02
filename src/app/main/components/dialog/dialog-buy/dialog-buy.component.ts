@@ -16,6 +16,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
   templateUrl: './dialog-buy.component.html',
   styleUrl: './dialog-buy.component.css'
 })
+
 export class DialogBuyComponent {
 
 
@@ -146,60 +147,40 @@ export class DialogBuyComponent {
 
   private fundsValidator(wallet: Wallet): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-
       const amountTobuy: number = Number.parseFloat(control.value);
       const currency: Currency | undefined = control.parent?.get('currencyType')?.value;
       const coin: CoinGecko = this.data.coinGecko;
-      const wallet: Wallet = this.data.wallet;
 
       if (currency === Currency.USD) {
-        if ( wallet.funds >= amountTobuy) {
+        if (wallet.funds < amountTobuy) {
           return { funds: true };
         }
       } else if (currency === Currency.CRYPTO) {
-
-        console.log({ currency })
-        console.log(wallet.funds)
-        console.log(amountTobuy)
-        console.log(coin.current_price)
-
-        console.log((amountTobuy * coin.current_price))
-        console.log(wallet.funds >= (amountTobuy * coin.current_price))
-
-        if ( amountTobuy != 0 && wallet.funds >= (amountTobuy * coin.current_price)) {
-          return { funds: true }
+        if (amountTobuy !== 0 && wallet.funds < (amountTobuy * coin.current_price)) {
+          return { funds: true };
         }
-
       }
 
       return null;
-
     };
   }
 
-  public isValidField(field: string): boolean | null {
-    return this.formBuy.controls[field].errors && this.formBuy.controls[field].touched;
+  public isValidField(field: string): boolean {
+    const control = this.formBuy.controls[field];
+    return control.errors !== null;
   }
 
   public messageFieldError(field: string): string | null {
+    const control = this.formBuy.controls[field];
+    if (!control) return null;
 
-    if (!this.formBuy.controls[field]) return null;
+    const errors = control.errors || {};
 
-    const errors = this.formBuy.controls[field].errors || {};
-
-    for (const key of Object.keys(errors)) {
-
-      switch (key) {
-
-        case 'funds':
-          return 'Fondos insuficientes';
-
-      }
-
+    if (errors['funds']) {
+      return 'Fondos insuficientes';
     }
 
     return null;
-
   }
 
 }
