@@ -8,6 +8,8 @@ import { WalletService } from '../../../wallet/services/wallet.service';
 import { User } from '../../../auth/models/user.model';
 import { environment } from '../../../../environments/environment';
 import { Wallet } from '../../../models/wallet/wallet.models';
+import { TransactionsService } from '../../../admin/services/transactions.service';
+import { Transaction } from '../../../admin/models/transaction.models';
 
 @Component({
   selector: 'app-market-page',
@@ -30,6 +32,7 @@ export class MarketPageComponent implements OnInit {
   constructor(
     private coinGeckoService: CoinGeckoService,
     private walletService: WalletService,
+    private transactionService: TransactionsService
   ) { }
 
   public ngOnInit(): void {
@@ -65,13 +68,21 @@ export class MarketPageComponent implements OnInit {
       .subscribe(wallet => this.wallet = wallet![0])
   }
 
-  public updateWallet (wallet : Wallet ) : void {
+  private updateWallet (wallet : Wallet ) : void {
     this.walletService.updateWallet( wallet )
     .pipe(
       filter( data => !!data),
       tap( wallet => this.wallet = wallet),
     )
     .subscribe();
+  }
+
+  private createTransaction () : void {
+
+    const transaction = new Transaction({
+      fecha: new Date().toLocaleString(),
+    })
+
   }
 
   private getCoinGeckoTest(): void {
