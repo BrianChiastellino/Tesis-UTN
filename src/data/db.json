@@ -17,14 +17,79 @@
       "password": "12345",
       "document": "41853675",
       "admin": false
+    },
+    {
+      "id": "5622",
+      "name": "Candela",
+      "email": "cande@gmail.com",
+      "username": "cande",
+      "password": "12345",
+      "document": "41899061",
+      "admin": false
+    },
+    {
+      "id": "6c52",
+      "name": "admin2",
+      "email": "admin2@gmail.com",
+      "username": "admin2",
+      "password": "12345",
+      "document": "987654",
+      "admin": false
+    },
+    {
+      "id": "4383",
+      "name": "admin3",
+      "email": "admin3@gmail.com",
+      "username": "admin3",
+      "password": "12345",
+      "document": "987654321",
+      "admin": true
+    },
+    {
+      "id": "fdff",
+      "name": "noah",
+      "email": "noah@gmail.com",
+      "username": "noah",
+      "password": "123456",
+      "document": "321654987",
+      "admin": false
     }
   ],
   "wallets": [
     {
       "id": "badc",
       "idUser": "3a5f",
-      "funds": 0,
-      "coins": []
+      "funds": 152,
+      "coins": [
+        {
+          "id": "tether",
+          "coinAmount": 12.005354388057073,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "2/7/2024, 23:38:28"
+        },
+        {
+          "id": "bitcoin",
+          "coinAmount": 0.0001862081807460741,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "3/7/2024, 00:16:27"
+        },
+        {
+          "id": "ethereum",
+          "coinAmount": 0.0034223037237516435,
+          "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+          "symbol": "eth",
+          "date": "3/7/2024, 00:16:31"
+        },
+        {
+          "id": "binancecoin",
+          "coinAmount": 0.02038216560509554,
+          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          "symbol": "bnb",
+          "date": "3/7/2024, 00:16:33"
+        }
+      ]
     },
     {
       "id": "b0f8",

@@ -36,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'www.google.com',
+    redirectTo: 'landing',
   },
 ];
 

@@ -29,13 +29,18 @@
 
     <mat-form-field>
       <mat-label>Contraseña</mat-label>
-      <input type="text" matInput placeholder="contraseña" formControlName="password">
+      <input [type]="hidePassword ? 'password' : 'text' " matInput placeholder="contraseña" formControlName="password">
+      <button mat-icon-button matSuffix (click)="showPassword()" ><mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}} </mat-icon> </button>
     </mat-form-field>
+
+    <div *ngIf="admin">
+      <mat-checkbox formControlName="admin">Admin</mat-checkbox>
+    </div>
+
+
 
     <button mat-button mat-flat-button color="primary" type="submit">Registrarme!</button>
     <button mat-button mat-flat-button color="primary" (click)="goToLogin()">Loguearme</button>
-
-
 
   </form>
 

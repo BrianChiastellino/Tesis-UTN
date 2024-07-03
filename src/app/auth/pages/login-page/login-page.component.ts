@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 
 export class LoginPageComponent {
 
+  public hidePassword: boolean = true;
+
   public loginForm: FormGroup = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required]
@@ -53,6 +55,9 @@ export class LoginPageComponent {
     this.router.navigateByUrl('auth/register');
   }
 
+  public showPassword () : void  {
+    this.hidePassword = !this.hidePassword;
+  }
 
 
 }

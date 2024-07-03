@@ -1,15 +1,15 @@
-<div class=" contenedor-general-lista-coin">
-  <div class="contenedor-general-coin" *ngFor="let coin of coins">
-    <div class="contenedor-img">
-      <img class="coin-img" [src]="coin.image">
+<div class="coins">
+  <div class="coin" *ngFor="let coin of coins">
+    <div class="content">
+      <img [src]="coin.image" alt="{{coin.id}}" class="coin-image">
+      <div class="text-content">
+        <h2>{{coin.id | uppercase}}</h2>
+        <p>${{coin.coinAmount | number:'1.0-20'}}</p>
+      </div>
     </div>
-
-    <p class="coin-id">{{coin.id}}</p>
-    <p class="coin-amount">${{coin.coinAmount}}</p>
-    <p class="coin-fecha">Ultima compra {{coin.date}}</p>
-
+    <div class="footer">
+      <p>Ultima actualizacion <br> {{coin.date}}</p>
+    </div>
   </div>
 </div>
-
-
 

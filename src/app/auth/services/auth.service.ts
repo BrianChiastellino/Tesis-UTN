@@ -95,9 +95,7 @@ export class AuthService {
       switchMap( users => {
         if ( users.length === 0 ) {
           user.admin = true;
-        } else {
-          user.admin = false
-        }
+        } 
         return this.validateUser(user);
       }),
         filter(isValid => isValid),
