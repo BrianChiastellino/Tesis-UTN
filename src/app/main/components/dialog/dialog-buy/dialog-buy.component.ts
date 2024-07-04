@@ -10,6 +10,9 @@ import { Wallet } from '../../../../models/wallet/wallet.models';
 import { Observable, tap } from 'rxjs';
 import { Operation } from '../../../../models/enum/dialog.enum';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { Transaction } from '../../../../admin/models/transaction.models';
+import { TransactionType } from '../../../../admin/models/enum/transaction.enum';
+import { TransactionsService } from '../../../../admin/services/transactions.service';
 
 @Component({
   selector: 'app-dialog-buy',
@@ -32,6 +35,7 @@ export class DialogBuyComponent {
     private dialogRef: MatDialogRef<DialogBuyComponent, Wallet | null>, @Inject(MAT_DIALOG_DATA) public data: Dialogdata,
     private fb: FormBuilder,
     private dialog: MatDialog,
+    private transactionService: TransactionsService,
   ) { }
 
 
@@ -117,6 +121,7 @@ export class DialogBuyComponent {
     else { wallet.funds -= (amountTobuy * this.data.coinGecko.current_price); }
 
 
+    this.createTransaction(coin, wallet);
     this.sendWalletToMarket(wallet);
 
   }
@@ -131,6 +136,20 @@ export class DialogBuyComponent {
 
   private sendWalletToMarket(wallet: Wallet): void {
     this.dialogRef.close(wallet);
+  }
+
+  private createTransaction (coin: Coin, wallet: Wallet ) : void {
+
+    const transaction = new Transaction({
+      coinAmount: coin.coinAmount,
+      fecha: new Date().toLocaleString(),
+      idCoin: coin.id,
+      idUser: wallet.idUser,
+      type: TransactionType.BUY,
+    });
+
+    this.transactionService.addTransaction(transaction).subscribe();
+
   }
 
 

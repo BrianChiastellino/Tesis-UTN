@@ -1,7 +1,6 @@
 import { AfterContentInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 import { BehaviorSubject, filter, tap } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
 import { CoinGeckoService } from '../../../models/coin-gecko/services/coin-gecko.service';
 import { CoinGecko } from '../../../models/coin-gecko/interface/coin-gecko.models';
 import { WalletService } from '../../../wallet/services/wallet.service';
@@ -9,7 +8,6 @@ import { User } from '../../../auth/models/user.model';
 import { environment } from '../../../../environments/environment';
 import { Wallet } from '../../../models/wallet/wallet.models';
 import { TransactionsService } from '../../../admin/services/transactions.service';
-import { Transaction } from '../../../admin/models/transaction.models';
 
 @Component({
   selector: 'app-market-page',
@@ -54,11 +52,7 @@ export class MarketPageComponent implements OnInit {
     this.user = new User(JSON.parse(localStorage.getItem(this.token)!));
   }
 
-  public updateWalletByEmiter (wallet: Wallet) : void {
-    this.updateWallet(wallet);
-  }
-
-  private getWallet(): void {
+   private getWallet(): void {
     if (!this.user) return;
 
     this.walletService.getWalletByIdUser(this.user.id)
@@ -68,7 +62,7 @@ export class MarketPageComponent implements OnInit {
       .subscribe(wallet => this.wallet = wallet![0])
   }
 
-  private updateWallet (wallet : Wallet ) : void {
+  public updateWallet (wallet : Wallet ) : void {
     this.walletService.updateWallet( wallet )
     .pipe(
       filter( data => !!data),
@@ -77,13 +71,7 @@ export class MarketPageComponent implements OnInit {
     .subscribe();
   }
 
-  private createTransaction () : void {
 
-    const transaction = new Transaction({
-      fecha: new Date().toLocaleString(),
-    })
-
-  }
 
   private getCoinGeckoTest(): void {
 

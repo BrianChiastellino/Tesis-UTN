@@ -1,6 +1,6 @@
 export enum TransactionType {
 
-  COMPRA = 'compra',
-  VENTA = 'venta',
+  BUY = 'buy',
+  SELL = 'sell',
 
 }

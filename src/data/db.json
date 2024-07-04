@@ -59,28 +59,28 @@
     {
       "id": "badc",
       "idUser": "3a5f",
-      "funds": 152,
+      "funds": 52,
       "coins": [
         {
           "id": "tether",
           "coinAmount": 12.005354388057073,
           "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
           "symbol": "usdt",
-          "date": "2/7/2024, 23:38:28"
+          "date": "4/7/2024, 03:28:44"
         },
         {
           "id": "bitcoin",
-          "coinAmount": 0.0001862081807460741,
+          "coinAmount": 0.0009620756005213828,
           "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
           "symbol": "btc",
-          "date": "3/7/2024, 00:16:27"
+          "date": "4/7/2024, 03:35:17"
         },
         {
           "id": "ethereum",
-          "coinAmount": 0.0034223037237516435,
+          "coinAmount": 0.017681902572716825,
           "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
           "symbol": "eth",
-          "date": "3/7/2024, 00:16:31"
+          "date": "4/7/2024, 03:27:14"
         },
         {
           "id": "binancecoin",
@@ -99,6 +99,29 @@
     }
   ],
   "transactions": [
-    
+    {
+      "id": "bd15",
+      "idUser": "3a5f",
+      "idCoin": "tether",
+      "coinAmount": 12.005354388057073,
+      "type": "buy",
+      "fecha": "4/7/2024, 03:28:44"
+    },
+    {
+      "id": "40db",
+      "idUser": "3a5f",
+      "idCoin": "bitcoin",
+      "coinAmount": 0.00015517348395506175,
+      "type": "buy",
+      "fecha": "4/7/2024, 03:35:17"
+    },
+    {
+      "id": "6994",
+      "idUser": "3a5f",
+      "idCoin": "bitcoin",
+      "coinAmount": 0.00015517348395506175,
+      "type": "sell",
+      "fecha": "4/7/2024, 03:35:40"
+    }
   ]
 }

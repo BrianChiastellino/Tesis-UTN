@@ -9,6 +9,9 @@ import { DialogConfirmData, Dialogdata } from '../../../../models/dialog/dialog.
 import { Operation } from '../../../../models/enum/dialog.enum';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { Observable } from 'rxjs';
+import { Transaction } from '../../../../admin/models/transaction.models';
+import { TransactionType } from '../../../../admin/models/enum/transaction.enum';
+import { TransactionsService } from '../../../../admin/services/transactions.service';
 
 @Component({
   selector: 'app-dialog-sell',
@@ -37,7 +40,7 @@ export class DialogSellComponent {
     private dialogRef: MatDialogRef<DialogSellComponent, Wallet | null>, @Inject(MAT_DIALOG_DATA) public data: Dialogdata,
     private fb: FormBuilder,
     private dialog: MatDialog,
-
+    private transactionService: TransactionsService,
   ) { }
 
   public setCurrency(currency: string): void {
@@ -116,6 +119,8 @@ export class DialogSellComponent {
 
     if (wallet.coins![index].coinAmount <= 0) { wallet.coins?.splice(index, 1) }
 
+    this.createTransaction(coin, wallet);
+
     this.sendWalletToMarket(wallet);
 
   }
@@ -125,6 +130,18 @@ export class DialogSellComponent {
     if (!wallet.coins) return -1;
 
     return wallet.coins.findIndex(c => c.id == coin.id);
+  }
+
+  private createTransaction (coin: Coin, wallet: Wallet) : void {
+    const transaction =  new Transaction({
+      coinAmount: coin.coinAmount,
+      fecha: new Date().toLocaleString(),
+      idCoin: coin.id,
+      idUser: wallet.idUser,
+      type: TransactionType.SELL
+    });
+
+    this.transactionService.addTransaction( transaction ).subscribe();
   }
 
   private sendWalletToMarket(wallet: Wallet): void {
