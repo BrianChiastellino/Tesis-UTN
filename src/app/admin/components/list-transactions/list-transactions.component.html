@@ -1,1 +1,49 @@
-<p>list-transactions works!</p>
+
+<div class="table-container mat-elevation-z8">
+  <table mat-table [dataSource]="transactions" class="mat-elevation-z8" matSort>
+    <!-- Columnas de la tabla -->
+
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef class="centered-header">#</th>
+      <td mat-cell *matCellDef="let i = index" class="centered-cell">{{ i + 1 }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">ID</th>
+      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="user">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">USER-ID</th>
+      <td mat-cell *matCellDef="let transaction" class="centered-cell"> {{ transaction.idUser }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="coin">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">COIN</th>
+      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.idCoin }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="cantidad">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">CANTIDAD</th>
+      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.coinAmount }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">TIPO</th>
+      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.type }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">FECHA</th>
+      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.fecha }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let transaction; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10]"
+   [length]="10"
+   [pageSize]="10"
+  showFirstLastButtons></mat-paginator>
+</div>
