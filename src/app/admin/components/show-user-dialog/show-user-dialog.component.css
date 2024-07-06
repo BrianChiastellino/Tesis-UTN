@@ -1,0 +1,58 @@
+.user-details-card {
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.user-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.user-info-item label {
+  font-weight: bold;
+  color: #555;
+}
+
+.user-info-item span {
+  color: #333;
+}
+
+.password-field .password-container {
+  display: flex;
+  align-items: center;
+}
+
+.password-field input {
+  width: calc(100% - 40px);
+  margin-right: 8px;
+}
+
+.password-field button {
+  margin-left: 8px;
+}
+
+.mat-dialog-actions {
+  padding: 8px 16px;
+}
+
+.mat-dialog-actions button {
+  background-color: #3f51b5;
+  color: #ffffff;
+}
+
+.mat-dialog-actions button:hover {
+  background-color: #303f9f;
+}

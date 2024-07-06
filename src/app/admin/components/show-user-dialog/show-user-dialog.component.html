@@ -1,0 +1,44 @@
+<mat-dialog-content>
+<h2 mat-dialog-title>Detalles del Usuario</h2>
+
+  <div class="user-details-card">
+    <div class="user-info">
+      <div class="user-info-item">
+        <label>ID:</label>
+        <span>{{data.id}}</span>
+      </div>
+      <div class="user-info-item">
+        <label>Nombre:</label>
+        <span>{{data.name}}</span>
+      </div>
+      <div class="user-info-item">
+        <label>Email:</label>
+        <span>{{data.email}}</span>
+      </div>
+      <div class="user-info-item">
+        <label>Nombre de usuario:</label>
+        <span>{{data.username}}</span>
+      </div>
+      <div class="user-info-item">
+        <label>Documento:</label>
+        <span>{{data.document}}</span>
+      </div>
+      <div class="user-info-item">
+        <label>Admin:</label>
+        <span>{{data.admin ? 'Sí' : 'No'}}</span>
+      </div>
+      <div class="user-info-item password-field">
+        <label>Contraseña:</label>
+        <div class="password-container">
+          <span class="password">{{ hidePassword ? '********' : data.password }}</span>
+          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

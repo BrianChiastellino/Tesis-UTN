@@ -33,7 +33,7 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin.module').then(a => a.AdminModule),
     canActivate: [AdminGuard],
     canMatch: [AdminGuard]
-  },
+  }, 
   {
     path: '**',
     redirectTo: 'landing',

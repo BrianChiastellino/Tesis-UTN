@@ -28,7 +28,7 @@ export class NavBarComponent implements OnInit {
 
     user ? this.isLogin = true : this.isLogin = false;
     user ? this.isAdmin = user.admin : this.isAdmin = false;
-    console.log(this.isAdmin)
+
   }
 
   public landing (): void {

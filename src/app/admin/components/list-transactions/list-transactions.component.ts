@@ -2,29 +2,53 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@
 import { Transaction } from '../../models/transaction.models';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { User } from '../../../auth/models/user.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ShowUserDialogComponent } from '../show-user-dialog/show-user-dialog.component';
 
 @Component({
   selector: 'app-list-transactions',
   templateUrl: './list-transactions.component.html',
   styleUrl: './list-transactions.component.css'
 })
-export class ListTransactionsComponent implements OnInit, OnChanges {
+export class ListTransactionsComponent implements OnChanges {
+
 
   @Input() public transactions: Transaction[] = [];
-  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
-  public dataSource!: MatTableDataSource<Transaction>
-
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   public displayedColumns: string[] = ['index', 'id', 'user', 'coin', 'cantidad', 'tipo', 'fecha'];
+  public dataSource!: MatTableDataSource<Transaction>;
 
-  public ngOnInit(): void {
-    this.dataSource = new MatTableDataSource( this.transactions) ;
+  constructor (
+    private dialog: MatDialog,
+  ) {}
+
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    this.dataSource = new MatTableDataSource(this.transactions);
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    if(this.dataSource) { this.dataSource.data = this.transactions }
+  public showUser (user: User) : void {
+
+    console.log(user);
+
+    if ( !user ) return;
+
+    this.dialog.open( ShowUserDialogComponent, {
+
+      data: user,
+      width: '50vh',
+
+    } );
+
   }
+
+
 
 
 

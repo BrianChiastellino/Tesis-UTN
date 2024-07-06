@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { Transaction } from '../../../../admin/models/transaction.models';
 import { TransactionType } from '../../../../admin/models/enum/transaction.enum';
 import { TransactionsService } from '../../../../admin/services/transactions.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-dialog-sell',
@@ -135,9 +136,9 @@ export class DialogSellComponent {
   private createTransaction (coin: Coin, wallet: Wallet) : void {
     const transaction =  new Transaction({
       coinAmount: coin.coinAmount,
-      fecha: new Date().toLocaleString(),
-      idCoin: coin.id,
-      idUser: wallet.idUser,
+      date: new Date().toLocaleString(),
+      coin: coin,
+      user: JSON.parse(localStorage.getItem( environment.userToken )!),
       type: TransactionType.SELL
     });
 

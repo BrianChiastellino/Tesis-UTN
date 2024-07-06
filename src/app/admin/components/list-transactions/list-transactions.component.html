@@ -1,6 +1,6 @@
 
 <div class="table-container mat-elevation-z8">
-  <table mat-table [dataSource]="transactions" class="mat-elevation-z8" matSort>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <!-- Columnas de la tabla -->
 
     <ng-container matColumnDef="index">
@@ -9,18 +9,18 @@
     </ng-container>
 
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">ID</th>
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">TRANSACCION-ID</th>
       <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.id }}</td>
     </ng-container>
 
     <ng-container matColumnDef="user">
       <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">USER-ID</th>
-      <td mat-cell *matCellDef="let transaction" class="centered-cell"> {{ transaction.idUser }} </td>
+      <td mat-cell *matCellDef="let transaction" class="centered-cell"> <button mat-buttonnn (click)="showUser(transaction.user)"> {{ transaction.user.id }} </button> </td>
     </ng-container>
 
     <ng-container matColumnDef="coin">
-      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">COIN</th>
-      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.idCoin }}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">COIN-ID</th>
+      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.coin.id | uppercase }}</td>
     </ng-container>
 
     <ng-container matColumnDef="cantidad">
@@ -30,20 +30,20 @@
 
     <ng-container matColumnDef="tipo">
       <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">TIPO</th>
-      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.type }}</td>
+      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.type | transactionType  }}</td>
+      <!-- Aplicar un pipe para poner compra //todo -->
     </ng-container>
 
     <ng-container matColumnDef="fecha">
       <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">FECHA</th>
-      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.fecha }}</td>
+      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.date }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let transaction; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10]"
-   [length]="10"
-   [pageSize]="10"
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]"
   showFirstLastButtons></mat-paginator>
+
 </div>

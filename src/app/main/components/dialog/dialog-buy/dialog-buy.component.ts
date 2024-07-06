@@ -13,6 +13,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 import { Transaction } from '../../../../admin/models/transaction.models';
 import { TransactionType } from '../../../../admin/models/enum/transaction.enum';
 import { TransactionsService } from '../../../../admin/services/transactions.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-dialog-buy',
@@ -142,9 +143,9 @@ export class DialogBuyComponent {
 
     const transaction = new Transaction({
       coinAmount: coin.coinAmount,
-      fecha: new Date().toLocaleString(),
-      idCoin: coin.id,
-      idUser: wallet.idUser,
+      date: new Date().toLocaleString(),
+      coin: coin,
+      user: JSON.parse(localStorage.getItem( environment.userToken )!),
       type: TransactionType.BUY,
     });
 
