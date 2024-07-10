@@ -46,12 +46,12 @@ export class WalletPageComponent implements OnInit {
       )
       .subscribe(wallet => {
 
-        if (wallet?.length == 0) {
+        if (wallet == null) {
           this.createWallet();
           return;
         }
 
-        this.wallet = wallet![0];
+        this.wallet = wallet;
 
       });
 

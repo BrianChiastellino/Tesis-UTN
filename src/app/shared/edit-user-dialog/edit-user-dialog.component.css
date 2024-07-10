@@ -1,0 +1,23 @@
+.edit-user-dialog {
+  width: 60vh;
+}
+
+
+.full-width {
+  width: 100%;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+.password-container button {
+  margin-left: auto;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}

@@ -8,6 +8,8 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ConfirmDialogComponent } from '../main/components/dialog/confirm-dialog/confirm-dialog.component';
 import { SearchCoinComponent } from './search-coin/search-coin.component';
+import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,13 +17,15 @@ import { SearchCoinComponent } from './search-coin/search-coin.component';
     NavBarComponent,
     ToastComponent,
     ConfirmDialogComponent,
-    SearchCoinComponent
+    SearchCoinComponent,
+    EditUserDialogComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ToastModule,
-    ButtonModule
+    ButtonModule,
+    ReactiveFormsModule
   ],
   exports:[
     NavBarComponent,

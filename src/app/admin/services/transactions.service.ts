@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
+
 export class TransactionsService {
 
   private baseUrl: string = environment.urlBaseJsonServer;
@@ -20,5 +21,5 @@ export class TransactionsService {
   public addTransaction (transaction: Transaction) : Observable<Transaction | null> {
     return this.http.post<Transaction>(`${ this.baseUrl }/transactions`, transaction);
   }
-  
+
 }

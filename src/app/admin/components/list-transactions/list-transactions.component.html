@@ -1,5 +1,6 @@
 
-<div class="table-container mat-elevation-z8">
+
+<div class="table-container mat-elevation-z8" *ngIf="transactions.length > 0">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <!-- Columnas de la tabla -->
 
@@ -15,12 +16,12 @@
 
     <ng-container matColumnDef="user">
       <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">USER-ID</th>
-      <td mat-cell *matCellDef="let transaction" class="centered-cell"> <button mat-buttonnn (click)="showUser(transaction.user)"> {{ transaction.user.id }} </button> </td>
+      <td mat-cell *matCellDef="let transaction" class="centered-cell"> <button mat-buttonnn (click)="showUser(transaction.userId)"> {{ transaction.userId}} </button> </td>
     </ng-container>
 
     <ng-container matColumnDef="coin">
       <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">COIN-ID</th>
-      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.coin.id | uppercase }}</td>
+      <td mat-cell *matCellDef="let transaction" class="centered-cell">{{ transaction.coinId | uppercase }}</td>
     </ng-container>
 
     <ng-container matColumnDef="cantidad">

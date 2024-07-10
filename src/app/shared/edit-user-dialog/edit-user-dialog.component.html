@@ -1,0 +1,63 @@
+<mat-dialog-content class="edit-user-dialog">
+  <form [formGroup]="editForm" (ngSubmit)="onConfirm()">
+
+    <h2 class="text-center">Editar Usuario</h2>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id" readonly style="cursor: default;" >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" placeholder="Nombre">
+      <mat-error *ngIf="isValidfield('name')">
+        {{ getFieldError('name') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Email">
+      <mat-error *ngIf="isValidfield('email')">
+        {{ getFieldError('email') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Documento</mat-label>
+      <input matInput formControlName="document" placeholder="Documento">
+      <mat-error *ngIf="isValidfield('document')">
+        {{ getFieldError('document') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre de usuario</mat-label>
+      <input matInput formControlName="username" placeholder="Nombre de usuario">
+      <mat-error *ngIf="isValidfield('username')">
+        {{ getFieldError('username') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width password-container">
+      <mat-label>Contraseña</mat-label>
+      <input [type]="hidePassword ? 'password' : 'text'" matInput formControlName="password" placeholder="Contraseña">
+      <button mat-icon-button matSuffix (click)="showPassword()" type="button">
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="isValidfield('password')">
+        {{ getFieldError('password') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="admin">Administrador</mat-checkbox>
+
+    <div class="button-group">
+      <button mat-button mat-flat-button color="primary" type="submit" [disabled]="editForm.invalid">Guardar Cambios</button>
+      <button mat-button mat-flat-button color="warn" (click)="onCancel()">Cancelar</button>
+    </div>
+
+
+  </form>
+</mat-dialog-content>

@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { User } from '../../../auth/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ShowUserDialogComponent } from '../show-user-dialog/show-user-dialog.component';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-list-transactions',
@@ -24,6 +25,7 @@ export class ListTransactionsComponent implements OnChanges {
 
   constructor (
     private dialog: MatDialog,
+    private authSerivce: AuthService
   ) {}
 
 
@@ -33,26 +35,21 @@ export class ListTransactionsComponent implements OnChanges {
     this.dataSource.paginator = this.paginator;
   }
 
-  public showUser (user: User) : void {
+  public showUser ( id: string) : void {
+    
+    if (!id) return;
 
-    console.log(user);
+    this.authSerivce.getUserById( id )
+    .subscribe( user =>  {
 
-    if ( !user ) return;
+      this.dialog.open( ShowUserDialogComponent, {
+        data: user,
+        width: '50vh'
 
-    this.dialog.open( ShowUserDialogComponent, {
+      });
 
-      data: user,
-      width: '50vh',
-
-    } );
+    });
 
   }
-
-
-
-
-
-
-
 
 }

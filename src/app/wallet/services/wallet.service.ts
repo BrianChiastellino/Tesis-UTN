@@ -30,11 +30,14 @@ export class WalletService {
     return this.http.patch<Wallet>(`${this.baseUrl}/wallets/${wallet.id}`, wallet);
   }
 
-  public getWalletByIdUser(idUser: string): Observable<Wallet[] | null> {
+  public getWalletByIdUser(idUser: string): Observable<Wallet | null> {
 
     if( !idUser) return of(null);
 
-    return this.http.get<Wallet[]>(`${this.baseUrl}/wallets/?idUser=${idUser}`);
+    return this.http.get<Wallet[]>(`${this.baseUrl}/wallets/?idUser=${idUser}`)
+    .pipe(
+      map( wallet => {return wallet[0] } )
+    )
 
   }
 

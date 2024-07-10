@@ -144,8 +144,8 @@ export class DialogBuyComponent {
     const transaction = new Transaction({
       coinAmount: coin.coinAmount,
       date: new Date().toLocaleString(),
-      coin: coin,
-      user: JSON.parse(localStorage.getItem( environment.userToken )!),
+      coinId: coin.id,
+      userId: wallet.idUser,
       type: TransactionType.BUY,
     });
 

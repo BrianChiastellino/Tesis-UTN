@@ -17,90 +17,72 @@
       "password": "12345",
       "document": "41853675",
       "admin": false
+    },
+    {
+      "id": "9f19",
+      "name": "Candela",
+      "email": "cande@gmail.com",
+      "username": "candesuli",
+      "password": "12345",
+      "document": "41899061",
+      "admin": false
     }
   ],
   "wallets": [
     {
-      "id": "badc",
+      "id": "3a07",
       "idUser": "3a5f",
-      "funds": 116,
+      "funds": 452,
       "coins": [
         {
-          "id": "binancecoin",
-          "coinAmount": 0.0016985138004246285,
-          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
-          "symbol": "bnb",
-          "date": "6/7/2024, 11:34:29"
+          "id": "bitcoin",
+          "coinAmount": 0.0005896592390292346,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "7/7/2024, 18:38:46"
+        },
+        {
+          "id": "ethereum",
+          "coinAmount": 0.0028519197697930362,
+          "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+          "symbol": "eth",
+          "date": "7/7/2024, 18:38:51"
         }
       ]
     }
   ],
   "transactions": [
     {
-      "id": "76b3",
-      "user": {
-        "id": "3a5f",
-        "name": "Brian",
-        "email": "chaste@gmail.com",
-        "username": "chaste",
-        "password": "12345",
-        "document": "41853675",
-        "admin": false
-      },
-      "coin": {
-        "id": "tether",
-        "coinAmount": 1.0004461990047562,
-        "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
-        "symbol": "usdt",
-        "date": "6/7/2024, 11:34:26"
-      },
-      "coinAmount": 1.0004461990047562,
+      "id": "2dee",
+      "userId": "3a5f",
+      "coinId": "bitcoin",
+      "coinAmount": 0.0007758674197753088,
       "type": "buy",
-      "date": "6/7/2024, 11:34:26"
+      "date": "7/7/2024, 18:38:47"
     },
     {
-      "id": "aa24",
-      "user": {
-        "id": "3a5f",
-        "name": "Brian",
-        "email": "chaste@gmail.com",
-        "username": "chaste",
-        "password": "12345",
-        "document": "41853675",
-        "admin": false
-      },
-      "coin": {
-        "id": "binancecoin",
-        "coinAmount": 0.0016985138004246285,
-        "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
-        "symbol": "bnb",
-        "date": "6/7/2024, 11:34:29"
-      },
-      "coinAmount": 0.0016985138004246285,
-      "type": "buy",
-      "date": "6/7/2024, 11:34:30"
-    },
-    {
-      "id": "9778",
-      "user": {
-        "id": "3a5f",
-        "name": "Brian",
-        "email": "chaste@gmail.com",
-        "username": "chaste",
-        "password": "12345",
-        "document": "41853675",
-        "admin": false
-      },
-      "coin": {
-        "id": "tether",
-        "coinAmount": 1.0004461990047562,
-        "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
-        "symbol": "usdt",
-        "date": "6/7/2024, 12:54:01"
-      },
-      "coinAmount": 1.0004461990047562,
+      "id": "b5eb",
+      "userId": "3a5f",
+      "coinId": "bitcoin",
+      "coinAmount": 0.0001862081807460741,
       "type": "sell",
-      "date": "6/7/2024, 12:54:01"
+      "date": "7/7/2024, 18:38:49"
+    },
+    {
+      "id": "e279",
+      "userId": "3a5f",
+      "coinId": "ethereum",
+      "coinAmount": 0.0034223037237516435,
+      "type": "buy",
+      "date": "7/7/2024, 18:38:51"
+    },
+    {
+      "id": "f9a3",
+      "userId": "3a5f",
+      "coinId": "ethereum",
+      "coinAmount": 0.0005703839539586072,
+      "type": "sell",
+      "date": "7/7/2024, 18:38:54"
     }
   ]
 }

@@ -53,13 +53,15 @@ export class MarketPageComponent implements OnInit {
   }
 
    private getWallet(): void {
+
     if (!this.user) return;
 
     this.walletService.getWalletByIdUser(this.user.id)
       .pipe(
-        filter(wallet => wallet?.length != 0),
+        filter(wallet => !wallet),
       )
-      .subscribe(wallet => this.wallet = wallet![0])
+      .subscribe(wallet => this.wallet = wallet)
+
   }
 
   public updateWallet (wallet : Wallet ) : void {

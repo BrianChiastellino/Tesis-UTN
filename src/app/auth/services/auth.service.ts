@@ -49,6 +49,17 @@ export class AuthService {
 
   }
 
+  public getUserById ( id: string ) : Observable<User | null> {
+
+    if ( !id ) return of(null);
+
+    return this.http.get<User[]>( `${ this.baseUrl }/users/?id=${id}` )
+    .pipe(
+      map ( user => { return user[0] })
+    );
+
+  }
+
   // LOGUEO USUARIO
 
   public login (email: string, password: string): Observable<User[] | null> {
@@ -95,7 +106,7 @@ export class AuthService {
       switchMap( users => {
         if ( users.length === 0 ) {
           user.admin = true;
-        } 
+        }
         return this.validateUser(user);
       }),
         filter(isValid => isValid),

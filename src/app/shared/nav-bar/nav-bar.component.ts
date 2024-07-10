@@ -47,6 +47,10 @@ export class NavBarComponent implements OnInit {
     this.router.navigateByUrl('/admin/transactions');
   }
 
+  public users () : void {
+    this.router.navigateByUrl('admin/users');
+  }
+
   public login (): void{
     this.router.navigateByUrl('/auth/login')
   }

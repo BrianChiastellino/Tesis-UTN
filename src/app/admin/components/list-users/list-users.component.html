@@ -1,0 +1,66 @@
+holi
+
+<div class="table-container mat-elevation-z8" *ngIf="users.length > 0">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <!-- Columnas de la tabla -->
+
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef class="centered-header">#</th>
+      <td mat-cell *matCellDef="let i = index" class="centered-cell">{{ i + 1 }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">USER-ID</th>
+      <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">NOMBRE</th>
+      <td mat-cell *matCellDef="let user" class="centered-cell"> {{ user.name}}  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">EMAIL</th>
+      <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">USUARIO</th>
+      <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.username }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="password">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">CONTRASEÑA</th>
+      <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.password }}</td>
+      <!-- Aplicar un pipe para poner compra //todo -->
+    </ng-container>
+
+    <ng-container matColumnDef="document">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">DOCUMENTO</th>
+      <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.document }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="admin">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">ADMIN</th>
+      <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.admin }}</td>
+    </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">EDITAR</th>
+    <td mat-cell *matCellDef="let user" class="centered-cell">
+      <button (click)="editUser(user)"  class="btn btn-outline-primary edit-button">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let user; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+
+</div>
+
+todo// Crear una columna mas, poniendo un emoticono de un lapiz para editar la informacion del usuario, qe se abra un dialog con la informacion ya
+puesta en el formulario, y que el administrador la pueda editar de ahi, puede ser un Dialog compartido, y despues podemos darselo tambien al usuario
