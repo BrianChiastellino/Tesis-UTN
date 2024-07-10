@@ -31,10 +31,17 @@ export class AuthService {
   }
 
   public updateUser(user: User): Observable<User | null> {
+    if (!user) return of(null);
 
-    if( !user) return of(null);
-    return this.http.patch<User>(`${ this.baseUrl }/users/${ user.id }`, user);
-
+    return this.validateUser(user, user.id).pipe(
+      switchMap(isValid => {
+        if (!isValid) {
+          return of(null); // Retorna null si el usuario ya existe con el mismo email, username o documento
+        }
+        
+        return this.http.patch<User>(`${this.baseUrl}/users/${user.id}`, user);
+      })
+    );
   }
 
   public deleteUserById(id: string): Observable<boolean> {
@@ -117,16 +124,19 @@ export class AuthService {
     );
 }
 
-  public validateUser(user : User ): Observable<boolean> {
+public validateUser(user: User, userId?: string): Observable<boolean> {
+  return this.getAllUsers.pipe(
+    map(users => {
+      // Excluir al usuario actual de la validación si se proporciona userId
+      const isValid = users.find(u =>
+        (u.username === user.username || u.email === user.email || u.document === user.document) &&
+        u.id !== userId
+      );
+      return !isValid; // Retorna true si no se encuentra un usuario existente, es decir, es válido
+    })
+  );
+}
 
-    return this.getAllUsers.pipe(
-      map( users => {
-        const isValid = users.find( u => u.username === user.username || u.email === user.email || u.document === user.document);
-        return !isValid;        /* No es una negacion - quiere decir que nunca va a ser undefinded */
-      })
-    )
-
-  }
 
 
 }

@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../auth/models/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../auth/services/auth.service';
+import { filter, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -29,11 +31,12 @@ export class EditUserDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<EditUserDialogComponent, boolean>,
     @Inject (MAT_DIALOG_DATA) public data: User,
     private fb: FormBuilder,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
-    this.editForm.reset(this.data);
-
+    this.authService.getUserById( this.data.id )
+    .subscribe( user => this.editForm.reset(user));
   }
 
   public onCancel () : void {
@@ -41,7 +44,13 @@ export class EditUserDialogComponent implements OnInit {
   }
 
   public onConfirm() : void {
-    this.dialogRef.close(true);
+
+    if (!this.editForm.valid) return;
+
+    const user: User = new User ({ ...this.editForm.value });
+
+    this.authService.updateUser(user)
+    .subscribe( data => this.dialogRef.close(!!data));
   }
 
   public showPassword () : void {
@@ -63,7 +72,7 @@ export class EditUserDialogComponent implements OnInit {
 
       switch (key) {
 
-        case 'requiered':
+        case 'required':
           return 'Este campo es requerido';
 
 

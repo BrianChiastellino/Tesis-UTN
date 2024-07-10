@@ -7,25 +7,7 @@ import { AuthService } from '../../../auth/services/auth.service';
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.css'
 })
-export class UsersPageComponent implements OnInit  {
-
-
-  public users: User[] = [];
-
-  constructor (
-    private authService: AuthService,
-  ) {}
-
-  ngOnInit(): void {
-    this.getUsers();
-  }
-
-  public getUsers() : void {
-    this.authService.getAllUsers
-    .subscribe( users => this.users = users )
-  }
-
-
+export class UsersPageComponent  {
 
 
 }
