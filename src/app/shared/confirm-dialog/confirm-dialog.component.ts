@@ -9,6 +9,7 @@ import { DialogConfirmData } from '../../models/dialog/dialog.interface';
   templateUrl: './confirm-dialog.component.html',
   styleUrl: './confirm-dialog.component.css'
 })
+
 export class ConfirmDialogComponent {
 
   constructor (

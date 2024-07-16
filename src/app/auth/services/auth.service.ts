@@ -8,7 +8,6 @@ import { User } from '../models/user.model';
 
 export class AuthService {
 
-  public user?: User;
   private baseUrl: string = environment.urlBaseJsonServer;
   private token: string = environment.userToken
 
@@ -38,7 +37,7 @@ export class AuthService {
         if (!isValid) {
           return of(null); // Retorna null si el usuario ya existe con el mismo email, username o documento
         }
-        
+
         return this.http.patch<User>(`${this.baseUrl}/users/${user.id}`, user);
       })
     );
@@ -69,15 +68,14 @@ export class AuthService {
 
   // LOGUEO USUARIO
 
-  public login (email: string, password: string): Observable<User[] | null> {
+  public login (email: string, password: string): Observable<User | null> {
 
     if( !email || !password ) return of( null );
 
     return this.http.get<User[]>(`${ this.baseUrl }/users?email=${ email }&password=${ password }`)
     .pipe(
-      tap( user => this.user = user[0]),
-      tap( user => localStorage.setItem(`${this.token}`, JSON.stringify(user[0]))),
-      tap( () => console.log(`Usuario ${this.user?.username} logueado con exito`)),
+      filter( user => !!user[0]),
+      map( user => { return user[0] }),
       catchError( () => of( null )),        /* Si no se pudo loguear mandamos un null  */
     );
 
@@ -105,9 +103,9 @@ export class AuthService {
 
   // REGISTRO USUARIO
 
-  public registerUser(user: User): Observable<boolean> {
+  public registerUser(user: User): Observable<User | null> {
 
-    if (!user) return of(false);
+    if (!user) return of(null);
 
     return this.getAllUsers.pipe(
       switchMap( users => {
@@ -118,8 +116,7 @@ export class AuthService {
       }),
         filter(isValid => isValid),
         switchMap(() => this.addUser(user).pipe(
-            tap(user => localStorage.setItem(`${this.token}`, JSON.stringify(user))),
-            map(() => true),
+            map(() => user),
         ))
     );
 }

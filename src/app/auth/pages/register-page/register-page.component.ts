@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { tap } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'auth-register-page',
@@ -13,9 +14,8 @@ import { environment } from '../../../../environments/environment.development';
 })
 export class RegisterPageComponent implements OnInit {
 
-  public user?: User;
   public hidePassword: boolean  = true;
-  public admin: boolean = false;
+  private userToken: string = environment.userToken;
 
   public registerForm: FormGroup = this.fb.group({
 
@@ -34,11 +34,11 @@ export class RegisterPageComponent implements OnInit {
     private authService: AuthService,
     private fb: FormBuilder,
     private router: Router,
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
-    this.user = new User(JSON.parse(localStorage.getItem(  environment.userToken  )!));
-    this.admin = this.user.admin;
+
   }
 
   public onSubmit() {
@@ -46,27 +46,25 @@ export class RegisterPageComponent implements OnInit {
     this.registerForm.markAllAsTouched();
 
     if( !this.registerForm.valid ) return;
-    
+
     this.createUser();
 
   }
 
   private createUser(): void{
 
-    this.user = new User({ ...this.registerForm.value as User })
+    const user = new User({ ...this.registerForm.value as User })
 
-    this.authService.registerUser(this.user).subscribe( register => {
-      if( !register ) return;
+    this.authService.registerUser(user).subscribe( user => {
+      if( !user ) return;
 
-      this.goToLogin();
+      localStorage.setItem(this.userToken, JSON.stringify(user));
+      this.router.navigateByUrl('main')
+      this.toastService.showSuccess('Éxtio!', 'Te has registrado extiosamente');
+
     });
 
   }
-
-  public goToLogin(): void{
-    this.router.navigateByUrl('auth/login');
-  }
-
   public showPassword () : void {
     this.hidePassword = !this.hidePassword;
   }

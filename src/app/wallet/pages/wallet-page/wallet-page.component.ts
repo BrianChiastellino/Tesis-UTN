@@ -5,6 +5,7 @@ import { environment } from '../../../../environments/environment';
 import { Wallet } from '../../../models/wallet/wallet.models';
 import { BehaviorSubject, filter, pipe, tap } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-wallet-page',
@@ -13,7 +14,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class WalletPageComponent implements OnInit {
 
-  public typeToast$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   private token: string = environment.userToken;
   public wallet: Wallet | null = null;
   private user: User | null = null;
@@ -25,6 +25,7 @@ export class WalletPageComponent implements OnInit {
 
   constructor(
     private walletService: WalletService,
+    private toastService: ToastService,
   ) { }
 
   ngOnInit(): void {
@@ -80,7 +81,7 @@ export class WalletPageComponent implements OnInit {
 
     const funds: number = Number.parseFloat(this.formFunds.controls['funds'].value);
 
-    if (this.wallet.funds < funds) return this.typeToast$.next('funds-negative');
+    if (this.wallet.funds < funds) return this.toastService.showError('Error', 'Fondos insuficientes!');
 
     this.wallet.funds -= funds;
 
@@ -141,7 +142,7 @@ export class WalletPageComponent implements OnInit {
     this.walletService.updateWallet(this.wallet)
       .pipe(
         tap(wallet => this.wallet = wallet),
-        tap( () => this.typeToast$.next('funds-success')),
+        tap( () => this.toastService.showSuccess('Éxito', 'Operacion realizada con exito!' )),
       )
       .subscribe();
 

@@ -7,6 +7,7 @@ import { User } from '../../../auth/models/user.model';
 import { CoinGecko } from '../../../models/coin-gecko/interface/coin-gecko.models';
 import { DialogSellComponent } from '../dialog/dialog-sell/dialog-sell.component';
 import { Dialogdata } from '../../../models/dialog/dialog.interface';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-sell-coin-gecko',
@@ -18,11 +19,11 @@ export class SellCoinGeckoComponent implements OnInit{
   @Output() public onSellCoin: EventEmitter<Wallet> = new EventEmitter<Wallet>;
   @Input() public wallet: Wallet | null = null;
   @Input() public coin$: BehaviorSubject<CoinGecko | null> = new BehaviorSubject<CoinGecko | null>(null);
-  public toast$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
 
   constructor(
     private dialog: MatDialog,
+    private toastService: ToastService,
   ) {}
 
   public ngOnInit(): void {
@@ -31,7 +32,7 @@ export class SellCoinGeckoComponent implements OnInit{
 
     if(this.wallet && coin != null) {
       this.openDialog( this.wallet, coin);
-    } 
+    }
 
   });
 
@@ -52,7 +53,7 @@ private openDialog ( wallet: Wallet, coinGecko: CoinGecko ): void {
     tap( data => console.log({ data })),
   )
   .subscribe( wallet => {
-    this.toast$.next('success');
+    this.toastService.showSuccess('Éxito', 'Operacion realizada con éxito!');
     this.onSellCoin.emit(wallet);
   });
 

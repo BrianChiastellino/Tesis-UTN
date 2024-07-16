@@ -52,13 +52,14 @@ export class MarketPageComponent implements OnInit {
     this.user = new User(JSON.parse(localStorage.getItem(this.token)!));
   }
 
-   private getWallet(): void {
+  private getWallet(): void {
 
     if (!this.user) return;
 
     this.walletService.getWalletByIdUser(this.user.id)
       .pipe(
-        filter(wallet => !wallet),
+        filter(wallet => !!wallet),
+        tap(wallet => console.log({wallet}))
       )
       .subscribe(wallet => this.wallet = wallet)
 
@@ -72,7 +73,6 @@ export class MarketPageComponent implements OnInit {
     )
     .subscribe();
   }
-
 
 
   private getCoinGeckoTest(): void {

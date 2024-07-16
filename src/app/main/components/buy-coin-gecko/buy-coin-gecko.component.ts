@@ -7,6 +7,7 @@ import { CoinGecko } from '../../../models/coin-gecko/interface/coin-gecko.model
 import { Dialogdata } from '../../../models/dialog/dialog.interface';
 import { DialogBuyComponent } from '../dialog/dialog-buy/dialog-buy.component';
 import { BehaviorSubject, filter, tap } from 'rxjs';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-buy-coin-gecko',
@@ -19,23 +20,22 @@ export class BuyCoinGeckoComponent implements OnInit {
   @Output() public onBuyCoin: EventEmitter<Wallet> = new EventEmitter<Wallet>;
   @Input() public wallet: Wallet | null = null;
   @Input() public coin$: BehaviorSubject<CoinGecko | null> = new BehaviorSubject<CoinGecko | null>(null);
-  public toast$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   constructor (
     private dialog: MatDialog,
-    private walletService: WalletService,
+    private toastService: ToastService,
   ) {}
-
-  ngAfterContentInit(): void {
-    console.log('after');
-  }
 
   public ngOnInit(): void {
 
-      this.coin$.subscribe(coin => {
+    this.coin$.subscribe(coin => {
 
-        if (this.wallet?.funds! > 0 && coin != null) { this.openDialog(this.wallet!, coin); }
-        else if (this.wallet?.funds! <= 0 || !this.wallet) { this.toast$.next('info') }
+      if (this.wallet?.funds! > 0 && coin != null) {
+        this.openDialog(this.wallet!, coin);
+      }
+      else if ((this.wallet?.funds! <= 0 || !this.wallet) && coin) {
+        this.toastService.showError('Error', 'Fondos insuficientes!')
+      }
 
     });
 
@@ -56,9 +56,8 @@ export class BuyCoinGeckoComponent implements OnInit {
       tap( data => console.log({ data })),
     )
     .subscribe( wallet => {
-      this.toast$.next('success');
       this.onBuyCoin.emit(wallet);
-      // this.updateWallet( wallet );
+      this.toastService.showSuccess('Éxito', 'Operacion realizada con exito!');
     });
 
   }

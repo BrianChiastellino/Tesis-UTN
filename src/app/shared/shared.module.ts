@@ -29,7 +29,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   exports:[
     NavBarComponent,
-    ToastComponent,
     ConfirmDialogComponent,
     SearchCoinComponent
   ],

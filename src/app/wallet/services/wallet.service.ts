@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Wallet } from '../../models/wallet/wallet.models';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
@@ -36,6 +36,7 @@ export class WalletService {
 
     return this.http.get<Wallet[]>(`${this.baseUrl}/wallets/?idUser=${idUser}`)
     .pipe(
+      tap( wallet => console.log({wallet})),
       map( wallet => {return wallet[0] } )
     )
 
