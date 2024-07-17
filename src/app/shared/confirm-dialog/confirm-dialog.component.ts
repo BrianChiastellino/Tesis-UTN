@@ -10,10 +10,10 @@ import { DialogConfirmData } from '../../models/dialog/dialog.interface';
   styleUrl: './confirm-dialog.component.css'
 })
 
-export class ConfirmDialogComponent {
+export class ConfirmTransactionDialogComponent {
 
   constructor (
-    private dialogRef: MatDialogRef<ConfirmDialogComponent, boolean>,
+    private dialogRef: MatDialogRef<ConfirmTransactionDialogComponent, boolean>,
      @Inject(MAT_DIALOG_DATA) public data: DialogConfirmData,
 
   ) {}

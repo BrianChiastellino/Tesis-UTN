@@ -16,7 +16,7 @@ holi
 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">NOMBRE</th>
-      <td mat-cell *matCellDef="let user" class="centered-cell"> {{ user.name}}  </td>
+      <td mat-cell *matCellDef="let user" class="centered-cell"> {{ user.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="email">
@@ -45,14 +45,23 @@ holi
       <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.admin }}</td>
     </ng-container>
 
-  <ng-container matColumnDef="edit">
-    <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">EDITAR</th>
-    <td mat-cell *matCellDef="let user" class="centered-cell">
-      <button (click)="editUser(user)"  class="btn btn-outline-primary edit-button">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">EDITAR</th>
+      <td mat-cell *matCellDef="let user" class="centered-cell">
+        <button (click)="editUser(user)" class="btn btn-outline-primary edit-button">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">ELIMINAR</th>
+      <td mat-cell *matCellDef="let user" class="centered-cell">
+        <button (click)="deleteUser(user)" class="btn btn-outline-primary edit-button">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let user; columns: displayedColumns;"></tr>
@@ -62,5 +71,7 @@ holi
 
 </div>
 
-todo// Crear una columna mas, poniendo un emoticono de un lapiz para editar la informacion del usuario, qe se abra un dialog con la informacion ya
-puesta en el formulario, y que el administrador la pueda editar de ahi, puede ser un Dialog compartido, y despues podemos darselo tambien al usuario
+todo// Crear una columna mas, poniendo un emoticono de un lapiz para editar la informacion del usuario, qe se abra un
+dialog con la informacion ya
+puesta en el formulario, y que el administrador la pueda editar de ahi, puede ser un Dialog compartido, y despues
+podemos darselo tambien al usuario

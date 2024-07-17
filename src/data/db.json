@@ -1,15 +1,6 @@
 {
   "users": [
     {
-      "id": "e51c",
-      "name": "admin",
-      "email": "admin@gmail.com",
-      "username": "admin",
-      "password": "admin123",
-      "document": "12345",
-      "admin": true
-    },
-    {
       "id": "3a5f",
       "name": "Brian",
       "email": "chaste@gmail.com",
@@ -25,15 +16,6 @@
       "username": "candesuli",
       "password": "12345",
       "document": "41899061",
-      "admin": false
-    },
-    {
-      "id": "0303",
-      "name": "hola",
-      "email": "hla@gmail.,com",
-      "username": "123kalosdj",
-      "password": "lakñsjdklaj123",
-      "document": "1231231",
       "admin": false
     }
   ],

@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditUserDialogComponent } from '../../../shared/edit-user-dialog/edit-user-dialog.component';
 import { filter, switchMap, tap } from 'rxjs';
 import { AuthService } from '../../../auth/services/auth.service';
+import { ConfirmOperationDialogComponent } from '../../../shared/dialog/confirm-operation-dialog/confirm-operation-dialog.component';
 
 @Component({
   selector: 'app-list-users',
@@ -21,7 +22,7 @@ export class ListUsersComponent implements OnInit, OnChanges {
   @ViewChild (MatPaginator) paginator: MatPaginator | null = null;
   @ViewChild (MatSort) sort: MatSort | null = null;
 
-  public displayedColumns: string[] = ['index', 'id', 'name', 'email', 'username', 'password', 'document', 'admin', 'edit' ];
+  public displayedColumns: string[] = ['index', 'id', 'name', 'email', 'username', 'password', 'document', 'admin', 'edit', 'delete' ];
   public dataSource!: MatTableDataSource<User>;
 
   constructor (
@@ -66,6 +67,22 @@ export class ListUsersComponent implements OnInit, OnChanges {
     .subscribe( users => {
       this.dataSource.data = users;
     })
+
+  }
+
+  public deleteUser (user : User) : void {
+
+    const dialogRef = this.dialog.open( ConfirmOperationDialogComponent );
+
+    dialogRef.afterClosed()
+    .pipe(
+      filter ( operation => !!operation),
+      tap( data => console.log({data})),
+      switchMap( () => this.authService.deleteUserById( user.id ) ),
+      switchMap( users => this.authService.getAllUsers),
+    )
+    .subscribe( users => this.dataSource.data = users );
+
 
   }
 

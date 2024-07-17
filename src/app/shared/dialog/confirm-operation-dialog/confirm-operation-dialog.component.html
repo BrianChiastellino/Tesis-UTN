@@ -1,0 +1,13 @@
+
+<mat-dialog-content>
+  <div class="confirm-dialog">
+    <h1 mat-dialog-title>Confirmar Operación</h1>
+    <div class="confirm-dialog-content">
+      <p>¿Está seguro de que desea proceder con esta operación?</p>
+    </div>
+    <div mat-dialog-actions class="confirm-dialog-actions">
+      <button mat-button (click)="onCancel()">Cancelar</button>
+      <button mat-raised-button color="primary" (click)="onConfirm()">Confirmar</button>
+    </div>
+  </div>
+</mat-dialog-content>

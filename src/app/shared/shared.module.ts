@@ -10,6 +10,7 @@ import { ConfirmDialogComponent } from '../main/components/dialog/confirm-dialog
 import { SearchCoinComponent } from './search-coin/search-coin.component';
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmOperationDialogComponent } from './dialog/confirm-operation-dialog/confirm-operation-dialog.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToastComponent,
     ConfirmDialogComponent,
     SearchCoinComponent,
-    EditUserDialogComponent
+    EditUserDialogComponent,
+    ConfirmOperationDialogComponent
   ],
   imports: [
     CommonModule,
