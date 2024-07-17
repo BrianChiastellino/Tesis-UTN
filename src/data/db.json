@@ -17,13 +17,22 @@
       "password": "12345",
       "document": "41899061",
       "admin": false
+    },
+    {
+      "id": "bfc4",
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "username": "admin",
+      "password": "12345",
+      "document": "12345",
+      "admin": true
     }
   ],
   "wallets": [
     {
       "id": "3a07",
       "idUser": "3a5f",
-      "funds": 0,
+      "funds": 500,
       "coins": [
         {
           "id": "bitcoin",
@@ -38,13 +47,6 @@
           "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
           "symbol": "eth",
           "date": "7/7/2024, 18:38:51"
-        },
-        {
-          "id": "tether",
-          "coinAmount": 500.22309950237803,
-          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
-          "symbol": "usdt",
-          "date": "16/7/2024, 20:39:06"
         }
       ]
     }
@@ -89,6 +91,30 @@
       "coinAmount": 500.22309950237803,
       "type": "buy",
       "date": "16/7/2024, 20:39:07"
+    },
+    {
+      "id": "0c0e",
+      "userId": "3a5f",
+      "coinId": "tether",
+      "coinAmount": 500.22309950237803,
+      "type": "sell",
+      "date": "17/7/2024, 10:46:33"
+    },
+    {
+      "id": "7edb",
+      "userId": "3a5f",
+      "coinId": "tether",
+      "coinAmount": 100.04461990047561,
+      "type": "buy",
+      "date": "17/7/2024, 11:19:16"
+    },
+    {
+      "id": "2ecd",
+      "userId": "3a5f",
+      "coinId": "tether",
+      "coinAmount": 100.04461990047561,
+      "type": "sell",
+      "date": "17/7/2024, 11:19:24"
     }
   ]
 }

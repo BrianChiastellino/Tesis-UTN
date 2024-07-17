@@ -1,11 +1,11 @@
 
 
 <app-search-coin
-(coinSearch)="coinsTableData.filter = $event"
+(coinSearch)="dataSource.filter = $event"
 ></app-search-coin>
 
 <div class="table-container mat-elevation-z8">
-  <table mat-table [dataSource]="coinsTableData" class="mat-elevation-z8" matSort>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
     <!-- Index Column -->
     <ng-container matColumnDef="index">
@@ -63,9 +63,17 @@
     <ng-container matColumnDef="sell">
       <th mat-header-cell *matHeaderCellDef class="centered-header"> Vender </th>
       <td mat-cell *matCellDef="let coin" class="centered-cell">
-        <button mat-raised-button color="accent" (click)="sell(coin)">Vender</button>
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="sell(coin)"
+          [ngClass]="{'disabled-button': !filterButtonSell(coin.id)}"
+          [disabled]="!filterButtonSell(coin.id)">
+          Vender
+        </button>
       </td>
     </ng-container>
+
 
     <!-- Header Row Definition -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -73,4 +81,7 @@
     <!-- Data Row Definition -->
     <tr mat-row *matRowDef="let coin; columns: displayedColumns;"></tr>
   </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 20, 50, coinsGecko.length]" showFirstLastButtons></mat-paginator>
+
 </div>

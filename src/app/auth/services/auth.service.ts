@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Observable, catchError, filter, map, of, switchMap, tap } from 'rxjs';
+import { Observable, catchError, filter, map, of, switchMap, tap, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({  providedIn: 'root' })
@@ -45,14 +45,21 @@ export class AuthService {
 
   public deleteUserById(id: string): Observable<boolean> {
 
-    if( !id ) return of(false);
+    if ( !id ) return of ( false );
 
-    return this.http.delete(`${ this.baseUrl }/users/${ id }`)
-    .pipe(
-      map( resp => true),                   /* Si todo salio bien, mapeamos un true */
-      catchError( error => of(false) ),     /* Si algo salio mal, agarramos el error y con " of " lo transformamos a un false */
-    );
+    return this.getUserById(id)
+      .pipe(
+        switchMap( user => {
+          if ( user?.admin ) {
+            return of ( false )
+          }
 
+          return this.http.delete(`${this.baseUrl}/users/${id}`)
+            .pipe(
+              map( resp => true )
+            )
+        })
+      )
   }
 
   public getUserById ( id: string ) : Observable<User | null> {

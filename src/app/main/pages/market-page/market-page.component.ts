@@ -59,7 +59,6 @@ export class MarketPageComponent implements OnInit {
     this.walletService.getWalletByIdUser(this.user.id)
       .pipe(
         filter(wallet => !!wallet),
-        tap(wallet => console.log({wallet}))
       )
       .subscribe(wallet => this.wallet = wallet)
 

@@ -9,6 +9,7 @@ import { EditUserDialogComponent } from '../../../shared/edit-user-dialog/edit-u
 import { filter, switchMap, tap } from 'rxjs';
 import { AuthService } from '../../../auth/services/auth.service';
 import { ConfirmOperationDialogComponent } from '../../../shared/dialog/confirm-operation-dialog/confirm-operation-dialog.component';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-list-users',
@@ -29,12 +30,12 @@ export class ListUsersComponent implements OnInit, OnChanges {
     private walletService: WalletService,
     private authService: AuthService,
     private dialog: MatDialog,
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
 
     this.authService.getAllUsers.subscribe( users => {
-      // this.users = users;
       this.dataSource = new MatTableDataSource(users);
     });
 
@@ -76,9 +77,9 @@ export class ListUsersComponent implements OnInit, OnChanges {
 
     dialogRef.afterClosed()
     .pipe(
-      filter ( operation => !!operation),
-      tap( data => console.log({data})),
       switchMap( () => this.authService.deleteUserById( user.id ) ),
+      tap ( data => { if (data) { this.toastService.showSuccess('Éxito','Operacion realizada con exito!'); } } ),
+      tap ( data => { if (!data) { this.toastService.showError('Error','No es posible eliminar administradores!'); } } ),
       switchMap( users => this.authService.getAllUsers),
     )
     .subscribe( users => this.dataSource.data = users );
