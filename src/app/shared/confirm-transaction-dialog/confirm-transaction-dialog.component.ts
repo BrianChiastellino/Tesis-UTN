@@ -6,8 +6,8 @@ import { DialogConfirmData } from '../../models/dialog/dialog.interface';
 
 @Component({
   selector: 'app-confirm-dialog',
-  templateUrl: './confirm-dialog.component.html',
-  styleUrl: './confirm-dialog.component.css'
+  templateUrl: './confirm-transaction-dialog.component.html',
+  styleUrl: './confirm-transaction-dialog.component.css'
 })
 
 export class ConfirmTransactionDialogComponent {

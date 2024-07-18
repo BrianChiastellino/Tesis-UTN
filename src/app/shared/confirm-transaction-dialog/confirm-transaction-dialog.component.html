@@ -2,8 +2,7 @@
 
   <h1 mat-dialog-title align="center">Confirmacion de  compra</h1>
   <div mat-dialog-content>
-    <p>Comprando ${{data.funds}}USD de {{data.coin.id}}</p>
-    <p>obtendras un total de {{data.coin.coinAmount}}</p>
+    <p>Obtendras un total de {{data.coin!.coinAmount}} {{ data.coin!.id }} </p>
   </div>
   <div mat-dialog-actions align="center">
     <button mat-button (click)="onCancel()">Cancelar</button>
@@ -16,7 +15,7 @@
 
   <h1 mat-dialog-title align="center">Confirmacion de enta</h1>
   <div mat-dialog-content>
-    <p>Vendiendo</p>
+    <p>Venderas un total de {{ data.coin!.coinAmount }} {{ data.coin!.id }}</p>
   </div>
   <div mat-dialog-actions align="center">
     <button mat-button (click)="onCancel()">Cancelar</button>
@@ -29,7 +28,7 @@
 
   <h1 mat-dialog-title align="center">Confirmarcion de deposito</h1>
   <div mat-dialog-content>
-    <p>Depositaras ${{data.funds}}USD a tu cuenta.</p>
+    <p>Depositaras ${{ data.funds | number }} USD a tu cuenta.</p>
   </div>
   <div mat-dialog-actions align="center">
     <button mat-button (click)="onCancel()">Cancelar</button>
@@ -42,7 +41,7 @@
 
   <h1 mat-dialog-title align="center">Confirmacion de extraccion</h1>
   <div mat-dialog-content>
-    <p>Retiraras ${{data.funds}}USD de tu cuenta.</p>
+    <p>Retiraras ${{ data.funds | number }} USD de tu cuenta.</p>
   </div>
   <div mat-dialog-actions align="center">
     <button mat-button (click)="onCancel()">Cancelar</button>
@@ -50,3 +49,4 @@
   </div>
 
 </ng-container>
+

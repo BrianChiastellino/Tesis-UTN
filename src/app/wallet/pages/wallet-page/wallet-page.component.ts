@@ -3,9 +3,13 @@ import { WalletService } from '../../services/wallet.service';
 import { User } from '../../../auth/models/user.model';
 import { environment } from '../../../../environments/environment';
 import { Wallet } from '../../../models/wallet/wallet.models';
-import { BehaviorSubject, filter, pipe, tap } from 'rxjs';
+import { BehaviorSubject, Observable, filter, pipe, tap } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastService } from '../../../shared/services/toast.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmTransactionDialogComponent } from '../../../shared/confirm-transaction-dialog/confirm-transaction-dialog.component';
+import { DialogConfirmData } from '../../../models/dialog/dialog.interface';
+import { Operation } from '../../../models/enum/dialog.enum';
 
 @Component({
   selector: 'app-wallet-page',
@@ -20,12 +24,13 @@ export class WalletPageComponent implements OnInit {
 
 
   public formFunds: FormGroup = new FormGroup({
-    funds: new FormControl('', [Validators.required, Validators.min(100), Validators.max(100000)])
+    funds: new FormControl('', [Validators.required, Validators.min(100), Validators.max(1000000)])
   });
 
   constructor(
     private walletService: WalletService,
     private toastService: ToastService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -69,9 +74,15 @@ export class WalletPageComponent implements OnInit {
 
     const funds: number = Number.parseFloat(this.formFunds.controls['funds'].value);
 
-    this.wallet.funds += funds;
+    this.openDialogConfirm( funds , Operation.DEPOSIT_FUNDS)
+    .pipe(
+      filter( operation => !!operation ),
+      tap( () => this.wallet!.funds += funds ),
+    )
+    .subscribe( () => {
+      this.updateWallet();
+    })
 
-    this.updateWallet();
 
   }
 
@@ -83,9 +94,30 @@ export class WalletPageComponent implements OnInit {
 
     if (this.wallet.funds < funds) return this.toastService.showError('Error', 'Fondos insuficientes!');
 
-    this.wallet.funds -= funds;
+    debugger;
 
-    this.updateWallet();
+    this.openDialogConfirm( funds , Operation.WITHDRAW_FUNDS)
+    .pipe(
+      filter( operation => !!operation ),
+      tap	( () => this.wallet!.funds -= funds ),
+      tap ( () => { if ( this.wallet!.funds <= 0 ) { this.wallet!.funds = 0 } } ),
+    )
+    .subscribe( () => {
+      this.updateWallet();
+    })
+  }
+
+  private openDialogConfirm ( funds: number, operation: Operation ) : Observable<boolean> {
+
+    const dialogConfirmData: DialogConfirmData = {
+      funds: funds,
+      operation: operation,
+    }
+
+    const dialogRef = this.dialog.open( ConfirmTransactionDialogComponent, { data: dialogConfirmData} );
+
+    return dialogRef.afterClosed();
+
 
   }
 
@@ -99,7 +131,6 @@ export class WalletPageComponent implements OnInit {
 
 
     const errors = this.formFunds.controls[field].errors || {};
-    console.log(errors)
 
     for( const key of Object.keys(errors)){
 
@@ -112,12 +143,9 @@ export class WalletPageComponent implements OnInit {
           return `Monto maximo ${errors['max'].max}`
 
       }
-
-
     }
 
     return null;
-
   }
 
   private createWallet(): void {

@@ -19,7 +19,7 @@
     </div>
 
     <h3 class="fs-5">ELIGE EL TIPO DE CAMBIO</h3>
-    <span class="mb-2">Mis fondos: {{ data.wallet.funds | number }}</span>
+    <span class="mb-2">Mis {{ data.coinGecko.id | lowercase }} : {{ getCoinAmount( data.coinGecko.id ) | number:'1.0-20' }}</span>
     <span *ngIf="isValidField('amountToSell')" class="mt-3 text-danger d-block"> {{ messageFieldError('amountToSell') }} </span>
   </div>
 

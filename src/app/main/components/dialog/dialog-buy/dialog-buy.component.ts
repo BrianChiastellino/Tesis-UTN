@@ -9,11 +9,11 @@ import { Wallet } from '../../../../models/wallet/wallet.models';
 
 import { Observable, tap } from 'rxjs';
 import { Operation } from '../../../../models/enum/dialog.enum';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { Transaction } from '../../../../admin/models/transaction.models';
 import { TransactionType } from '../../../../admin/models/enum/transaction.enum';
 import { TransactionsService } from '../../../../admin/services/transactions.service';
 import { environment } from '../../../../../environments/environment';
+import { ConfirmTransactionDialogComponent } from '../../../../shared/confirm-transaction-dialog/confirm-transaction-dialog.component';
 
 @Component({
   selector: 'app-dialog-buy',
@@ -99,7 +99,7 @@ export class DialogBuyComponent {
       operation: Operation.BUY
     }
 
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: dialogConfirmData });
+    const dialogRef = this.dialog.open(ConfirmTransactionDialogComponent, { data: dialogConfirmData });
 
     return dialogRef.afterClosed()
 

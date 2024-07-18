@@ -32,23 +32,8 @@
     {
       "id": "3a07",
       "idUser": "3a5f",
-      "funds": 500,
-      "coins": [
-        {
-          "id": "bitcoin",
-          "coinAmount": 0.0005896592390292346,
-          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
-          "symbol": "btc",
-          "date": "7/7/2024, 18:38:46"
-        },
-        {
-          "id": "ethereum",
-          "coinAmount": 0.0028519197697930362,
-          "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
-          "symbol": "eth",
-          "date": "7/7/2024, 18:38:51"
-        }
-      ]
+      "funds": 0,
+      "coins": []
     }
   ],
   "transactions": [
@@ -115,6 +100,86 @@
       "coinAmount": 100.04461990047561,
       "type": "sell",
       "date": "17/7/2024, 11:19:24"
+    },
+    {
+      "id": "9992",
+      "userId": "3a5f",
+      "coinId": "bitcoin",
+      "coinAmount": 0.000015517348395506178,
+      "type": "buy",
+      "date": "17/7/2024, 11:36:55"
+    },
+    {
+      "id": "d4bc",
+      "userId": "3a5f",
+      "coinId": "bitcoin",
+      "coinAmount": 0.000015517348395506178,
+      "type": "sell",
+      "date": "17/7/2024, 11:38:03"
+    },
+    {
+      "id": "2103",
+      "userId": "3a5f",
+      "coinId": "bitcoin",
+      "coinAmount": 1,
+      "type": "buy",
+      "date": "17/7/2024, 11:38:26"
+    },
+    {
+      "id": "ba52",
+      "userId": "3a5f",
+      "coinId": "bitcoin",
+      "coinAmount": 1.0005896592390293,
+      "type": "sell",
+      "date": "17/7/2024, 11:39:00"
+    },
+    {
+      "id": "832d",
+      "userId": "3a5f",
+      "coinId": "ethereum",
+      "coinAmount": 0.0028519197697930362,
+      "type": "sell",
+      "date": "17/7/2024, 11:39:52"
+    },
+    {
+      "id": "4d90",
+      "userId": "3a5f",
+      "coinId": "bitcoin",
+      "coinAmount": 1,
+      "type": "buy",
+      "date": "17/7/2024, 11:45:42"
+    },
+    {
+      "id": "a873",
+      "userId": "3a5f",
+      "coinId": "bitcoin",
+      "coinAmount": 1,
+      "type": "buy",
+      "date": "17/7/2024, 11:46:28"
+    },
+    {
+      "id": "af06",
+      "userId": "3a5f",
+      "coinId": "bitcoin",
+      "coinAmount": 1.5,
+      "type": "sell",
+      "date": "17/7/2024, 11:46:43"
+    },
+    {
+      "id": "435f",
+      "userId": "3a5f",
+      "coinId": "bitcoin",
+      "coinAmount": 0.000031034696791012355,
+      "type": "buy",
+      "date": "17/7/2024, 11:47:24"
+    },
+    {
+      "id": "7c48",
+      "userId": "3a5f",
+      "coinId": "bitcoin",
+      "coinAmount": 0.500031034696791,
+      "type": "sell",
+      "date": "17/7/2024, 11:48:00"
     }
   ]
 }

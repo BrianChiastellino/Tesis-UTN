@@ -10,6 +10,6 @@ export interface Dialogdata {
 
 export interface DialogConfirmData {
   funds: number;
-  coin: Coin;
+  coin?: Coin;
   operation: Operation;
 }

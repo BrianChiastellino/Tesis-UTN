@@ -7,12 +7,12 @@ import { Currency } from '../../../../models/enum/currency.enum';
 import { Wallet } from '../../../../models/wallet/wallet.models';
 import { DialogConfirmData, Dialogdata } from '../../../../models/dialog/dialog.interface';
 import { Operation } from '../../../../models/enum/dialog.enum';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { Observable } from 'rxjs';
+import { Observable, filter } from 'rxjs';
 import { Transaction } from '../../../../admin/models/transaction.models';
 import { TransactionType } from '../../../../admin/models/enum/transaction.enum';
 import { TransactionsService } from '../../../../admin/services/transactions.service';
 import { environment } from '../../../../../environments/environment';
+import { ConfirmTransactionDialogComponent } from '../../../../shared/confirm-transaction-dialog/confirm-transaction-dialog.component';
 
 @Component({
   selector: 'app-dialog-sell',
@@ -69,8 +69,11 @@ export class DialogSellComponent {
     const coin = this.createCoin(coinGecko, currency, amountToSell);
 
     this.openDialog(amountToSell, coin)
+      .pipe(
+        filter(operation => !!operation),
+      )
       .subscribe(data => {
-        if (data) this.updateWallet(coin, wallet, currency, amountToSell, index);
+        this.updateWallet(coin, wallet, currency, amountToSell, index);
       })
 
 
@@ -87,9 +90,6 @@ export class DialogSellComponent {
       coin.coinAmount = amountToSell;
     }
 
-
-
-
     return coin;
 
   }
@@ -102,9 +102,22 @@ export class DialogSellComponent {
       operation: Operation.SELL
     }
 
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: dialogConfirmData });
+    const dialogRef = this.dialog.open( ConfirmTransactionDialogComponent, { data: dialogConfirmData });
 
     return dialogRef.afterClosed()
+
+  }
+
+  public getCoinAmount ( id : string ) : number  {
+
+    let amount: number = 0;
+
+
+    this.data.wallet.coins?.find( c => {
+      if ( c.id == id ) amount = c.coinAmount;
+    });
+
+    return amount;
 
   }
 

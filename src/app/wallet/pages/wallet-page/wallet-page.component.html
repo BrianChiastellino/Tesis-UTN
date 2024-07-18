@@ -5,7 +5,7 @@
 
 <form [formGroup]="formFunds" class="p-4 border rounded bg-light">
   <div class="form-group mb-3">
-    <label for="fundsInput" class="form-label">Mis fondos: {{ wallet?.funds }}</label>
+    <label for="fundsInput" class="form-label">Mis fondos: {{ wallet?.funds | number }}</label>
     <input type="text" id="fundsInput" autocomplete="off" class="form-control" formControlName="funds" (input)="removeLetters($event)" placeholder="Ingrese la cantidad">
     <div *ngIf="isValidField('funds')" class="mt-2 text-danger">
       {{ messageFieldError('funds') }}
