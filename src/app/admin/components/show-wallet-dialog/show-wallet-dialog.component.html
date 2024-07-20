@@ -1,0 +1,35 @@
+<div class="wallet-container">
+  <div class="wallet-header">
+    <h2>Billetera del {{ wallet.idUser }}</h2>
+    <p>Fondos: {{ wallet.funds | currency }}</p>
+  </div>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Coin ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef class="centered-header"> ID </th>
+        <td mat-cell *matCellDef="let coin" class="centered-cell"> {{ coin.id | uppercase }} </td>
+      </ng-container>
+
+      <!-- Coin Amount Column -->
+      <ng-container matColumnDef="coinAmount">
+        <th mat-header-cell *matHeaderCellDef class="centered-header"> Cantidad </th>
+        <td mat-cell *matCellDef="let coin" class="centered-cell"> {{ coin.coinAmount }} </td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef class="centered-header"> Fecha </th>
+        <td mat-cell *matCellDef="let coin" class="centered-cell"> {{ coin.date }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+  </div>
+</div>
+
+

@@ -10,6 +10,7 @@ import { ShowUserDialogComponent } from './components/show-user-dialog/show-user
 import { TransactionTypePipe } from './pipe/transactionType.pipe';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
+import { ShowWalletDialogComponent } from './components/show-wallet-dialog/show-wallet-dialog.component';
 
 
 
@@ -20,7 +21,8 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
     ShowUserDialogComponent,
     TransactionTypePipe,
     ListUsersComponent,
-    UsersPageComponent
+    UsersPageComponent,
+    ShowWalletDialogComponent
   ],
   imports: [
     CommonModule,

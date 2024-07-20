@@ -7,23 +7,7 @@ import { Transaction } from '../../models/transaction.models';
   templateUrl: './transactions-page.component.html',
   styleUrl: './transactions-page.component.css'
 })
-export class TransactionsPageComponent implements OnInit {
-
-  public transactions: Transaction[] = [];
-
-  constructor (
-    private transactionService: TransactionsService,
-  ) {}
-
-  public ngOnInit(): void {
-    this.getTransactions();
-  }
-
-  private getTransactions () : void {
-    this.transactionService.getTransactions()
-    .subscribe(transactions => this.transactions = transactions);
-  }
-
+export class TransactionsPageComponent   {
 
 
 

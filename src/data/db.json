@@ -1,15 +1,6 @@
 {
   "users": [
     {
-      "id": "3a5f",
-      "name": "Brian",
-      "email": "chaste@gmail.com",
-      "username": "chaste",
-      "password": "12345",
-      "document": "41853675",
-      "admin": false
-    },
-    {
       "id": "9f19",
       "name": "Candela",
       "email": "cande@gmail.com",
@@ -32,14 +23,64 @@
     {
       "id": "3a07",
       "idUser": "3a5f",
+      "funds": 300,
+      "coins": [
+        {
+          "id": "bitcoin",
+          "coinAmount": 0.0015517348395506175,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "20/7/2024, 01:56:10"
+        },
+        {
+          "id": "tether",
+          "coinAmount": 100.04461990047561,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "20/7/2024, 01:56:15"
+        }
+      ]
+    },
+    {
+      "id": "56fe",
+      "idUser": "9f19",
       "funds": 0,
-      "coins": []
+      "coins": [
+        {
+          "id": "bitcoin",
+          "coinAmount": 0.0015517348395506175,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "20/7/2024, 10:39:57"
+        },
+        {
+          "id": "ethereum",
+          "coinAmount": 0.028519197697930362,
+          "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+          "symbol": "eth",
+          "date": "20/7/2024, 10:40:01"
+        },
+        {
+          "id": "tether",
+          "coinAmount": 200.08923980095122,
+          "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          "symbol": "usdt",
+          "date": "20/7/2024, 10:40:06"
+        },
+        {
+          "id": "binancecoin",
+          "coinAmount": 0.16985138004246284,
+          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          "symbol": "bnb",
+          "date": "20/7/2024, 10:40:10"
+        }
+      ]
     }
   ],
   "transactions": [
     {
       "id": "2dee",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "bitcoin",
       "coinAmount": 0.0007758674197753088,
       "type": "buy",
@@ -47,7 +88,7 @@
     },
     {
       "id": "b5eb",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "bitcoin",
       "coinAmount": 0.0001862081807460741,
       "type": "sell",
@@ -55,7 +96,7 @@
     },
     {
       "id": "e279",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "ethereum",
       "coinAmount": 0.0034223037237516435,
       "type": "buy",
@@ -63,7 +104,7 @@
     },
     {
       "id": "f9a3",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "ethereum",
       "coinAmount": 0.0005703839539586072,
       "type": "sell",
@@ -71,7 +112,7 @@
     },
     {
       "id": "fe57",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "tether",
       "coinAmount": 500.22309950237803,
       "type": "buy",
@@ -79,7 +120,7 @@
     },
     {
       "id": "0c0e",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "tether",
       "coinAmount": 500.22309950237803,
       "type": "sell",
@@ -87,7 +128,7 @@
     },
     {
       "id": "7edb",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "tether",
       "coinAmount": 100.04461990047561,
       "type": "buy",
@@ -95,7 +136,7 @@
     },
     {
       "id": "2ecd",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "tether",
       "coinAmount": 100.04461990047561,
       "type": "sell",
@@ -103,7 +144,7 @@
     },
     {
       "id": "9992",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "bitcoin",
       "coinAmount": 0.000015517348395506178,
       "type": "buy",
@@ -111,7 +152,7 @@
     },
     {
       "id": "d4bc",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "bitcoin",
       "coinAmount": 0.000015517348395506178,
       "type": "sell",
@@ -119,7 +160,7 @@
     },
     {
       "id": "2103",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "bitcoin",
       "coinAmount": 1,
       "type": "buy",
@@ -127,7 +168,7 @@
     },
     {
       "id": "ba52",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "bitcoin",
       "coinAmount": 1.0005896592390293,
       "type": "sell",
@@ -135,7 +176,7 @@
     },
     {
       "id": "832d",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "ethereum",
       "coinAmount": 0.0028519197697930362,
       "type": "sell",
@@ -143,7 +184,7 @@
     },
     {
       "id": "4d90",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "bitcoin",
       "coinAmount": 1,
       "type": "buy",
@@ -151,7 +192,7 @@
     },
     {
       "id": "a873",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "bitcoin",
       "coinAmount": 1,
       "type": "buy",
@@ -159,7 +200,7 @@
     },
     {
       "id": "af06",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "bitcoin",
       "coinAmount": 1.5,
       "type": "sell",
@@ -167,7 +208,7 @@
     },
     {
       "id": "435f",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "bitcoin",
       "coinAmount": 0.000031034696791012355,
       "type": "buy",
@@ -175,11 +216,67 @@
     },
     {
       "id": "7c48",
-      "userId": "3a5f",
+      "userId": null,
       "coinId": "bitcoin",
       "coinAmount": 0.500031034696791,
       "type": "sell",
       "date": "17/7/2024, 11:48:00"
+    },
+    {
+      "id": "3f96",
+      "userId": null,
+      "coinId": "bitcoin",
+      "coinAmount": 0.0015517348395506175,
+      "type": "buy",
+      "date": "20/7/2024, 01:56:12"
+    },
+    {
+      "id": "919a",
+      "userId": null,
+      "coinId": "tether",
+      "coinAmount": 100.04461990047561,
+      "type": "buy",
+      "date": "20/7/2024, 01:56:15"
+    },
+    {
+      "id": "14c4",
+      "userId": "9f19",
+      "coinId": "bitcoin",
+      "coinAmount": 0.0015517348395506175,
+      "type": "buy",
+      "date": "20/7/2024, 10:39:58"
+    },
+    {
+      "id": "5c1c",
+      "userId": "9f19",
+      "coinId": "ethereum",
+      "coinAmount": 0.028519197697930362,
+      "type": "buy",
+      "date": "20/7/2024, 10:40:02"
+    },
+    {
+      "id": "ee0c",
+      "userId": "9f19",
+      "coinId": "tether",
+      "coinAmount": 100.04461990047561,
+      "type": "buy",
+      "date": "20/7/2024, 10:40:04"
+    },
+    {
+      "id": "5eed",
+      "userId": "9f19",
+      "coinId": "tether",
+      "coinAmount": 100.04461990047561,
+      "type": "buy",
+      "date": "20/7/2024, 10:40:06"
+    },
+    {
+      "id": "690f",
+      "userId": "9f19",
+      "coinId": "binancecoin",
+      "coinAmount": 0.16985138004246284,
+      "type": "buy",
+      "date": "20/7/2024, 10:40:10"
     }
   ]
 }

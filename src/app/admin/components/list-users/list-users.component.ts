@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { User } from '../../../auth/models/user.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -6,10 +6,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { WalletService } from '../../../wallet/services/wallet.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserDialogComponent } from '../../../shared/edit-user-dialog/edit-user-dialog.component';
-import { filter, switchMap, tap } from 'rxjs';
+import { filter, Observable, switchMap, tap } from 'rxjs';
 import { AuthService } from '../../../auth/services/auth.service';
 import { ConfirmOperationDialogComponent } from '../../../shared/dialog/confirm-operation-dialog/confirm-operation-dialog.component';
 import { ToastService } from '../../../shared/services/toast.service';
+import { Wallet } from '../../../models/wallet/wallet.models';
+import { ShowWalletDialogComponent } from '../show-wallet-dialog/show-wallet-dialog.component';
 
 @Component({
   selector: 'app-list-users',
@@ -17,14 +19,13 @@ import { ToastService } from '../../../shared/services/toast.service';
   styleUrl: './list-users.component.css'
 })
 
-export class ListUsersComponent implements OnInit, OnChanges {
+export class ListUsersComponent implements OnInit, AfterViewInit {
 
-  public users: User[] = [];
   @ViewChild (MatPaginator) paginator: MatPaginator | null = null;
   @ViewChild (MatSort) sort: MatSort | null = null;
 
-  public displayedColumns: string[] = ['index', 'id', 'name', 'email', 'username', 'password', 'document', 'admin', 'edit', 'delete' ];
-  public dataSource!: MatTableDataSource<User>;
+  public displayedColumns: string[] = ['index', 'id', 'name', 'email', 'username', 'password', 'document', 'admin', 'edit', 'delete', 'wallet' ];
+  public dataSource: MatTableDataSource<User> = new MatTableDataSource<User>();
 
   constructor (
     private walletService: WalletService,
@@ -34,16 +35,12 @@ export class ListUsersComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-
-    this.authService.getAllUsers.subscribe( users => {
-      this.dataSource = new MatTableDataSource(users);
-    });
-
+    this.getUsers();
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    this.dataSource.sort = this.sort;
+  public ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   public showWallet ( id: string ) : void {
@@ -51,8 +48,28 @@ export class ListUsersComponent implements OnInit, OnChanges {
     if ( !id ) return;
 
     this.walletService.getWalletByIdUser( id )
-    .subscribe( wallet => console.log({wallet}));
+    .subscribe( wallet => {
 
+      if( wallet ) this.openDialogWallet(wallet).subscribe();
+
+    });
+
+  }
+
+  private openDialogWallet ( wallet: Wallet) : Observable<boolean> {
+
+
+    const dialogRef = this.dialog.open( ShowWalletDialogComponent, { data: wallet });
+
+    return dialogRef.afterClosed();
+
+  }
+
+  private getUsers () : void {
+
+    this.authService.getAllUsers.subscribe( users => {
+      this.dataSource.data = users;
+    });
 
   }
 

@@ -63,6 +63,15 @@ holi
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="wallet">
+      <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">BILLTERA</th>
+      <td mat-cell *matCellDef="let user" class="centered-cell">
+        <button (click)="showWallet(user.id)" class="btn btn-outline-primary edit-button">
+          <mat-icon>wallet</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let user; columns: displayedColumns;"></tr>
   </table>
@@ -71,7 +80,6 @@ holi
 
 </div>
 
-todo// Crear una columna mas, poniendo un emoticono de un lapiz para editar la informacion del usuario, qe se abra un
-dialog con la informacion ya
-puesta en el formulario, y que el administrador la pueda editar de ahi, puede ser un Dialog compartido, y despues
-podemos darselo tambien al usuario
+agregar paginator ////
+agregar que el boton este disabled si no hay una wallet
+
