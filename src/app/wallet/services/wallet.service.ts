@@ -36,8 +36,20 @@ export class WalletService {
 
     return this.http.get<Wallet[]>(`${this.baseUrl}/wallets/?idUser=${idUser}`)
     .pipe(
-      tap( wallet => console.log({wallet})),
       map( wallet => {return wallet[0] } )
+    )
+
+  }
+
+  public deleteWalletByIdUser ( idUser: string ) : Observable<boolean> {
+
+    if ( !idUser ) return of(false);
+
+    return this.http.delete(`${this.baseUrl}/wallets/${idUser}`)
+    .pipe
+    (
+      tap( deleted => console.log({deleted})),
+      map( deleted => !deleted),
     )
 
   }

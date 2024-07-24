@@ -46,20 +46,14 @@ export class WalletPageComponent implements OnInit {
 
   private getWallet(): void {
 
+    debugger; //todo, arreglar que no crea la wallet
+
     this.walletService.getWalletByIdUser(this.user!.id)
       .pipe(
-        tap(wallet => console.log({ wallet })),
+        tap( wallet => { if (!wallet) { this.createWallet() } }),
+        tap( wallet => { if (wallet) { this.wallet = wallet} } )
       )
-      .subscribe(wallet => {
-
-        if (wallet == null) {
-          this.createWallet();
-          return;
-        }
-
-        this.wallet = wallet;
-
-      });
+      .subscribe();
 
   }
 
@@ -159,7 +153,7 @@ export class WalletPageComponent implements OnInit {
       .pipe(
         tap(wallet => this.wallet = wallet),
       )
-      .subscribe();
+      .subscribe( wallet => this.wallet = wallet);
 
   }
 

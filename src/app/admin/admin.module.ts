@@ -11,6 +11,7 @@ import { TransactionTypePipe } from './pipe/transactionType.pipe';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
 import { ShowWalletDialogComponent } from './components/show-wallet-dialog/show-wallet-dialog.component';
+import { UserEliminated } from './pipe/user-eliminated.pipe';
 
 
 
@@ -22,7 +23,8 @@ import { ShowWalletDialogComponent } from './components/show-wallet-dialog/show-
     TransactionTypePipe,
     ListUsersComponent,
     UsersPageComponent,
-    ShowWalletDialogComponent
+    ShowWalletDialogComponent,
+    UserEliminated
   ],
   imports: [
     CommonModule,

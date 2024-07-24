@@ -95,6 +95,7 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed()
     .pipe(
       switchMap( () => this.authService.deleteUserById( user.id ) ),
+      switchMap( () => this.walletService.deleteWalletByIdUser( user.id )),
       tap ( data => { if (data) { this.toastService.showSuccess('Éxito','Operacion realizada con exito!'); } } ),
       tap ( data => { if (!data) { this.toastService.showError('Error','No es posible eliminar administradores!'); } } ),
       switchMap( users => this.authService.getAllUsers),

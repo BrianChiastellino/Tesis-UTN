@@ -15,7 +15,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="centered-header">USER-ID</th>
       <td mat-cell *matCellDef="let transaction" class="centered-cell">
         <button mat-button (click)="showUser(transaction.userId)">
-          {{ transaction.userId }}
+          {{ transaction.userId | user }}
         </button>
       </td>
     </ng-container>

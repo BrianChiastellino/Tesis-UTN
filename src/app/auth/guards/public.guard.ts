@@ -13,12 +13,9 @@ constructor( private authService: AuthService, private router: Router) {}
 private checkAuthentication(): Observable<boolean> {
 
   return this.authService.checkAuthentication()
-  .pipe(
-    tap( isAuthenticated => {
-      if( isAuthenticated ) this.router.navigateByUrl('/landing');
-    }),
-    map( isAuthenticated => !isAuthenticated ),
-  )
+    .pipe(
+      map( isAuthenticated => !isAuthenticated ),
+    )
 }
 
 public canMatch: CanMatchFn = ( route, segments ) => {

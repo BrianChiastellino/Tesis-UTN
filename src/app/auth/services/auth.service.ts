@@ -104,7 +104,7 @@ export class AuthService {
 
     if ( !user ) return of(false);
 
-    return user.admin == true ? of(true) : of(false);
+    return user.admin ? of(true) : of(false);
 
   }
 
