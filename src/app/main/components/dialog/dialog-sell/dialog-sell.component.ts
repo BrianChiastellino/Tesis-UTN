@@ -33,7 +33,7 @@ export class DialogSellComponent {
   public coin: Coin | null = null;
 
   public formSell: FormGroup = this.fb.group({
-    amountToSell: ['', [Validators.required, this.fundsValidator(this.data.wallet)]],
+    amountToSell: ['', [Validators.required, this.conditionalMinValidator(50), this.fundsValidator(this.data.wallet)]],
     currencyType: [Currency.USD, [Validators.required]],
   })
 
@@ -68,7 +68,7 @@ export class DialogSellComponent {
 
     const coin = this.createCoin(coinGecko, currency, amountToSell);
 
-    this.openDialog(amountToSell, coin)
+    this.openDialog(amountToSell, coin, currency)
       .pipe(
         filter(operation => !!operation),
       )
@@ -94,12 +94,14 @@ export class DialogSellComponent {
 
   }
 
-  private openDialog(amountToSell: number, coin: Coin): Observable<boolean> {
+  private openDialog(amountToSell: number, coin: Coin, currency: Currency): Observable<boolean> {
 
     const dialogConfirmData: DialogConfirmData = {
       funds: amountToSell,
       coin: coin,
-      operation: Operation.SELL
+      operation: Operation.SELL,
+      currency: currency,
+      coinCurrentPrice: this.data.coinGecko.current_price,
     }
 
     const dialogRef = this.dialog.open( ConfirmTransactionDialogComponent, { data: dialogConfirmData });
@@ -194,19 +196,35 @@ export class DialogSellComponent {
     };
   }
 
-  public isValidField(field: string): boolean {
-    const control = this.formSell.controls[field];
-    return control.errors !== null;
+  private conditionalMinValidator(minValue: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const currency: Currency | undefined = control.parent?.get('currencyType')?.value;
+      if (currency !== Currency.CRYPTO && control.value < minValue) {
+        return { min: { requiredMin: minValue, actualValue: control.value } };
+      }
+      return null;
+    };
+  }
+
+
+  isValidField( field: string ): boolean | null {
+    return this.formSell.controls[field].errors
+      && this.formSell.controls[field].touched;
   }
 
   public messageFieldError(field: string): string | null {
-    const control = this.formSell.controls[field];
-    if (!control) return null;
+    const errors = this.formSell.controls[field].errors || {};
+    if (!errors) return null;
 
-    const errors = control.errors || {};
-
-    if (errors['funds']) {
-      return 'Fondos insuficientes';
+    for (const key of Object.keys(errors)) {
+      switch (key) {
+        case 'required':
+          return 'Este campo es obligatorio';
+        case 'funds':
+          return `No tienes ${this.data.coinGecko.id} suficientes`;
+        case 'min':
+          return `Mínimo de venta ${errors['min'].requiredMin } USD`;
+      }
     }
 
     return null;

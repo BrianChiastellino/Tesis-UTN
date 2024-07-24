@@ -12,6 +12,7 @@ import { ListUsersComponent } from './components/list-users/list-users.component
 import { UsersPageComponent } from './pages/users-page/users-page.component';
 import { ShowWalletDialogComponent } from './components/show-wallet-dialog/show-wallet-dialog.component';
 import { UserEliminated } from './pipe/user-eliminated.pipe';
+import { UserType } from './pipe/admin-type.pipe';
 
 
 
@@ -24,7 +25,8 @@ import { UserEliminated } from './pipe/user-eliminated.pipe';
     ListUsersComponent,
     UsersPageComponent,
     ShowWalletDialogComponent,
-    UserEliminated
+    UserEliminated,
+    UserType
   ],
   imports: [
     CommonModule,

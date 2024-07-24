@@ -70,6 +70,7 @@ export class WalletPageComponent implements OnInit {
     .pipe(
       filter( operation => !!operation ),
       tap( () => this.wallet!.funds += funds ),
+      tap( () => this.formFunds.reset),
     )
     .subscribe( () => {
       this.updateWallet();
@@ -93,6 +94,7 @@ export class WalletPageComponent implements OnInit {
       filter( operation => !!operation ),
       tap	( () => this.wallet!.funds -= funds ),
       tap ( () => { if ( this.wallet!.funds <= 0 ) { this.wallet!.funds = 0 } } ),
+      tap( () => this.formFunds.reset),
     )
     .subscribe( () => {
       this.updateWallet();

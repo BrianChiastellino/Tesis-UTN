@@ -28,7 +28,7 @@ export class DialogBuyComponent {
   public coin: Coin | null = null;
 
   public formBuy: FormGroup = this.fb.group({
-    amountTobuy: ['', [Validators.required, Validators.min(-0), this.fundsValidator(this.data.wallet)]],
+    amountTobuy: ['', [Validators.required, Validators.max(10000), this.conditionalMinValidator(50), this.fundsValidator(this.data.wallet)]],
     currencyType: [Currency.USD, [Validators.required]],
   })
 
@@ -65,7 +65,7 @@ export class DialogBuyComponent {
 
     const coin = this.createCoin(coinGecko, currency, amountTobuy);
 
-    this.openDialog(amountTobuy, coin)
+    this.openDialog(amountTobuy, coin, currency)
       .subscribe(data => {
         if (data) this.updateWallet(coin, wallet, currency);
       })
@@ -85,18 +85,18 @@ export class DialogBuyComponent {
       coin.coinAmount = amountTobuy;
     }
 
-    console.log({ coin })
-
     return coin;
 
   }
 
-  private openDialog(amountTobuy: number, coin: Coin): Observable<boolean> {
+  private openDialog(amountTobuy: number, coin: Coin, currency: Currency): Observable<boolean> {
 
     const dialogConfirmData: DialogConfirmData = {
       funds: amountTobuy,
       coin: coin,
-      operation: Operation.BUY
+      operation: Operation.BUY,
+      currency: currency,
+      coinCurrentPrice: this.data.coinGecko.current_price,
     }
 
     const dialogRef = this.dialog.open(ConfirmTransactionDialogComponent, { data: dialogConfirmData });
@@ -185,22 +185,41 @@ export class DialogBuyComponent {
     };
   }
 
-  public isValidField(field: string): boolean {
-    const control = this.formBuy.controls[field];
-    return control.errors !== null;
+  private conditionalMinValidator(minValue: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const currency: Currency | undefined = control.parent?.get('currencyType')?.value;
+      if (currency !== Currency.CRYPTO && control.value < minValue) {
+        return { min: { requiredMin: minValue, actualValue: control.value } };
+      }
+      return null;
+    };
+  }
+
+
+  isValidField( field: string ): boolean | null {
+    return this.formBuy.controls[field].errors
+      && this.formBuy.controls[field].touched;
   }
 
   public messageFieldError(field: string): string | null {
-    const control = this.formBuy.controls[field];
-    if (!control) return null;
+    const errors = this.formBuy.controls[field].errors || {};
+    if (!errors) return null;
 
-    const errors = control.errors || {};
-
-    if (errors['funds']) {
-      return 'Fondos insuficientes';
+    for (const key of Object.keys(errors)) {
+      switch (key) {
+        case 'required':
+          return 'Este campo es obligatorio';
+        case 'funds':
+          return 'Fondos insuficientes';
+        case 'min':
+          return `Mínimo de compra ${errors['min'].requiredMin } USD`;
+        case 'max':
+          return `Maximo de compra 10,000 USD`;
+      }
     }
 
     return null;
   }
+
 
 }

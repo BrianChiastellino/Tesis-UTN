@@ -8,9 +8,25 @@
       "password": "12345",
       "document": "123456789",
       "admin": true
+    },
+    {
+      "id": "09c6",
+      "name": "Brian",
+      "email": "chaste@gmail.com",
+      "username": "chaste",
+      "password": "12345",
+      "document": "41853675",
+      "admin": false
     }
   ],
-  "wallets": [],
+  "wallets": [
+    {
+      "id": "034e",
+      "idUser": "09c6",
+      "funds": 65444,
+      "coins": []
+    }
+  ],
   "transactions": [
     {
       "id": "31cf",
@@ -27,6 +43,174 @@
       "coinAmount": 0.028519197697930362,
       "type": "buy",
       "date": "24/7/2024, 00:04:14"
+    },
+    {
+      "id": "b562",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 0.0015517348395506175,
+      "type": "buy",
+      "date": "24/7/2024, 01:34:18"
+    },
+    {
+      "id": "decb",
+      "userId": "09c6",
+      "coinId": "ethereum",
+      "coinAmount": 0.028519197697930362,
+      "type": "buy",
+      "date": "24/7/2024, 01:34:25"
+    },
+    {
+      "id": "3fec",
+      "userId": "09c6",
+      "coinId": "tether",
+      "coinAmount": 100,
+      "type": "buy",
+      "date": "24/7/2024, 01:34:34"
+    },
+    {
+      "id": "a59f",
+      "userId": "09c6",
+      "coinId": "binancecoin",
+      "coinAmount": 1.1,
+      "type": "buy",
+      "date": "24/7/2024, 02:08:10"
+    },
+    {
+      "id": "103c",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 1,
+      "type": "buy",
+      "date": "24/7/2024, 02:13:43"
+    },
+    {
+      "id": "7c30",
+      "userId": "09c6",
+      "coinId": "binancecoin",
+      "coinAmount": 1.1,
+      "type": "sell",
+      "date": "24/7/2024, 02:15:30"
+    },
+    {
+      "id": "f779",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 1.0015517348395506,
+      "type": "sell",
+      "date": "24/7/2024, 02:16:04"
+    },
+    {
+      "id": "6ebd",
+      "userId": "09c6",
+      "coinId": "ethereum",
+      "coinAmount": 0.028519197697930362,
+      "type": "sell",
+      "date": "24/7/2024, 02:16:21"
+    },
+    {
+      "id": "2889",
+      "userId": "09c6",
+      "coinId": "tether",
+      "coinAmount": 100,
+      "type": "sell",
+      "date": "24/7/2024, 02:16:29"
+    },
+    {
+      "id": "59d6",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 0.000015517348395506178,
+      "type": "buy",
+      "date": "24/7/2024, 02:52:51"
+    },
+    {
+      "id": "ddd5",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 1,
+      "type": "buy",
+      "date": "24/7/2024, 03:02:40"
+    },
+    {
+      "id": "4909",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 0.000015517348395506178,
+      "type": "sell",
+      "date": "24/7/2024, 03:02:48"
+    },
+    {
+      "id": "a487",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 1,
+      "type": "sell",
+      "date": "24/7/2024, 03:03:01"
+    },
+    {
+      "id": "4919",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 0.000015517348395506178,
+      "type": "buy",
+      "date": "24/7/2024, 03:03:38"
+    },
+    {
+      "id": "8fea",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 0.000017069083235056795,
+      "type": "buy",
+      "date": "24/7/2024, 03:06:36"
+    },
+    {
+      "id": "fbb7",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 1.5517348395506176e-12,
+      "type": "buy",
+      "date": "24/7/2024, 03:06:46"
+    },
+    {
+      "id": "579b",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 1,
+      "type": "buy",
+      "date": "24/7/2024, 03:43:25"
+    },
+    {
+      "id": "a18e",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 1,
+      "type": "buy",
+      "date": "24/7/2024, 03:44:37"
+    },
+    {
+      "id": "135a",
+      "userId": "09c6",
+      "coinId": "ethereum",
+      "coinAmount": 0.028519197697930362,
+      "type": "buy",
+      "date": "24/7/2024, 03:48:06"
+    },
+    {
+      "id": "7d9d",
+      "userId": "09c6",
+      "coinId": "ethereum",
+      "coinAmount": 0.028519197697930362,
+      "type": "sell",
+      "date": "24/7/2024, 03:50:15"
+    },
+    {
+      "id": "49ed",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 1.0000325864331823,
+      "type": "sell",
+      "date": "24/7/2024, 03:50:59"
     }
   ]
 }

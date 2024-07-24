@@ -2,6 +2,8 @@ import { Component, Inject } from '@angular/core';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogConfirmData } from '../../models/dialog/dialog.interface';
+import { Currency } from '../../models/enum/currency.enum';
+import { Operation } from '../../models/enum/dialog.enum';
 
 
 @Component({
@@ -12,19 +14,18 @@ import { DialogConfirmData } from '../../models/dialog/dialog.interface';
 
 export class ConfirmTransactionDialogComponent {
 
-  constructor (
+  constructor(
     private dialogRef: MatDialogRef<ConfirmTransactionDialogComponent, boolean>,
-     @Inject(MAT_DIALOG_DATA) public data: DialogConfirmData,
+    @Inject(MAT_DIALOG_DATA) public data: DialogConfirmData,
 
-  ) {}
+  ) { }
 
-  public onCancel () : void {
+  public onCancel(): void {
     this.dialogRef.close(false);
   }
 
-  public onConfirm() : void {
+  public onConfirm(): void {
     this.dialogRef.close(true);
   }
-
 
 }

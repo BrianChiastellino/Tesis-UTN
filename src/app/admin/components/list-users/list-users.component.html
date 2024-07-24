@@ -42,7 +42,7 @@ holi
 
     <ng-container matColumnDef="admin">
       <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">ADMIN</th>
-      <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.admin }}</td>
+      <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.admin | userType }}</td>
     </ng-container>
 
     <ng-container matColumnDef="edit">
@@ -57,7 +57,8 @@ holi
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">ELIMINAR</th>
       <td mat-cell *matCellDef="let user" class="centered-cell">
-        <button (click)="deleteUser(user)" class="btn btn-outline-primary edit-button">
+        <button (click)="deleteUser(user)" class="btn btn-outline-primary edit-button"
+          [ngClass]="{'disabled-button': user.admin}" [disabled]="user.admin">
           <mat-icon>delete</mat-icon>
         </button>
       </td>
@@ -66,7 +67,8 @@ holi
     <ng-container matColumnDef="wallet">
       <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">BILLTERA</th>
       <td mat-cell *matCellDef="let user" class="centered-cell">
-        <button (click)="showWallet(user.id)" class="btn btn-outline-primary edit-button">
+        <button (click)="showWallet(user.id)" class="btn btn-outline-primary edit-button"
+          [ngClass]="{'disabled-button': user.admin}" [disabled]="user.admin">
           <mat-icon>wallet</mat-icon>
         </button>
       </td>

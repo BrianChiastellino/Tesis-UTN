@@ -19,7 +19,7 @@
     </div>
 
     <h3 class="fs-5">ELIGE EL TIPO DE CAMBIO</h3>
-    <span class="mb-2">Mis fondos: {{ data.wallet.funds | number }}</span>
+    <span class="mb-2">Mis fondos: {{ data.wallet.funds | number:'1.0-2' }}</span>
     <span *ngIf="isValidField('amountTobuy')" class="mt-3 text-danger d-block"> {{ messageFieldError('amountTobuy') }} </span>
   </div>
 
