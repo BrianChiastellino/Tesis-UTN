@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Wallet } from '../../models/wallet/wallet.models';
-import { Observable, catchError, map, of, tap } from 'rxjs';
+import { Observable, catchError, map, of, pipe, switchMap, tap, throwError } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
@@ -36,7 +36,9 @@ export class WalletService {
 
     return this.http.get<Wallet[]>(`${this.baseUrl}/wallets/?idUser=${idUser}`)
     .pipe(
-      map( wallet => {return wallet[0] } )
+      tap( wallet => console.log(wallet)),
+      map( wallet => {return wallet[0] } ),
+      catchError( () => { return of(null) })
     )
 
   }
@@ -45,12 +47,17 @@ export class WalletService {
 
     if ( !idUser ) return of(false);
 
-    return this.http.delete(`${this.baseUrl}/wallets/${idUser}`)
-    .pipe
-    (
-      tap( deleted => console.log({deleted})),
-      map( deleted => !deleted),
-    )
+    return this.getWalletByIdUser( idUser )
+    .pipe(
+      switchMap( wallet => {
+
+        return this.http.delete(`${this.baseUrl}/wallets/${wallet?.id}`)
+        .pipe(
+          map( resp => true),
+          catchError( () => { return of(false) })
+        )
+      })
+    );
 
   }
 

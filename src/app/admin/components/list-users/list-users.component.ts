@@ -92,17 +92,25 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
 
     const dialogRef = this.dialog.open( ConfirmOperationDialogComponent );
 
+
     dialogRef.afterClosed()
     .pipe(
-      switchMap( () => this.authService.deleteUserById( user.id ) ),
-      switchMap( () => this.walletService.deleteWalletByIdUser( user.id )),
-      tap ( data => { if (data) { this.toastService.showSuccess('Éxito','Operacion realizada con exito!'); } } ),
-      tap ( data => { if (!data) { this.toastService.showError('Error','No es posible eliminar administradores!'); } } ),
-      switchMap( users => this.authService.getAllUsers),
+      filter(confirm => !!confirm),
+      switchMap(() => this.walletService.deleteWalletByIdUser(user.id)),
+      filter(eliminated => !!eliminated),
+      switchMap(() => this.authService.deleteUserById(user.id)),
+      tap(data => {
+        data
+          ? this.toastService.showSuccess('Éxito', 'Operación realizada con éxito!')
+          : this.toastService.showError('Error', 'No es posible eliminar administradores!');
+      }),
+      switchMap(() => this.authService.getAllUsers)
     )
-    .subscribe( users => this.dataSource.data = users );
-
+    .subscribe(users => this.dataSource.data = users);
 
   }
+
+
+
 
 }

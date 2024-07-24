@@ -116,7 +116,7 @@ export class DialogBuyComponent {
       wallet.coins![index].coinAmount += coin.coinAmount
       wallet.coins![index].date = new Date().toLocaleString();
 
-    } else { wallet.coins!.push(coin) };
+    } else { wallet.coins!.unshift(coin) };
 
     if (currency == Currency.USD) { wallet.funds -= amountTobuy; }
     else { wallet.funds -= (amountTobuy * this.data.coinGecko.current_price); }

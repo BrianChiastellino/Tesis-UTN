@@ -6,7 +6,7 @@ import { Pipe, type PipeTransform } from '@angular/core';
 export class UserEliminated implements PipeTransform {
 
   transform(id: string): string {
-    return id == null ? 'Eliminado' : id;
+    return id == null ? 'Usuario eliminado' : id;
   }
 
 }

@@ -46,8 +46,6 @@ export class WalletPageComponent implements OnInit {
 
   private getWallet(): void {
 
-    debugger; //todo, arreglar que no crea la wallet
-
     this.walletService.getWalletByIdUser(this.user!.id)
       .pipe(
         tap( wallet => { if (!wallet) { this.createWallet() } }),

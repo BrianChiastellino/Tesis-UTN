@@ -8,26 +8,25 @@
       "password": "12345",
       "document": "123456789",
       "admin": true
-    },
-    {
-      "id": "7218",
-      "name": "Brian",
-      "email": "chaste@gmail.com",
-      "username": "chaste",
-      "password": "12345",
-      "document": "41853675",
-      "admin": false
     }
   ],
   "wallets": [],
   "transactions": [
     {
-      "id": "7601",
+      "id": "31cf",
       "userId": null,
       "coinId": "bitcoin",
-      "coinAmount": 0.0013965613555955558,
+      "coinAmount": 0.0015517348395506175,
       "type": "buy",
-      "date": "23/7/2024, 12:08:52"
+      "date": "24/7/2024, 00:04:12"
+    },
+    {
+      "id": "7c18",
+      "userId": null,
+      "coinId": "ethereum",
+      "coinAmount": 0.028519197697930362,
+      "type": "buy",
+      "date": "24/7/2024, 00:04:14"
     }
   ]
 }

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
-import { tap } from 'rxjs';
+import { filter, pipe, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { ToastService } from '../../../shared/services/toast.service';
 
@@ -55,14 +55,21 @@ export class RegisterPageComponent implements OnInit {
 
     const user = new User({ ...this.registerForm.value as User })
 
-    this.authService.registerUser(user).subscribe( user => {
+    this.authService.registerUser(user)
+    .pipe(
+      filter( register => !!register),
+    )
+    .subscribe( user => {
+
       if( !user ) return;
 
-      localStorage.setItem(this.userToken, JSON.stringify(user));
-      this.router.navigateByUrl('main')
+      // localStorage.setItem(this.userToken, JSON.stringify(user));
+      this.router.navigateByUrl('auth/login')
       this.toastService.showSuccess('Éxtio!', 'Te has registrado extiosamente');
 
     });
+
+
 
   }
   public showPassword () : void {
