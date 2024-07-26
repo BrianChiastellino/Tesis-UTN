@@ -13,6 +13,7 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
 import { ShowWalletDialogComponent } from './components/show-wallet-dialog/show-wallet-dialog.component';
 import { UserEliminated } from './pipe/user-eliminated.pipe';
 import { UserType } from './pipe/admin-type.pipe';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -32,7 +33,8 @@ import { UserType } from './pipe/admin-type.pipe';
     CommonModule,
     AdminRoutingModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    MatSortModule,
   ]
 })
 export class AdminModule { }

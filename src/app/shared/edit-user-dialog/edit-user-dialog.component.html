@@ -1,3 +1,7 @@
+
+
+Aplicar toastService
+
 <mat-dialog-content class="edit-user-dialog">
   <form [formGroup]="editForm" (ngSubmit)="onConfirm()">
 
@@ -51,7 +55,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-checkbox formControlName="admin">Administrador</mat-checkbox>
+    <mat-checkbox *ngIf="data.admin" formControlName="admin">Administrador</mat-checkbox>
 
     <div class="button-group">
       <button mat-button mat-flat-button color="primary" type="submit" [disabled]="editForm.invalid">Guardar Cambios</button>
@@ -61,3 +65,4 @@
 
   </form>
 </mat-dialog-content>
+

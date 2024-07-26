@@ -7,9 +7,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   flex: 1 1 auto;
 }
 
+/* Ocultar la flecha de ordenación */
+.mat-sort-header-arrow {
+  display: none !important;
+}
 
+/* Oculte el contenedor de la flecha */
+.mat-sort-header-arrow-container {
+  display: none !important;
+}
 
+.mat-sort-header-container {
+  display: flex;
+  width: 100%;
+}
 
+.mat-sort-header-content {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+}
 
 :root {
   --color-primario: #ffc93c;

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { User } from '../../auth/models/user.model';
+import { MatDialog } from '@angular/material/dialog';
+import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
 
 @Component({
   selector: 'shared-nav-bar',
@@ -15,7 +17,10 @@ export class NavBarComponent implements OnInit {
   public isLogin: boolean = false;
   public isAdmin: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+  ) {}
 
   ngOnInit(): void {
     this.isUserLoged();
@@ -49,6 +54,15 @@ export class NavBarComponent implements OnInit {
 
   public users () : void {
     this.router.navigateByUrl('admin/users');
+  }
+
+  public editProfile() : void {
+
+    const dialogRef = this.dialog.open( EditUserDialogComponent, {
+      data: JSON.parse(localStorage.getItem( this.token )!) as User,
+    } )
+
+
   }
 
   public login (): void{

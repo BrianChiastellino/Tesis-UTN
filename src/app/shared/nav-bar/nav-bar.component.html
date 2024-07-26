@@ -1,15 +1,23 @@
 <mat-toolbar class="navbar">
-
   <button mat-button (click)="landing()">Inicio</button>
   <button mat-button (click)="main()" *ngIf="isLogin && !isAdmin">Market</button>
   <button mat-button (click)="wallet()" *ngIf="isLogin && !isAdmin">Mi billetera</button>
   <button mat-button (click)="transictions()" *ngIf="isAdmin">Transacciones</button>
   <button mat-button (click)="users()" *ngIf="isAdmin">Usuarios</button>
 
-
   <span class="spacer"></span>
-  <button mat-button (click)="logout()" *ngIf="isLogin">Cerrar Sesion</button>
-  <button mat-button (click)="login()" *ngIf="!isLogin">Iniciar Sesion</button>
-  <button mat-button (click)="register()" *ngIf="!isLogin && !isAdmin">Registrarme</button>
 
+  <button mat-button [matMenuTriggerFor]="profileMenu" *ngIf="isLogin">
+    Mi Perfil
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+  <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item (click)="editProfile()">
+      Editar perfil
+    </button>
+  </mat-menu>
+
+  <button mat-button (click)="logout()" *ngIf="isLogin">Cerrar Sesión</button>
+  <button mat-button (click)="login()" *ngIf="!isLogin">Iniciar Sesión</button>
+  <button mat-button (click)="register()" *ngIf="!isLogin && !isAdmin">Registrarme</button>
 </mat-toolbar>

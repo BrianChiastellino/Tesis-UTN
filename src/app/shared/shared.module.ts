@@ -8,6 +8,7 @@ import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmOperationDialogComponent } from './dialog/confirm-operation-dialog/confirm-operation-dialog.component';
 import { ConfirmTransactionDialogComponent } from './confirm-transaction-dialog/confirm-transaction-dialog.component';
+import { MatMenuModule } from '@angular/material/menu'; // Importa el módulo para el menú
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ConfirmTransactionDialogComponent } from './confirm-transaction-dialog/
     CommonModule,
     MaterialModule,
     ButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatMenuModule
   ],
   exports:[
     NavBarComponent,
