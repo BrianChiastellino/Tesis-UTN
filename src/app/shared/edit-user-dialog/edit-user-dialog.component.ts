@@ -24,7 +24,7 @@ export class EditUserDialogComponent implements OnInit {
     document: ['', Validators.required],
     username: ['', Validators.required],
     password: ['', Validators.required],
-    admin: [],
+    admin: [false],
 
   })
 

@@ -35,14 +35,97 @@
       "password": "1234",
       "document": "1234567891",
       "admin": true
+    },
+    {
+      "id": "025b",
+      "name": "noah",
+      "email": "noah@gmail.com",
+      "username": "noah",
+      "password": "123",
+      "document": "789",
+      "admin": null
+    },
+    {
+      "id": "ba49",
+      "name": "candela",
+      "email": "cande@gmail.com",
+      "username": "cande",
+      "password": "123",
+      "document": "1234",
+      "admin": false
+    },
+    {
+      "id": "0159",
+      "name": "pruebadmin",
+      "email": "ads",
+      "username": "asd",
+      "password": "asd",
+      "document": "asd",
+      "admin": true
     }
   ],
   "wallets": [
     {
       "id": "034e",
       "idUser": "09c6",
-      "funds": 53444,
+      "funds": 34702.6828,
       "coins": [
+        {
+          "id": "pepe",
+          "coinAmount": 10000,
+          "image": "https://coin-images.coingecko.com/coins/images/29850/large/pepe-token.jpeg?1696528776",
+          "symbol": "pepe",
+          "date": "28/7/2024, 02:53:08"
+        },
+        {
+          "id": "ethereum-classic",
+          "coinAmount": 5,
+          "image": "https://coin-images.coingecko.com/coins/images/453/large/ethereum-classic-logo.png?1696501717",
+          "symbol": "etc",
+          "date": "28/7/2024, 02:52:34"
+        },
+        {
+          "id": "mantle-staked-ether",
+          "coinAmount": 3,
+          "image": "https://coin-images.coingecko.com/coins/images/33345/large/symbol_transparent_bg.png?1701697066",
+          "symbol": "meth",
+          "date": "28/7/2024, 02:52:20"
+        },
+        {
+          "id": "kelp-dao-restaked-eth",
+          "coinAmount": 2,
+          "image": "https://coin-images.coingecko.com/coins/images/33800/large/Icon___Dark.png?1702991855",
+          "symbol": "rseth",
+          "date": "28/7/2024, 02:52:12"
+        },
+        {
+          "id": "litecoin",
+          "coinAmount": 2,
+          "image": "https://coin-images.coingecko.com/coins/images/2/large/litecoin.png?1696501400",
+          "symbol": "ltc",
+          "date": "28/7/2024, 02:52:04"
+        },
+        {
+          "id": "bittensor",
+          "coinAmount": 1,
+          "image": "https://coin-images.coingecko.com/coins/images/28452/large/ARUsPeNQ_400x400.jpeg?1696527447",
+          "symbol": "tao",
+          "date": "28/7/2024, 02:51:54"
+        },
+        {
+          "id": "monero",
+          "coinAmount": 3.714710252600297,
+          "image": "https://coin-images.coingecko.com/coins/images/69/large/monero_logo.png?1696501460",
+          "symbol": "xmr",
+          "date": "28/7/2024, 02:51:50"
+        },
+        {
+          "id": "shiba-inu",
+          "coinAmount": 29744199.881023202,
+          "image": "https://coin-images.coingecko.com/coins/images/11939/large/shiba.png?1696511800",
+          "symbol": "shib",
+          "date": "28/7/2024, 02:51:37"
+        },
         {
           "id": "binancecoin",
           "coinAmount": 10.19108280254777,
@@ -52,10 +135,24 @@
         },
         {
           "id": "bitcoin",
-          "coinAmount": 0.09310409037303706,
+          "coinAmount": 0.10086276457079014,
           "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
           "symbol": "btc",
-          "date": "28/7/2024, 00:36:02"
+          "date": "28/7/2024, 03:02:42"
+        }
+      ]
+    },
+    {
+      "id": "f913",
+      "idUser": "025b",
+      "funds": 0,
+      "coins": [
+        {
+          "id": "bitcoin",
+          "coinAmount": 0.0074088342940121805,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "28/7/2024, 02:59:19"
         }
       ]
     }
@@ -292,6 +389,86 @@
       "coinAmount": 10.19108280254777,
       "type": "buy",
       "date": "28/7/2024, 00:36:08"
+    },
+    {
+      "id": "318c",
+      "userId": "09c6",
+      "coinId": "shiba-inu",
+      "coinAmount": 29744199.881023202,
+      "type": "buy",
+      "date": "28/7/2024, 02:51:38"
+    },
+    {
+      "id": "1d6e",
+      "userId": "09c6",
+      "coinId": "monero",
+      "coinAmount": 3.714710252600297,
+      "type": "buy",
+      "date": "28/7/2024, 02:51:51"
+    },
+    {
+      "id": "e008",
+      "userId": "09c6",
+      "coinId": "bittensor",
+      "coinAmount": 1,
+      "type": "buy",
+      "date": "28/7/2024, 02:51:57"
+    },
+    {
+      "id": "f7df",
+      "userId": "09c6",
+      "coinId": "litecoin",
+      "coinAmount": 2,
+      "type": "buy",
+      "date": "28/7/2024, 02:52:07"
+    },
+    {
+      "id": "ed2a",
+      "userId": "09c6",
+      "coinId": "kelp-dao-restaked-eth",
+      "coinAmount": 2,
+      "type": "buy",
+      "date": "28/7/2024, 02:52:13"
+    },
+    {
+      "id": "507f",
+      "userId": "09c6",
+      "coinId": "mantle-staked-ether",
+      "coinAmount": 3,
+      "type": "buy",
+      "date": "28/7/2024, 02:52:21"
+    },
+    {
+      "id": "00c5",
+      "userId": "09c6",
+      "coinId": "ethereum-classic",
+      "coinAmount": 5,
+      "type": "buy",
+      "date": "28/7/2024, 02:52:35"
+    },
+    {
+      "id": "9906",
+      "userId": "09c6",
+      "coinId": "pepe",
+      "coinAmount": 10000,
+      "type": "buy",
+      "date": "28/7/2024, 02:53:11"
+    },
+    {
+      "id": "34d7",
+      "userId": "025b",
+      "coinId": "bitcoin",
+      "coinAmount": 0.0074088342940121805,
+      "type": "buy",
+      "date": "28/7/2024, 02:59:20"
+    },
+    {
+      "id": "e1cd",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 0.007758674197753088,
+      "type": "buy",
+      "date": "28/7/2024, 03:02:42"
     }
   ]
 }
