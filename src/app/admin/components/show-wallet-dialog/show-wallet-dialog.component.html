@@ -4,7 +4,7 @@
     <p>Fondos: {{ wallet.funds | currency }}</p>
   </div>
 
-  <div class="table-container">
+  <div class="table-container" *ngIf="wallet.coins!.length > 0; else notCoinsTemplate">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
       <!-- Coin ID Column -->
@@ -30,6 +30,12 @@
 
     </table>
   </div>
+
+  <ng-template #notCoinsTemplate>
+    <p> El usuario no contiene monedas </p>
+  </ng-template>
+
+
 </div>
 
 

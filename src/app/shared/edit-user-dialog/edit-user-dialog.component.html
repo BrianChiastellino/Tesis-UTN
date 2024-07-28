@@ -1,16 +1,14 @@
-
-
-Aplicar toastService
-
 <mat-dialog-content class="edit-user-dialog">
   <form [formGroup]="editForm" (ngSubmit)="onConfirm()">
 
-    <h2 class="text-center">Editar Usuario</h2>
+    <h2 class="text-center">{{ editMode ? 'Editar Usuario' : 'Registrar Usuario' }}</h2>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>ID</mat-label>
-      <input matInput formControlName="id" readonly style="cursor: default;" >
-    </mat-form-field>
+    <div *ngIf="editMode" class="id-container">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>ID</mat-label>
+        <input matInput [value]="idUser" readonly style="cursor: default;">
+      </mat-form-field>
+    </div>
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Nombre</mat-label>
@@ -55,11 +53,11 @@ Aplicar toastService
       </mat-error>
     </mat-form-field>
 
-    <mat-checkbox *ngIf="data.admin" formControlName="admin">Administrador</mat-checkbox>
+    <mat-checkbox *ngIf="!editMode" formControlName="admin">Administrador</mat-checkbox>
 
     <div class="button-group">
       <button mat-button mat-flat-button color="primary" type="submit" [disabled]="editForm.invalid">Guardar Cambios</button>
-      <button mat-button mat-flat-button color="warn" (click)="onCancel()">Cancelar</button>
+      <button mat-button mat-flat-button color="warn" type="button" (click)="onCancel()">Cancelar</button>
     </div>
 
 

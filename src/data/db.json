@@ -17,6 +17,24 @@
       "password": "12345",
       "document": "41853675",
       "admin": false
+    },
+    {
+      "id": "d76a",
+      "name": "admin",
+      "email": "admin1@gmail.com",
+      "username": "admin1",
+      "password": "12345",
+      "document": "123456789",
+      "admin": true
+    },
+    {
+      "id": "2089",
+      "name": "admin2",
+      "email": "admin2@gmail.com",
+      "username": "admin2",
+      "password": "1234",
+      "document": "1234567891",
+      "admin": true
     }
   ],
   "wallets": [
@@ -219,6 +237,14 @@
       "coinAmount": 0.015517348395506177,
       "type": "buy",
       "date": "26/7/2024, 12:10:46"
+    },
+    {
+      "id": "c295",
+      "userId": null,
+      "coinId": "bitcoin",
+      "coinAmount": 0.0015517348395506175,
+      "type": "buy",
+      "date": "27/7/2024, 05:49:08"
     }
   ]
 }

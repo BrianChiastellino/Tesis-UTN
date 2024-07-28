@@ -7,7 +7,7 @@
 
   <span class="spacer"></span>
 
-  <button mat-button [matMenuTriggerFor]="profileMenu" *ngIf="isLogin">
+  <button mat-button [matMenuTriggerFor]="profileMenu" *ngIf="isLogin &&!isAdmin ">
     Mi Perfil
     <mat-icon>arrow_drop_down</mat-icon>
   </button>

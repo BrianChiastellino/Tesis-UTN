@@ -1,57 +1,35 @@
+.user-table-container {
+  padding: 2px;
+  background-color: #f5f5f5;
+}
 
+.header-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
 
 .table-container {
-  padding: 16px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
 }
 
 .centered-header {
   text-align: center;
   font-weight: bold;
-  background-color: #f5f5f5;
-  padding: 8px;
 }
 
 .centered-cell {
   text-align: center;
-  padding: 8px;
 }
 
-.coin-image {
-  border-radius: 50%;
+.btn {
+  margin: 0;
 }
 
-button.mat-raised-button {
-  margin: 0 8px;
+.mat-elevation-z8 {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .mat-header-cell, .mat-cell {
-  border-bottom: 1px solid #e0e0e0;
+  padding: 8px 16px;
 }
-
-.mat-header-row {
-  background-color: #f5f5f5;
-}
-
-.mat-row:nth-child(even) {
-  background-color: #fafafa;
-}
-
-.mat-row:hover {
-  background-color: #f1f1f1;
-}
-
-.edit-button {
-  color: #007bff; /* Cambia el color del icono */
-  transition: background-color 0.3s ease;
-}
-
-.edit-button:hover {
-  background-color: rgba(0, 123, 255, 0.1); /* Color de fondo al pasar el ratón */
-}
-
-
-
-

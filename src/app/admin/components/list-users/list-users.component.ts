@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { WalletService } from '../../../wallet/services/wallet.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EditUserDialogComponent } from '../../../shared/edit-user-dialog/edit-user-dialog.component';
 import { filter, Observable, switchMap, tap } from 'rxjs';
 import { AuthService } from '../../../auth/services/auth.service';
@@ -48,6 +48,9 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
     if ( !id ) return;
 
     this.walletService.getWalletByIdUser( id )
+    .pipe(
+      tap( data => { if (!data) return this.toastService.showInfo('Info', 'El usuario no contiene billetera') }),
+    )
     .subscribe( wallet => {
 
       if( wallet ) this.openDialogWallet(wallet).subscribe();
@@ -73,19 +76,25 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
 
   }
 
-  public editUser (user: User) : void {
+  public editUser(user: User): void {
+    this.openUserDialog(user.id);
+  }
 
-    const dialogRef = this.dialog.open( EditUserDialogComponent, { data: user } );
+  public registerUser(): void {
+    this.openUserDialog(null);
+  }
+
+  private openUserDialog(userId: string | null): void {
+    const dialogRef = this.dialog.open( EditUserDialogComponent, { data: userId });
 
     dialogRef.afterClosed()
-    .pipe(
-      filter( data => !!data),
-      switchMap ( users => this.authService.getAllUsers),
-    )
-    .subscribe( users => {
-      this.dataSource.data = users;
-    })
-
+      .pipe(
+        filter(data => !!data),
+        switchMap( users => this.authService.getAllUsers)
+      )
+      .subscribe(users => {
+        this.dataSource.data = users;
+      });
   }
 
   public deleteUser (user : User) : void {
@@ -96,8 +105,8 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed()
     .pipe(
       filter(confirm => !!confirm),
+      tap( () => { if (user.admin) return this.toastService.showInfo('Info','No es posible eliminar administradores') }),
       switchMap(() => this.walletService.deleteWalletByIdUser(user.id)),
-      filter(eliminated => !!eliminated),
       switchMap(() => this.authService.deleteUserById(user.id)),
       tap(data => {
         data
