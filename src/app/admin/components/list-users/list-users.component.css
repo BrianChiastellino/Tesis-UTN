@@ -33,3 +33,28 @@
 .mat-header-cell, .mat-cell {
   padding: 8px 16px;
 }
+
+.password-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-container span {
+  margin-right: 8px;
+}
+
+.centered-header {
+  text-align: center;
+  font-weight: bold;
+}
+
+.centered-cell {
+  text-align: center;
+}
+
+.mat-icon-button {
+  padding: 0;
+}
+
+

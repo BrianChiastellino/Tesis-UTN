@@ -7,6 +7,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   flex: 1 1 auto;
 }
 
+
+.p-toast{
+  width: 50vh;
+  height: auto;
+}
+
 /* Ocultar la flecha de ordenación */
 .mat-sort-header-arrow {
   display: none !important;
@@ -18,15 +24,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .mat-sort-header-container {
-  display: flex;
-  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mat-sort-header-content {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  display: flex;
-  width: 100%;
 }
 
 :root {

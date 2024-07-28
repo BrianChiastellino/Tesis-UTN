@@ -34,7 +34,7 @@ export class ListTransactionsComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
@@ -62,7 +62,7 @@ export class ListTransactionsComponent implements OnInit, AfterViewInit {
       });
   }
 
-  announceSortChange(sortState: Sort) {
+  public announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {

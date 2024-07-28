@@ -4,7 +4,7 @@
   </div>
 
   <div class="table-container mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)">
       <!-- Columnas de la tabla -->
       <ng-container matColumnDef="index">
         <th mat-header-cell *matHeaderCellDef class="centered-header">#</th>
@@ -12,37 +12,46 @@
       </ng-container>
 
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">USER-ID</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="id" sortActionDescription="id" sort class="centered-header">USER-ID</th>
         <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.id }}</td>
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">NOMBRE</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="name" sortActionDescription="name" class="centered-header">NOMBRE</th>
         <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">EMAIL</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="email" sortActionDescription="email" class="centered-header">EMAIL</th>
         <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.email }}</td>
       </ng-container>
 
       <ng-container matColumnDef="username">
-        <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">USUARIO</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="username" sortActionDescription="username" class="centered-header">USUARIO</th>
         <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.username }}</td>
       </ng-container>
 
       <ng-container matColumnDef="password">
-        <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">CONTRASEÑA</th>
-        <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.password }}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="password" sortActionDescription="password" class="centered-header">
+          CONTRASEÑA
+        </th>
+        <td mat-cell *matCellDef="let user" class="centered-cell">
+          <div class="password-container">
+            <span>{{ passwordVisibility.get(user.id) ? user.password : '••••••••' }}</span>
+            <button mat-icon-button (click)="togglePasswordVisibility(user.id)">
+              <mat-icon>{{ passwordVisibility.get(user.id) ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </div>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="document">
-        <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">DOCUMENTO</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="document" sortActionDescription="document" class="centered-header">DOCUMENTO</th>
         <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.document }}</td>
       </ng-container>
 
       <ng-container matColumnDef="admin">
-        <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">ADMIN</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="admin" class="centered-header">ADMIN</th>
         <td mat-cell *matCellDef="let user" class="centered-cell">{{ user.admin | userType }}</td>
       </ng-container>
 
@@ -58,7 +67,7 @@
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">ELIMINAR</th>
         <td mat-cell *matCellDef="let user" class="centered-cell">
-          <button (click)="deleteUser(user)" class="btn btn-outline-primary edit-button" [ngClass]="{'disabled-button': user.admin}" [disabled]="user.admin">
+          <button (click)="deleteUser(user)" class="btn btn-outline-primary edit-button">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -67,7 +76,7 @@
       <ng-container matColumnDef="wallet">
         <th mat-header-cell *matHeaderCellDef mat-sub-header class="centered-header">BILLETERA</th>
         <td mat-cell *matCellDef="let user" class="centered-cell">
-          <button (click)="showWallet(user.id)" class="btn btn-outline-primary edit-button" [ngClass]="{'disabled-button': user.admin}" [disabled]="user.admin">
+          <button (click)="showWallet(user)" class="btn btn-outline-primary edit-button">
             <mat-icon>wallet</mat-icon>
           </button>
         </td>
