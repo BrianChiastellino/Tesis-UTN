@@ -4,9 +4,10 @@ import { CoinGecko } from '../../../models/coin-gecko/interface/coin-gecko.model
 import { WalletService } from '../../../wallet/services/wallet.service';
 import { Wallet } from '../../../models/wallet/wallet.models';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { CoinGeckoService } from '../../../models/coin-gecko/services/coin-gecko.service';
 import { tap } from 'rxjs';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-list-coin-gecko',
@@ -28,7 +29,6 @@ export class ListCoinGeckoComponent implements OnInit, AfterViewInit {
   public dataSource: MatTableDataSource<CoinGecko> = new MatTableDataSource<CoinGecko>();
 
   constructor(
-    private walletService: WalletService,
     private coinGeckoService: CoinGeckoService,
   ) { }
 
@@ -77,6 +77,8 @@ export class ListCoinGeckoComponent implements OnInit, AfterViewInit {
       .subscribe(coins => this.dataSource.data = coins);
 
   }
+
+
 
 
 

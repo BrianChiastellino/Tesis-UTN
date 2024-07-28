@@ -58,8 +58,10 @@ export class NavBarComponent implements OnInit {
 
   public editProfile() : void {
 
+    const user: User = JSON.parse(localStorage.getItem( this.token )!)
+
     const dialogRef = this.dialog.open( EditUserDialogComponent, {
-      data: JSON.parse(localStorage.getItem( this.token )!) as User,
+      data: user.id,
     } )
 
 

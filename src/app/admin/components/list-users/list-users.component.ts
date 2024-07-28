@@ -36,7 +36,6 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private dialog: MatDialog,
     private toastService: ToastService,
-    private liveAnnouncer: LiveAnnouncer,
   ) {}
 
   ngOnInit(): void {
@@ -130,13 +129,6 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
 
   }
 
-  public announceSortChange(sortState: Sort) {
-    if (sortState.direction) {
-      this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this.liveAnnouncer.announce('Sorting cleared');
-    }
-  }
 
 
 

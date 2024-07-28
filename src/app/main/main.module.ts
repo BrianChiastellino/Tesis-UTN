@@ -11,6 +11,7 @@ import { DialogSellComponent } from './components/dialog/dialog-sell/dialog-sell
 import { ReactiveFormsModule } from '@angular/forms';
 import { BuyCoinGeckoComponent } from './components/buy-coin-gecko/buy-coin-gecko.component';
 import { SellCoinGeckoComponent } from './components/sell-coin-gecko/sell-coin-gecko.component';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SellCoinGeckoComponent } from './components/sell-coin-gecko/sell-coin-g
     SharedModule,
     MainRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSortModule
   ]
 })
 

@@ -26,7 +26,6 @@ export class ListTransactionsComponent implements OnInit, AfterViewInit {
     private dialog: MatDialog,
     private authService: AuthService,
     private transactionService: TransactionsService,
-    private liveAnnouncer: LiveAnnouncer,
   ) {}
 
   public ngOnInit(): void {
@@ -62,12 +61,6 @@ export class ListTransactionsComponent implements OnInit, AfterViewInit {
       });
   }
 
-  public announceSortChange(sortState: Sort) {
-    if (sortState.direction) {
-      this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this.liveAnnouncer.announce('Sorting cleared');
-    }
-  }
+
 
 }

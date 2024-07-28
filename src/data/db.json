@@ -14,7 +14,7 @@
       "name": "Brian",
       "email": "chaste@gmail.com",
       "username": "chaste",
-      "password": "12345",
+      "password": "123",
       "document": "41853675",
       "admin": false
     },
@@ -41,8 +41,23 @@
     {
       "id": "034e",
       "idUser": "09c6",
-      "funds": 65444,
-      "coins": []
+      "funds": 53444,
+      "coins": [
+        {
+          "id": "binancecoin",
+          "coinAmount": 10.19108280254777,
+          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          "symbol": "bnb",
+          "date": "28/7/2024, 00:36:07"
+        },
+        {
+          "id": "bitcoin",
+          "coinAmount": 0.09310409037303706,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "28/7/2024, 00:36:02"
+        }
+      ]
     }
   ],
   "transactions": [
@@ -245,6 +260,38 @@
       "coinAmount": 0.0015517348395506175,
       "type": "buy",
       "date": "27/7/2024, 05:49:08"
+    },
+    {
+      "id": "dff7",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 0.007758674197753088,
+      "type": "buy",
+      "date": "28/7/2024, 00:35:41"
+    },
+    {
+      "id": "edfb",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 0.007758674197753088,
+      "type": "sell",
+      "date": "28/7/2024, 00:35:48"
+    },
+    {
+      "id": "fbe5",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 0.09310409037303706,
+      "type": "buy",
+      "date": "28/7/2024, 00:36:03"
+    },
+    {
+      "id": "d4a3",
+      "userId": "09c6",
+      "coinId": "binancecoin",
+      "coinAmount": 10.19108280254777,
+      "type": "buy",
+      "date": "28/7/2024, 00:36:08"
     }
   ]
 }

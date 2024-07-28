@@ -75,18 +75,16 @@ export class AuthService {
 
   // LOGUEO USUARIO
 
-  public login (email: string, password: string): Observable<User | null> {
+  public login(email: string, password: string): Observable<User | null> {
+    if (!email || !password) return of(null);
 
-    if( !email || !password ) return of( null );
-
-    return this.http.get<User[]>(`${ this.baseUrl }/users?email=${ email }&password=${ password }`)
-    .pipe(
-      filter( user => !!user[0]),
-      map( user => { return user[0] }),
-      catchError( () => of( null )),        /* Si no se pudo loguear mandamos un null  */
-    );
-
+    return this.http.get<User[]>(`${this.baseUrl}/users?email=${email}`)
+      .pipe(
+        map(users => users.find(user => user.password === password) || null),
+        catchError(() => of(null))
+      );
   }
+
 
   // AUTENTICACION
 
