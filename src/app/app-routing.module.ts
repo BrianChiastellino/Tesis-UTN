@@ -4,11 +4,14 @@ import { LandingComponent } from './landing/landing.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { PublicGuard } from './auth/guards/public.guard';
 import { AdminGuard } from './admin/guards/admin.guard';
+import { NotAdminGuard } from './auth/guards/not-admin.guard';
 
 const routes: Routes = [
   {
     path: 'landing',
-    component: LandingComponent,
+    loadComponent: () => import('./landing/landing.component').then( l => l.LandingComponent),
+    canActivate: [NotAdminGuard],
+    canMatch: [NotAdminGuard],
   },
   {
     path: 'auth',
@@ -19,13 +22,13 @@ const routes: Routes = [
   {
     path: 'main',
     loadChildren: () => import('./main/main.module').then(m => m.MainModule),
-    canActivate: [AuthGuard], //todo:
+    canActivate: [AuthGuard],
     canMatch: [AuthGuard]
   },
   {
     path: 'wallet',
     loadChildren: () => import('./wallet/wallet.module').then(w => w.WalletModule),
-    canActivate: [AuthGuard], //todo:
+    canActivate: [AuthGuard],
     canMatch: [AuthGuard]
   },
   {
@@ -33,7 +36,7 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin.module').then(a => a.AdminModule),
     canActivate: [AdminGuard],
     canMatch: [AdminGuard]
-  }, 
+  },
   {
     path: '**',
     redirectTo: 'landing',

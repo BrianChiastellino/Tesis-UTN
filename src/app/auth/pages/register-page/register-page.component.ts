@@ -6,26 +6,25 @@ import { User } from '../../models/user.model';
 import { filter, pipe, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { ToastService } from '../../../shared/services/toast.service';
+import { CustomValidators } from '../../../shared/validators/custom-validators';
 
 @Component({
   selector: 'auth-register-page',
   templateUrl: './register-page.component.html',
+  styleUrl: './register-page.component.css'
 
 })
-export class RegisterPageComponent implements OnInit {
+export class RegisterPageComponent  {
 
   public hidePassword: boolean  = true;
-  private userToken: string = environment.userToken;
 
   public registerForm: FormGroup = this.fb.group({
 
-    //todo: Usar validaciones de Devtalles para el mail
-
-    name: ['', Validators.required],
-    email: ['', Validators.required],
-    document: ['', Validators.required],
-    username: ['', Validators.required],
-    password: ['', Validators.required],
+    name: ['', [Validators.required, CustomValidators.noNumbers()]],
+    email: ['', [Validators.required, Validators.pattern( CustomValidators.emailPattern)]],
+    document: ['', [Validators.required, CustomValidators.onlyNumbers()]],
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]],
     admin: [false],
 
   })
@@ -37,9 +36,6 @@ export class RegisterPageComponent implements OnInit {
     private toastService: ToastService,
   ) {}
 
-  ngOnInit(): void {
-
-  }
 
   public onSubmit() {
 
@@ -63,17 +59,21 @@ export class RegisterPageComponent implements OnInit {
 
       if( !user ) return;
 
-      // localStorage.setItem(this.userToken, JSON.stringify(user));
       this.router.navigateByUrl('auth/login')
       this.toastService.showSuccess('Éxtio!', 'Te has registrado extiosamente');
 
     });
 
-
-
   }
+
   public showPassword () : void {
     this.hidePassword = !this.hidePassword;
+  }
+
+  public isValidfield( field: string ): boolean | null {
+
+    return this.registerForm.get(field)!.invalid && this.registerForm.get(field)!.touched;
+
   }
 
 

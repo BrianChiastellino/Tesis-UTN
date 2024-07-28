@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Observable, catchError, filter, map, of, switchMap, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, filter, map, of, switchMap, tap, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({  providedIn: 'root' })
@@ -10,8 +10,18 @@ export class AuthService {
 
   private baseUrl: string = environment.urlBaseJsonServer;
   private token: string = environment.userToken
+  private isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
+
 
   constructor(private http: HttpClient) { }
+
+  private hasToken(): boolean {
+    return !!localStorage.getItem(this.token);
+  }
+
+  public isLoggedIn(): Observable<boolean> {
+    return this.isLoginSubject.asObservable();
+  }
 
   // CRUD
 
@@ -81,8 +91,14 @@ export class AuthService {
     return this.http.get<User[]>(`${this.baseUrl}/users?email=${email}`)
       .pipe(
         map(users => users.find(user => user.password === password) || null),
+        tap( () => this.isLoginSubject.next(true)),
         catchError(() => of(null))
       );
+  }
+
+  public logOut (): void {
+    localStorage.removeItem(this.token);
+    this.isLoginSubject.next(false);
   }
 
 

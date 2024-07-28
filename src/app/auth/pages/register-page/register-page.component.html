@@ -1,43 +1,63 @@
-
 <shared-nav-bar></shared-nav-bar>
 
-<div class="d-flex flex-column">
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+    <div class="card-body">
+      <h2 class="text-center text-uppercase mb-4">Registrarme</h2>
 
-  <h2 class="text-center text-uppercase">Registro</h2>
+      <form [formGroup]="registerForm" (submit)="onSubmit()">
 
-  <form class="d-flex flex-column" [formGroup]="registerForm" (submit)="onSubmit()">
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Nombre</mat-label>
+          <input type="text" matInput placeholder="Nombre" formControlName="name">
+          <mat-error *ngIf="isValidfield('name')">
+            Introduce un nombre válido
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Nombre</mat-label>
-      <input type="text" matInput placeholder="Nombre" formControlName="name">
-    </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Email</mat-label>
+          <input type="text" matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="isValidfield('email')">
+            Introduce un email válido
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input type="text" matInput placeholder="Email" formControlName="email">
-    </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Documento</mat-label>
+          <input type="text" matInput placeholder="Documento" formControlName="document">
+          <mat-error *ngIf="isValidfield('document')">
+            Introduce un documento válido
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Documento</mat-label>
-      <input type="text" matInput placeholder="Documento" formControlName="document">
-    </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Nombre de usuario</mat-label>
+          <input type="text" matInput placeholder="Usuario" formControlName="username">
+          <mat-error *ngIf="isValidfield('username')">
+            Introduce un nombre de usuario válido
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Nombre de usuario</mat-label>
-      <input type="text" matInput placeholder="Usuario" formControlName="username">
-    </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 mb-4">
+          <mat-label>Contraseña</mat-label>
+          <input [type]="hidePassword ? 'password' : 'text'" matInput placeholder="Contraseña" formControlName="password">
+          <button mat-icon-button matSuffix (click)="showPassword()" type="button">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="isValidfield('password')">
+            La contraseña es requerida
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Contraseña</mat-label>
-      <input [type]="hidePassword ? 'password' : 'text' " matInput placeholder="contraseña" formControlName="password">
-      <button mat-icon-button matSuffix (click)="showPassword()" ><mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}} </mat-icon> </button>
-    </mat-form-field>
-
-
-
-    <button mat-button mat-flat-button color="primary" type="submit">Registrarme!</button>
-
-
-  </form>
-
+        <button mat-raised-button color="primary" type="submit" class="w-100" [disabled]="registerForm.invalid">
+          Registrarme!
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
+
+// añadir las validaciones del email de devtalels en los demas formularios,
+poner bien los corchetes en los demas formularios
+

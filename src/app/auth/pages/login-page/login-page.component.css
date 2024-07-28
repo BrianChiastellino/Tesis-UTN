@@ -1,0 +1,21 @@
+
+.card {
+  border: none;
+  border-radius: 1rem;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+button[type="submit"] {
+  margin-top: 1rem;
+}
+
+button[type="button"] {
+  margin-right: 0;
+}

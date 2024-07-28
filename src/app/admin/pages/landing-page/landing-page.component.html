@@ -1,0 +1,30 @@
+<shared-nav-bar></shared-nav-bar>
+
+<div class="container mt-5">
+  <div class="text-center mb-5">
+    <h1 class="display-4">Panel de Administración</h1>
+    <p class="lead">Bienvenido al panel de administración. Aquí puedes gestionar usuarios, transacciones y billeteras virtuales.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card admin-card shadow-sm" (click)="navigateTo('admin/transactons')">
+        <div class="card-body text-center">
+          <mat-icon class="admin-icon">swap_horiz</mat-icon>
+          <h5 class="card-title mt-2">Transacciones</h5>
+          <p class="card-text">Ver y gestionar todas las transacciones.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card admin-card shadow-sm" (click)="navigateTo('admin/users')">
+        <div class="card-body text-center">
+          <mat-icon class="admin-icon">group</mat-icon>
+          <h5 class="card-title mt-2">Usuarios</h5>
+          <p class="card-text">Gestionar usuarios: alta, baja y modificación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

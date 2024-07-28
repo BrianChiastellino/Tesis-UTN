@@ -1,33 +1,33 @@
 <shared-nav-bar></shared-nav-bar>
 
-<div class="d-flex flex-column">
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+    <div class="card-body">
+      <h2 class="text-center text-uppercase mb-4">Iniciar Sesion</h2>
 
-  <h2 class="text-center text-uppercase">Login</h2>
+      <form [formGroup]="loginForm" (submit)="onSubmit()">
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Email</mat-label>
+          <input type="text" matInput placeholder="Usuario" formControlName="email">
+          <mat-error *ngIf="isValidfield('email')">
+            Introduce un email válido
+          </mat-error>
+        </mat-form-field>
 
-  <form class="d-flex flex-column" [formGroup]="loginForm" (submit)="onSubmit()">
+        <mat-form-field appearance="outline" class="w-100 mb-4">
+          <mat-label>Contraseña</mat-label>
+          <input [type]="hidePassword ? 'password' : 'text'" matInput placeholder="Contraseña" formControlName="password">
+          <button mat-icon-button matSuffix (click)="showPassword()" type="button">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="isValidfield('password')">
+            La contraseña es requerida
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field>
-
-      <mat-label>Email</mat-label>
-      <input type="text" matInput placeholder="Usuario" formControlName="email">
-
-    </mat-form-field>
-
-    <mat-form-field>
-
-      <mat-label>Contraseña</mat-label>
-
-      <input [type]=" hidePassword ? 'password' : 'text' " matInput placeholder="Contraseña" formControlName="password">
-
-      <button mat-icon-button matSuffix (click)="showPassword()">
-        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}} </mat-icon>
-       </button>
-
-    </mat-form-field>
-
-    <button mat-button mat-flat-button color="primary" type="submit">Iniciar Sesion</button>
-
-  </form>
-
+        <button mat-raised-button color="primary" type="submit" class="w-100" [disabled]="loginForm.invalid">Iniciar Sesión</button>
+      </form>
+    </div>
+  </div>
 </div>
 

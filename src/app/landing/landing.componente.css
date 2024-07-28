@@ -1,14 +1,30 @@
-.container {
-  max-width: 800px;
+/* Estilos opcionales para mejorar la apariencia */
+h1, h2 {
+  color: #2c3e50;
 }
 
-h1.display-4 {
+.mat-card {
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.mat-card-title {
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #333; /* Color de texto personalizado */
 }
 
-p.lead {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: #666; /* Color de texto personalizado */
+.mat-card-content {
+  font-size: 1rem;
+}
+
+button[mat-button] {
+  margin-top: 10px;
+}
+
+.text-primary {
+  color: #007bff;
+}
+
+.card-hover:hover {
+  transform: scale(1.1);
 }

@@ -14,6 +14,7 @@ import { ShowWalletDialogComponent } from './components/show-wallet-dialog/show-
 import { UserEliminated } from './pipe/user-eliminated.pipe';
 import { UserType } from './pipe/admin-type.pipe';
 import { MatSortModule } from '@angular/material/sort';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 
 
@@ -27,7 +28,8 @@ import { MatSortModule } from '@angular/material/sort';
     UsersPageComponent,
     ShowWalletDialogComponent,
     UserEliminated,
-    UserType
+    UserType,
+    LandingPageComponent
   ],
   imports: [
     CommonModule,

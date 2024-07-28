@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'auth-login-page',
   templateUrl: './login-page.component.html',
+  styleUrl: './login-page.component.css'
 })
 
 export class LoginPageComponent {
@@ -53,12 +54,21 @@ export class LoginPageComponent {
 
       localStorage.setItem(this.userToken, JSON.stringify(user));
       this.toastService.showSuccess(`Éxito!`, 'Has iniciado sesion correctamente');
-      this.router.navigateByUrl('/landing');
+
+      if(user.admin) this.router.navigateByUrl('/admin/landing')
+        else  this.router.navigateByUrl('/landing');
+
     })
   }
 
   public showPassword () : void  {
     this.hidePassword = !this.hidePassword;
+  }
+
+  public isValidfield( field: string ): boolean | null {
+
+    return this.loginForm.get(field)!.invalid && this.loginForm.get(field)!.touched;
+
   }
 
 

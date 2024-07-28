@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { User } from '../../auth/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'shared-nav-bar',
@@ -20,6 +21,7 @@ export class NavBarComponent implements OnInit {
   constructor(
     private router: Router,
     private dialog: MatDialog,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +30,6 @@ export class NavBarComponent implements OnInit {
 
   private isUserLoged (): void {
 
-    const isLoged = localStorage.getItem( this.token );
     const user: User = JSON.parse(localStorage.getItem( this.token )!);
 
     user ? this.isLogin = true : this.isLogin = false;
@@ -37,7 +38,10 @@ export class NavBarComponent implements OnInit {
   }
 
   public landing (): void {
-    this.router.navigateByUrl('landing');
+
+    if( this.isAdmin ) this.router.navigateByUrl('/admin/landing')
+      else this.router.navigateByUrl('landing');
+
   }
 
   public main (): void {
@@ -76,7 +80,8 @@ export class NavBarComponent implements OnInit {
   }
 
   public logout (): void {
-    localStorage.clear();
+
+    this.authService.logOut();
     this.isLogin = !this.isLogin;
     this.isAdmin = false;
     this.landing();
