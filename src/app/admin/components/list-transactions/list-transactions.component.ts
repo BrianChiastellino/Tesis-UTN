@@ -8,6 +8,7 @@ import { ShowUserDialogComponent } from '../show-user-dialog/show-user-dialog.co
 import { AuthService } from '../../../auth/services/auth.service';
 import { TransactionsService } from '../../services/transactions.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-list-transactions',
@@ -47,6 +48,16 @@ export class ListTransactionsComponent implements OnInit, AfterViewInit {
       .subscribe(transactions => {
         this.dataSource.data = transactions;
       });
+  }
+
+  private getTransactionByUserId( id: string ): void {
+    this.transactionService.getTransactionsByUserId( id )
+    .pipe(
+      tap( transaction => console.log(transaction)),
+    )
+    .subscribe( transaction =>  {
+      this.dataSource.data = transaction;
+    });
   }
 
   public showUser(id: string): void {

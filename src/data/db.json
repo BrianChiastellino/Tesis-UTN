@@ -469,6 +469,46 @@
       "coinAmount": 0.007758674197753088,
       "type": "buy",
       "date": "28/7/2024, 03:02:42"
+    },
+    {
+      "id": "91e5",
+      "userId": null,
+      "coinId": "bitcoin",
+      "coinAmount": 0.007758674197753088,
+      "type": "buy",
+      "date": "28/7/2024, 08:34:27"
+    },
+    {
+      "id": "5273",
+      "userId": null,
+      "coinId": "ethereum",
+      "coinAmount": 0.028519197697930362,
+      "type": "buy",
+      "date": "28/7/2024, 08:35:15"
+    },
+    {
+      "id": "4407",
+      "userId": null,
+      "coinId": "binancecoin",
+      "coinAmount": 2,
+      "type": "buy",
+      "date": "28/7/2024, 08:37:00"
+    },
+    {
+      "id": "1ff6",
+      "userId": null,
+      "coinId": "ethereum",
+      "coinAmount": 0.028519197697930362,
+      "type": "sell",
+      "date": "28/7/2024, 08:37:41"
+    },
+    {
+      "id": "1676",
+      "userId": null,
+      "coinId": "binancecoin",
+      "coinAmount": 2,
+      "type": "sell",
+      "date": "28/7/2024, 08:38:06"
     }
   ]
 }
