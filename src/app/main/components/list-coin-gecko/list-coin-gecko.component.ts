@@ -33,8 +33,8 @@ export class ListCoinGeckoComponent implements OnInit, AfterViewInit {
   ) { }
 
   public ngOnInit(): void {
-    this.getCoinGeckoTest();
-    // this.getCoinGecko();
+    // this.getCoinGeckoTest();
+    this.getCoinGecko();
   }
 
   public ngAfterViewInit(): void {

@@ -28,13 +28,22 @@
       "admin": null
     },
     {
-      "id": "c2c9",
-      "name": "noah",
-      "email": "noah@gmail.com",
-      "username": "noahxd",
-      "password": "Noah123!",
-      "document": "71899061",
+      "id": "26aa",
+      "name": "Matias",
+      "email": "tesoreiro@gmail.com",
+      "username": "Matias",
+      "password": "Matias123!",
+      "document": "66554433",
       "admin": false
+    },
+    {
+      "id": "7db0",
+      "name": "admin",
+      "email": "admin2@gmail.com",
+      "username": "admin2",
+      "password": "Admin123!",
+      "document": "11223344",
+      "admin": true
     }
   ],
   "wallets": [
@@ -98,6 +107,41 @@
           "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
           "symbol": "bnb",
           "date": "31/7/2024, 13:17:06"
+        }
+      ]
+    },
+    {
+      "id": "4736",
+      "idUser": "26aa",
+      "funds": 2000,
+      "coins": [
+        {
+          "id": "ethereum",
+          "coinAmount": 0.3018767678658218,
+          "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+          "symbol": "eth",
+          "date": "31/7/2024, 14:47:35"
+        },
+        {
+          "id": "staked-ether",
+          "coinAmount": 0.15104371205026734,
+          "image": "https://coin-images.coingecko.com/coins/images/13442/large/steth_logo.png?1696513206",
+          "symbol": "steth",
+          "date": "31/7/2024, 14:46:27"
+        },
+        {
+          "id": "ripple",
+          "coinAmount": 784.1292244961969,
+          "image": "https://coin-images.coingecko.com/coins/images/44/large/xrp-symbol-white-128.png?1696501442",
+          "symbol": "xrp",
+          "date": "31/7/2024, 14:46:23"
+        },
+        {
+          "id": "binancecoin",
+          "coinAmount": 0.8457088731774973,
+          "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          "symbol": "bnb",
+          "date": "31/7/2024, 14:46:19"
         }
       ]
     }
@@ -246,6 +290,62 @@
       "coinAmount": 0.0007506042364103103,
       "type": "sell",
       "date": "31/7/2024, 13:23:27"
+    },
+    {
+      "id": "5daa",
+      "userId": "26aa",
+      "coinId": "bitcoin",
+      "coinAmount": 0.007503338985848703,
+      "type": "buy",
+      "date": "31/7/2024, 14:44:18"
+    },
+    {
+      "id": "b927",
+      "userId": "26aa",
+      "coinId": "bitcoin",
+      "coinAmount": 0.007503338985848703,
+      "type": "sell",
+      "date": "31/7/2024, 14:44:59"
+    },
+    {
+      "id": "a6d3",
+      "userId": "26aa",
+      "coinId": "ethereum",
+      "coinAmount": 0.1509383839329109,
+      "type": "buy",
+      "date": "31/7/2024, 14:45:51"
+    },
+    {
+      "id": "9c60",
+      "userId": "26aa",
+      "coinId": "binancecoin",
+      "coinAmount": 0.8457088731774973,
+      "type": "buy",
+      "date": "31/7/2024, 14:46:20"
+    },
+    {
+      "id": "4579",
+      "userId": "26aa",
+      "coinId": "ripple",
+      "coinAmount": 784.1292244961969,
+      "type": "buy",
+      "date": "31/7/2024, 14:46:24"
+    },
+    {
+      "id": "b7e4",
+      "userId": "26aa",
+      "coinId": "staked-ether",
+      "coinAmount": 0.15104371205026734,
+      "type": "buy",
+      "date": "31/7/2024, 14:46:28"
+    },
+    {
+      "id": "7ec3",
+      "userId": "26aa",
+      "coinId": "ethereum",
+      "coinAmount": 0.1509383839329109,
+      "type": "buy",
+      "date": "31/7/2024, 14:47:35"
     }
   ]
 }
