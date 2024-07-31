@@ -6,6 +6,8 @@ import { catchError, filter, pipe, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../shared/services/toast.service';
 import { environment } from '../../../../environments/environment';
+import { CustomValidators } from '../../../shared/validators/custom-validators';
+import { CustomHelpers } from '../../../shared/helpers/custom-helpers';
 
 @Component({
   selector: 'auth-login-page',
@@ -19,8 +21,8 @@ export class LoginPageComponent {
   private userToken: string = environment.userToken;
 
   public loginForm: FormGroup = this.fb.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required]
+    email: ['', [Validators.required, Validators.pattern(CustomValidators.emailPattern)]],
+    password: ['', [Validators.required, Validators.pattern(CustomValidators.passwordPattern)]]
   });
 
   constructor(
@@ -32,13 +34,9 @@ export class LoginPageComponent {
 
   public onSubmit(): void {
 
-    this.loginForm.markAllAsTouched();
-
     if (!this.loginForm.valid) return;
 
     this.login();
-
-    this.loginForm.reset();
 
   }
 
@@ -47,16 +45,19 @@ export class LoginPageComponent {
     const email = this.loginForm.controls['email'].value;
     const password = this.loginForm.controls['password'].value;
 
-    console.log({ email,password });
-
     this.authService.login(email, password).subscribe( user => {
-      if( !user ) return;
+
+      if( !user ) {
+        this.loginForm.reset();
+        return this.toastService.showError('Error', 'Email o contraseña invalidos');
+      }
 
       localStorage.setItem(this.userToken, JSON.stringify(user));
-      this.toastService.showSuccess(`Éxito!`, 'Has iniciado sesion correctamente');
 
       if(user.admin) this.router.navigateByUrl('/admin/landing')
         else  this.router.navigateByUrl('/landing');
+
+      this.toastService.showSuccess(`Éxito!`, 'Has iniciado sesion correctamente');
 
     })
   }
@@ -66,9 +67,7 @@ export class LoginPageComponent {
   }
 
   public isValidfield( field: string ): boolean | null {
-
-    return this.loginForm.get(field)!.invalid && this.loginForm.get(field)!.touched;
-
+    return CustomHelpers.isValidField( field, this.loginForm );
   }
 
 

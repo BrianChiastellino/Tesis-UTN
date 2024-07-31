@@ -1,27 +1,31 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { Transaction } from '../../models/transaction.models';
+import { Transaction } from '../../admin/models/transaction.models';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { ShowUserDialogComponent } from '../show-user-dialog/show-user-dialog.component';
-import { AuthService } from '../../../auth/services/auth.service';
-import { TransactionsService } from '../../services/transactions.service';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { ShowUserDialogComponent } from '../../admin/components/show-user-dialog/show-user-dialog.component';
+import { AuthService } from '../../auth/services/auth.service';
+import { TransactionsService } from '../services/transactions.service';
 import { tap } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { User } from '../../auth/models/user.model';
 
 @Component({
-  selector: 'app-list-transactions',
+  selector: 'shared-list-transactions',
   templateUrl: './list-transactions.component.html',
   styleUrls: ['./list-transactions.component.css']
 })
 export class ListTransactionsComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort) sort: MatSort | null = null;
 
   public displayedColumns: string[] = ['index', 'id', 'user', 'coin', 'cantidad', 'tipo', 'fecha'];
   public dataSource = new MatTableDataSource<Transaction>();
+
+  private token: string = environment.userToken;
+  public user: User | null = null;
 
   constructor(
     private dialog: MatDialog,
@@ -30,7 +34,13 @@ export class ListTransactionsComponent implements OnInit, AfterViewInit {
   ) {}
 
   public ngOnInit(): void {
-    this.getTransactions();
+
+    this.user =  JSON.parse(localStorage.getItem(this.token)!);
+
+    this.user!.admin ? this.getTransactions() : this.getTransactionByUserId( this.user!.id );
+
+    if (!this.user!.admin)  this.displayedColumns = ['index', 'coin', 'cantidad', 'tipo', 'fecha'];
+
   }
 
   public ngAfterViewInit(): void {
@@ -38,8 +48,8 @@ export class ListTransactionsComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    this.sort.active = 'date';
-    this.sort.direction = 'desc';
+    this.sort!.active = 'date';
+    this.sort!.direction = 'desc';
 
   }
 
@@ -52,9 +62,6 @@ export class ListTransactionsComponent implements OnInit, AfterViewInit {
 
   private getTransactionByUserId( id: string ): void {
     this.transactionService.getTransactionsByUserId( id )
-    .pipe(
-      tap( transaction => console.log(transaction)),
-    )
     .subscribe( transaction =>  {
       this.dataSource.data = transaction;
     });
@@ -67,7 +74,7 @@ export class ListTransactionsComponent implements OnInit, AfterViewInit {
       .subscribe(user => {
         this.dialog.open(ShowUserDialogComponent, {
           data: user,
-          width: '50vh'
+          // width: '50vh'
         });
       });
   }

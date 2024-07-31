@@ -39,9 +39,12 @@ export class NavBarComponent implements OnInit {
 
   public landing (): void {
 
-    if( this.isAdmin ) this.router.navigateByUrl('/admin/landing')
-      else this.router.navigateByUrl('landing');
+    this.isAdmin ?  this.router.navigateByUrl('/admin/landing') :  this.router.navigateByUrl('landing');
 
+  }
+
+  public contact () : void {
+    this.router.navigateByUrl('contact');
   }
 
   public main (): void {
@@ -53,7 +56,8 @@ export class NavBarComponent implements OnInit {
   }
 
   public transictions () : void {
-    this.router.navigateByUrl('/admin/transactions');
+
+    this.isAdmin ?  this.router.navigateByUrl('/admin/transactions') : this.router.navigateByUrl('/transaction/myTransactions');
   }
 
   public users () : void {

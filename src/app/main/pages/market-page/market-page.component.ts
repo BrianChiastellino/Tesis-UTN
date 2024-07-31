@@ -7,7 +7,7 @@ import { WalletService } from '../../../wallet/services/wallet.service';
 import { User } from '../../../auth/models/user.model';
 import { environment } from '../../../../environments/environment';
 import { Wallet } from '../../../models/wallet/wallet.models';
-import { TransactionsService } from '../../../admin/services/transactions.service';
+import { TransactionsService } from '../../../shared/services/transactions.service';
 
 @Component({
   selector: 'app-market-page',

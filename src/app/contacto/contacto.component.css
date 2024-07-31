@@ -1,0 +1,36 @@
+.container {
+  margin-top: 5rem;
+}
+
+.card {
+  border: none;
+  border-radius: 1rem;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+button[type="submit"] {
+  margin-top: 1rem;
+}
+
+button[mat-icon-button] .fab.fa-github {
+  color: #000000; /* Negro */
+}
+
+button[mat-icon-button] .fab.fa-linkedin {
+  color: #0e76a8; /* Color azul de LinkedIn */
+}
+
+button[mat-icon-button] {
+  margin: 0 0.5rem;
+}
+
+button[mat-icon-button] i {
+  font-size: 3rem;
+}

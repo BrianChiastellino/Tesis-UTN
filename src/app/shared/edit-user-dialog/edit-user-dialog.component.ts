@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../auth/services/auth.service';
 import { filter, Observable, pipe, switchMap, tap } from 'rxjs';
 import { ToastService } from '../services/toast.service';
+import { CustomValidators } from '../validators/custom-validators';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -19,11 +20,11 @@ export class EditUserDialogComponent implements OnInit {
 
   public editForm: FormGroup = this.fb.group({
 
-    name: ['', Validators.required],
-    email: ['', Validators.required],
-    document: ['', Validators.required],
-    username: ['', Validators.required],
-    password: ['', Validators.required],
+    name: ['', [Validators.required, CustomValidators.noNumbers(), CustomValidators.noSymbols()]],
+    email: ['', [Validators.required, Validators.pattern( CustomValidators.emailPattern)]],
+    document: ['', [Validators.required, CustomValidators.onlyNumbers(), CustomValidators.noSymbols()]],
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.pattern(CustomValidators.passwordPattern)]],
     admin: [false],
 
   })
@@ -97,10 +98,12 @@ export class EditUserDialogComponent implements OnInit {
     this.hidePassword = !this.hidePassword;
   }
 
-  public isValidfield ( field: string ) : boolean | null {
-    return this.editForm.controls[field].errors
-    && this.editForm.controls[field].touched;
+  public isValidfield( field: string ): boolean | null {
+
+    return this.editForm.get(field)!.invalid && this.editForm.get(field)!.touched;
+
   }
+
 
   public getFieldError ( field: string ) : string | null {
 

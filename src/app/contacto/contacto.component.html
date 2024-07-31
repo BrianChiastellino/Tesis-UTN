@@ -1,0 +1,54 @@
+<shared-nav-bar></shared-nav-bar>
+
+<div class="container mt-5">
+  <div class="card p-4 shadow" style="max-width: 600px; margin: auto;">
+    <div class="card-body">
+      <h2 class="text-center text-uppercase mb-4">Contáctanos</h2>
+
+      <form [formGroup]="contactForm" (submit)="onSubmit()">
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Nombre</mat-label>
+          <input type="text" matInput formControlName="name" placeholder="Nombre">
+          <mat-error *ngIf="isValidField('name')">
+            {{ messageFieldError('name') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" placeholder="Email">
+          <mat-error *ngIf="isValidField('email')">
+            {{ messageFieldError('email') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Asunto</mat-label>
+          <input type="text" matInput formControlName="subject" placeholder="Asunto">
+          <mat-error *ngIf="isValidField('subject')">
+            {{ messageFieldError('subject') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Mensaje</mat-label>
+          <textarea matInput formControlName="message" placeholder="Mensaje" rows="5"></textarea>
+          <mat-error *ngIf="isValidField('message')">
+            {{ messageFieldError('message') }}
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" class="w-100" [disabled]="contactForm.invalid">Enviar</button>
+      </form>
+
+      <div class="mt-4 d-flex justify-content-center">
+        <button mat-icon-button color="primary" (click)="navigateToLinkedIn()">
+          <i class="fab fa-linkedin"></i>
+        </button>
+        <button mat-icon-button color="primary" (click)="navigateToGitHub()">
+          <i class="fab fa-github"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

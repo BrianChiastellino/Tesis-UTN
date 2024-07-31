@@ -5,6 +5,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 export class CustomValidators {
 
   static emailPattern: string = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$';
+  static passwordPattern: string = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
 
 
   // Validador para asegurar que el nombre no contenga números
@@ -22,6 +23,14 @@ export class CustomValidators {
       const value = control.value;
       const hasLetters = /[a-zA-Z]/.test(value);
       return hasLetters ? { hasLetters: true } : null;
+    };
+  }
+
+  static noSymbols(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      const hasSymbols = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+      return hasSymbols ? { hasSymbols: true } : null;
     };
   }
 }

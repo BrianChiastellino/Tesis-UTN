@@ -125,22 +125,28 @@ export class AuthService {
   // REGISTRO USUARIO
 
   public registerUser(user: User): Observable<User | null> {
-
     if (!user) return of(null);
 
     return this.getAllUsers.pipe(
-      switchMap( users => {
-        if ( users.length === 0 ) {
+      switchMap(users => {
+        if (users.length === 0) {
           user.admin = true;
         }
         return this.validateUser(user);
       }),
-        filter(isValid => isValid),
-        switchMap(() => this.addUser(user).pipe(
-            map(() => user),
-        ))
+      switchMap(isValid => {
+        if (!isValid) {
+          return of(null);
+        }
+        return this.addUser(user).pipe(
+          map(() => user),
+          catchError(() => of(null))
+        );
+      }),
+      catchError(() => of(null))
     );
-}
+  }
+
 
 public validateUser(user: User, userId?: string): Observable<boolean> {
   return this.getAllUsers.pipe(

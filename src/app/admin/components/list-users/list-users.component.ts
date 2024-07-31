@@ -12,7 +12,6 @@ import { ConfirmOperationDialogComponent } from '../../../shared/dialog/confirm-
 import { ToastService } from '../../../shared/services/toast.service';
 import { Wallet } from '../../../models/wallet/wallet.models';
 import { ShowWalletDialogComponent } from '../show-wallet-dialog/show-wallet-dialog.component';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-list-users',

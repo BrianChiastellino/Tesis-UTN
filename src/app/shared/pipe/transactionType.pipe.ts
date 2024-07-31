@@ -1,5 +1,5 @@
 import { Pipe, type PipeTransform } from '@angular/core';
-import { TransactionType } from '../models/enum/transaction.enum';
+import { TransactionType } from '../../admin/models/enum/transaction.enum';
 
 @Pipe({
   name: 'transactionType',

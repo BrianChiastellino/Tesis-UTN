@@ -1,7 +1,9 @@
 <mat-dialog-content class="edit-user-dialog">
   <form [formGroup]="editForm" (ngSubmit)="onConfirm()">
 
-    <h2 class="text-center">{{ editMode ? 'Editar Usuario' : 'Registrar Usuario' }}</h2>
+    <h1 class="display-8 text-center mt-3 mb-3"> {{ editMode ? 'Editar Usuario' : 'Registrar Usuario' }}  </h1>
+
+    <hr>
 
     <div *ngIf="editMode" class="id-container">
       <mat-form-field appearance="outline" class="full-width">
@@ -14,7 +16,7 @@
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="name" placeholder="Nombre">
       <mat-error *ngIf="isValidfield('name')">
-        {{ getFieldError('name') }}
+        Introduce un nombre válido
       </mat-error>
     </mat-form-field>
 
@@ -22,7 +24,7 @@
       <mat-label>Email</mat-label>
       <input matInput formControlName="email" placeholder="Email">
       <mat-error *ngIf="isValidfield('email')">
-        {{ getFieldError('email') }}
+        Introduce un email válido
       </mat-error>
     </mat-form-field>
 
@@ -30,7 +32,7 @@
       <mat-label>Documento</mat-label>
       <input matInput formControlName="document" placeholder="Documento">
       <mat-error *ngIf="isValidfield('document')">
-        {{ getFieldError('document') }}
+        Introduce un documento válido
       </mat-error>
     </mat-form-field>
 
@@ -38,7 +40,7 @@
       <mat-label>Nombre de usuario</mat-label>
       <input matInput formControlName="username" placeholder="Nombre de usuario">
       <mat-error *ngIf="isValidfield('username')">
-        {{ getFieldError('username') }}
+        Introduce un nombre de usuario válido
       </mat-error>
     </mat-form-field>
 
@@ -49,7 +51,7 @@
         <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
       <mat-error *ngIf="isValidfield('password')">
-        {{ getFieldError('password') }}
+        La contraseña es requerida
       </mat-error>
     </mat-form-field>
 

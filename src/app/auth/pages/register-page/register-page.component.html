@@ -2,9 +2,7 @@
 
 
 
-// añadir las validaciones del email de devtalels en los demas formularios, //
-poner bien los corchetes en los demas formularios //
-Agregar pagina de contacto
+Agregar messageField en los demas formularios tal cual tiene el register.ts
 
 
 <div class="container mt-5 d-flex justify-content-center">
@@ -12,13 +10,15 @@ Agregar pagina de contacto
     <div class="card-body">
       <h2 class="text-center text-uppercase mb-4">Registrarme</h2>
 
+      <hr>
+
       <form [formGroup]="registerForm" (submit)="onSubmit()">
 
         <mat-form-field appearance="outline" class="w-100 mb-3">
           <mat-label>Nombre</mat-label>
           <input type="text" matInput placeholder="Nombre" formControlName="name">
           <mat-error *ngIf="isValidfield('name')">
-            Introduce un nombre válido
+            {{ messageField('name') }}
           </mat-error>
         </mat-form-field>
 
@@ -26,7 +26,7 @@ Agregar pagina de contacto
           <mat-label>Email</mat-label>
           <input type="text" matInput placeholder="Email" formControlName="email">
           <mat-error *ngIf="isValidfield('email')">
-            Introduce un email válido
+            {{ messageField('email') }}
           </mat-error>
         </mat-form-field>
 
@@ -34,7 +34,7 @@ Agregar pagina de contacto
           <mat-label>Documento</mat-label>
           <input type="text" matInput placeholder="Documento" formControlName="document">
           <mat-error *ngIf="isValidfield('document')">
-            Introduce un documento válido
+            {{ messageField('document') }}
           </mat-error>
         </mat-form-field>
 
@@ -42,7 +42,7 @@ Agregar pagina de contacto
           <mat-label>Nombre de usuario</mat-label>
           <input type="text" matInput placeholder="Usuario" formControlName="username">
           <mat-error *ngIf="isValidfield('username')">
-            Introduce un nombre de usuario válido
+            {{ messageField('username') }}
           </mat-error>
         </mat-form-field>
 
@@ -53,7 +53,7 @@ Agregar pagina de contacto
             <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
           <mat-error *ngIf="isValidfield('password')">
-            La contraseña es requerida
+            {{ messageField('password') }}
           </mat-error>
         </mat-form-field>
 

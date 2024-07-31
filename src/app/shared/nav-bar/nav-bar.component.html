@@ -1,7 +1,9 @@
 <mat-toolbar class="navbar">
   <button mat-button (click)="landing()">Inicio</button>
-  <button mat-button (click)="main()" *ngIf="isLogin && !isAdmin">Market</button>
+  <button mat-button (click)="contact()" *ngIf="!isAdmin">Contacto</button>
+  <button mat-button (click)="main()" *ngIf="isLogin && !isAdmin">Mercado</button>
   <button mat-button (click)="wallet()" *ngIf="isLogin && !isAdmin">Mi billetera</button>
+  <button mat-button (click)="transictions()" *ngIf="isLogin && !isAdmin">Mis transacciones</button>
   <button mat-button (click)="transictions()" *ngIf="isAdmin">Transacciones</button>
   <button mat-button (click)="users()" *ngIf="isAdmin">Usuarios</button>
 

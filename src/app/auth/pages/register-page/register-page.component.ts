@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
@@ -7,6 +7,7 @@ import { filter, pipe, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { ToastService } from '../../../shared/services/toast.service';
 import { CustomValidators } from '../../../shared/validators/custom-validators';
+import { CustomHelpers } from '../../../shared/helpers/custom-helpers';
 
 @Component({
   selector: 'auth-register-page',
@@ -20,11 +21,11 @@ export class RegisterPageComponent  {
 
   public registerForm: FormGroup = this.fb.group({
 
-    name: ['', [Validators.required, CustomValidators.noNumbers()]],
+    name: ['', [Validators.required, CustomValidators.noNumbers(), CustomValidators.noSymbols()]],
     email: ['', [Validators.required, Validators.pattern( CustomValidators.emailPattern)]],
-    document: ['', [Validators.required, CustomValidators.onlyNumbers()]],
+    document: ['', [Validators.required, CustomValidators.onlyNumbers(), CustomValidators.noSymbols()]],
     username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.pattern(CustomValidators.passwordPattern), Validators.min(8)]],
     admin: [false],
 
   })
@@ -38,6 +39,8 @@ export class RegisterPageComponent  {
 
 
   public onSubmit() {
+
+    debugger;
 
     this.registerForm.markAllAsTouched();
 
@@ -53,11 +56,14 @@ export class RegisterPageComponent  {
 
     this.authService.registerUser(user)
     .pipe(
-      filter( register => !!register),
+     tap( user => console.log({user})),
     )
     .subscribe( user => {
 
-      if( !user ) return;
+      if( !user ) {
+        this.registerForm.reset();
+        return this.toastService.showError('Error', 'Registro invalido. Intente nuevamente');
+      }
 
       this.router.navigateByUrl('auth/login')
       this.toastService.showSuccess('Éxtio!', 'Te has registrado extiosamente');
@@ -71,10 +77,52 @@ export class RegisterPageComponent  {
   }
 
   public isValidfield( field: string ): boolean | null {
-
-    return this.registerForm.get(field)!.invalid && this.registerForm.get(field)!.touched;
-
+    return CustomHelpers.isValidField( field, this.registerForm );
   }
+
+  public messageField(field: string): string | null {
+    const errors: ValidationErrors | null = CustomHelpers.getFieldErrors(field, this.registerForm);
+
+    if (!errors) return null;
+
+    const errorMessages: { [key: string]: { [key: string]: string } } = {
+      name: {
+        required: 'Ingrese un nombre válido',
+        hasSymbols: 'Ingrese un nombre válido',
+        hasNumbers: 'Ingrese un nombre válido',
+      },
+      email: {
+        required: 'Ingrese un email válido',
+        pattern: 'El email no tiene un formato válido'
+      },
+      document: {
+        required: 'Ingrese un documento válido',
+        hasSymbols: 'Ingrese un documento válido',
+        hasLetters: 'Ingrese un documento válido'
+      },
+      username: {
+        required: 'Ingrese un nombre de usuario válido',
+      },
+      password: {
+        required: 'Ingrese una contraseña válida',
+        minlength: `La contraseña debe tener al menos ${errors['minlength']?.requiredLength} caracteres`,
+        pattern: 'La contraseña debe contener al menos una letra mayuscula, un número y un símbolo'
+      }
+    };
+
+    const fieldErrors = errorMessages[field];
+
+    if (!fieldErrors) return 'Campo inválido';
+
+    for (const errorKey in errors) {
+      if (fieldErrors[errorKey]) {
+        return fieldErrors[errorKey];
+      }
+    }
+
+    return 'Campo inválido';
+  }
+
 
 
 

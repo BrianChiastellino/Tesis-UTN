@@ -11,7 +11,7 @@ import { Observable, tap } from 'rxjs';
 import { Operation } from '../../../../models/enum/dialog.enum';
 import { Transaction } from '../../../../admin/models/transaction.models';
 import { TransactionType } from '../../../../admin/models/enum/transaction.enum';
-import { TransactionsService } from '../../../../admin/services/transactions.service';
+import { TransactionsService } from '../../../../shared/services/transactions.service';
 import { environment } from '../../../../../environments/environment';
 import { ConfirmTransactionDialogComponent } from '../../../../shared/confirm-transaction-dialog/confirm-transaction-dialog.component';
 
@@ -112,11 +112,16 @@ export class DialogBuyComponent {
 
 
     if (index != -1) {
-
-      wallet.coins![index].coinAmount += coin.coinAmount
+      wallet.coins![index].coinAmount += coin.coinAmount;
       wallet.coins![index].date = new Date().toLocaleString();
 
-    } else { wallet.coins!.unshift(coin) };
+      const coinAux = wallet.coins!.splice(index, 1)[0];
+
+      wallet.coins?.unshift(coinAux);
+    } else {
+      wallet.coins!.unshift(coin);
+    }
+
 
     if (currency == Currency.USD) { wallet.funds -= amountTobuy; }
     else { wallet.funds -= (amountTobuy * this.data.coinGecko.current_price); }

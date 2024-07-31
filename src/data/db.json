@@ -5,7 +5,7 @@
       "name": "admin",
       "email": "admin@gmail.com",
       "username": "admin",
-      "password": "12345",
+      "password": "Admin123!",
       "document": "123456789",
       "admin": true
     },
@@ -14,7 +14,7 @@
       "name": "Brian",
       "email": "chaste@gmail.com",
       "username": "chaste",
-      "password": "123",
+      "password": "ByChaste123!",
       "document": "41853675",
       "admin": false
     },
@@ -62,14 +62,37 @@
       "password": "asd",
       "document": "asd",
       "admin": true
+    },
+    {
+      "id": "ceba",
+      "name": "tizi",
+      "email": "tizi@gmail.com",
+      "username": "tizi",
+      "password": "123",
+      "document": "4189906112",
+      "admin": false
     }
   ],
   "wallets": [
     {
       "id": "034e",
       "idUser": "09c6",
-      "funds": 34702.6828,
+      "funds": 29089.862800000003,
       "coins": [
+        {
+          "id": "ethereum",
+          "coinAmount": 2.02851919769793,
+          "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+          "symbol": "eth",
+          "date": "30/7/2024, 03:53:02"
+        },
+        {
+          "id": "bitcoin",
+          "coinAmount": 0.10241449941034078,
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "symbol": "btc",
+          "date": "30/7/2024, 03:52:49"
+        },
         {
           "id": "pepe",
           "coinAmount": 10000,
@@ -132,13 +155,6 @@
           "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
           "symbol": "bnb",
           "date": "28/7/2024, 00:36:07"
-        },
-        {
-          "id": "bitcoin",
-          "coinAmount": 0.10086276457079014,
-          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
-          "symbol": "btc",
-          "date": "28/7/2024, 03:02:42"
         }
       ]
     },
@@ -155,6 +171,12 @@
           "date": "28/7/2024, 02:59:19"
         }
       ]
+    },
+    {
+      "id": "4e37",
+      "idUser": "ceba",
+      "funds": 0,
+      "coins": []
     }
   ],
   "transactions": [
@@ -509,6 +531,46 @@
       "coinAmount": 2,
       "type": "sell",
       "date": "28/7/2024, 08:38:06"
+    },
+    {
+      "id": "448b",
+      "userId": "09c6",
+      "coinId": "ethereum",
+      "coinAmount": 2,
+      "type": "buy",
+      "date": "29/7/2024, 12:09:29"
+    },
+    {
+      "id": "a07a",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 0.015517348395506177,
+      "type": "buy",
+      "date": "30/7/2024, 03:52:27"
+    },
+    {
+      "id": "6c7e",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 0.0015517348395506175,
+      "type": "buy",
+      "date": "30/7/2024, 03:52:49"
+    },
+    {
+      "id": "6e34",
+      "userId": "09c6",
+      "coinId": "ethereum",
+      "coinAmount": 0.028519197697930362,
+      "type": "buy",
+      "date": "30/7/2024, 03:53:02"
+    },
+    {
+      "id": "377a",
+      "userId": "09c6",
+      "coinId": "bitcoin",
+      "coinAmount": 0.015517348395506177,
+      "type": "sell",
+      "date": "30/7/2024, 03:58:32"
     }
   ]
 }

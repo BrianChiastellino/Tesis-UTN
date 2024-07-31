@@ -4,12 +4,14 @@ import { User } from '../../../auth/models/user.model';
 import { environment } from '../../../../environments/environment';
 import { Wallet } from '../../../models/wallet/wallet.models';
 import { BehaviorSubject, Observable, filter, pipe, tap } from 'rxjs';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ToastService } from '../../../shared/services/toast.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmTransactionDialogComponent } from '../../../shared/confirm-transaction-dialog/confirm-transaction-dialog.component';
 import { DialogConfirmData } from '../../../models/dialog/dialog.interface';
 import { Operation } from '../../../models/enum/dialog.enum';
+import { CustomValidators } from '../../../shared/validators/custom-validators';
+import { CustomHelpers } from '../../../shared/helpers/custom-helpers';
 
 @Component({
   selector: 'app-wallet-page',
@@ -24,7 +26,14 @@ export class WalletPageComponent implements OnInit {
 
 
   public formFunds: FormGroup = new FormGroup({
-    funds: new FormControl('', [Validators.required, Validators.min(100), Validators.max(1000000)])
+    funds: new FormControl('',
+      [
+        Validators.required,
+        Validators.min(100),
+        Validators.max(1000000),
+        CustomValidators.onlyNumbers(),
+        CustomValidators.noSymbols(),
+      ]),
   });
 
   constructor(
@@ -55,11 +64,6 @@ export class WalletPageComponent implements OnInit {
 
   }
 
-  public removeLetters(event: any): void {
-    const input = event.target as HTMLInputElement;
-    input.value = input.value.replace(/\D/g, '');
-  }
-
   public depositFunds(): void {
 
     if (this.formFunds.invalid || !this.wallet) return;
@@ -70,7 +74,7 @@ export class WalletPageComponent implements OnInit {
     .pipe(
       filter( operation => !!operation ),
       tap( () => this.wallet!.funds += funds ),
-      tap( () => this.formFunds.reset),
+      tap( () => this.formFunds.reset()),
     )
     .subscribe( () => {
       this.updateWallet();
@@ -94,7 +98,7 @@ export class WalletPageComponent implements OnInit {
       filter( operation => !!operation ),
       tap	( () => this.wallet!.funds -= funds ),
       tap ( () => { if ( this.wallet!.funds <= 0 ) { this.wallet!.funds = 0 } } ),
-      tap( () => this.formFunds.reset),
+      tap( () => this.formFunds.reset()),
     )
     .subscribe( () => {
       this.updateWallet();
@@ -115,32 +119,42 @@ export class WalletPageComponent implements OnInit {
 
   }
 
-  public isValidField(field: string): boolean | null {
-    return this.formFunds.controls[field].errors && this.formFunds.controls[field].touched;
+
+  public isValidfield( field: string ): boolean | null {
+
+    return this.formFunds.get(field)!.invalid && this.formFunds.get(field)!.touched;
+
   }
 
-  public messageFieldError (field: string) : string | null {
+  public messageFieldError(field: string): string | null {
 
-    if (!this.formFunds.controls[field]) return null;
+    const errors: ValidationErrors | null = CustomHelpers.getFieldErrors(field, this.formFunds);
 
+    if (errors) {
+      for (const key of Object.keys(errors)) {
+        switch (key) {
 
-    const errors = this.formFunds.controls[field].errors || {};
+          case 'required':
+            return 'Este campo es requerido';
 
-    for( const key of Object.keys(errors)){
+          case 'min':
+            return `Monto mínimo ${errors['min'].min}`;
 
-      switch ( key ) {
+          case 'max':
+            return `Monto máximo ${errors['max'].max}`;
 
-        case 'min':
-          return `Monto minimo ${errors['min'].min}`;
+          case 'hasLetters':
+            return 'Monto inválido';
 
-        case 'max':
-          return `Monto maximo ${errors['max'].max}`
-
+          case 'hasSymbols':
+            return 'Monto inválido';
+        }
       }
     }
 
     return null;
   }
+
 
   private createWallet(): void {
 

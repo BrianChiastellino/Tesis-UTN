@@ -7,12 +7,14 @@ mensaje de error cuando hace mal el login, // resetar input fondos
     <div class="card-body">
       <h2 class="text-center text-uppercase mb-4">Iniciar Sesion</h2>
 
+      <hr>
+
       <form [formGroup]="loginForm" (submit)="onSubmit()">
         <mat-form-field appearance="outline" class="w-100 mb-3">
           <mat-label>Email</mat-label>
           <input type="text" matInput placeholder="Usuario" formControlName="email">
           <mat-error *ngIf="isValidfield('email')">
-            Introduce un email válido
+            Mail invalido
           </mat-error>
         </mat-form-field>
 
@@ -23,7 +25,7 @@ mensaje de error cuando hace mal el login, // resetar input fondos
             <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
           <mat-error *ngIf="isValidfield('password')">
-            La contraseña es requerida
+            Contraseña invalida
           </mat-error>
         </mat-form-field>
 

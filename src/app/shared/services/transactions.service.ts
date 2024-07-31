@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { map, Observable } from 'rxjs';
-import { Transaction } from '../models/transaction.models';
+import { Transaction } from '../../admin/models/transaction.models';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

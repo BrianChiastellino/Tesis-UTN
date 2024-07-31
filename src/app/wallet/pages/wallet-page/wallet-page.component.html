@@ -2,20 +2,24 @@
 
 <h1 class="display-4 text-center mt-4 mb-4">Mi Billetera</h1>
 
+<hr>
+
 
 <form [formGroup]="formFunds" class="p-4 border rounded bg-light">
   <div class="form-group mb-3">
     <label for="fundsInput" class="form-label">Mis fondos: {{ wallet?.funds | number }}</label>
-    <input type="text" id="fundsInput" autocomplete="off" class="form-control" formControlName="funds" (input)="removeLetters($event)" placeholder="Ingrese la cantidad">
-    <div *ngIf="isValidField('funds')" class="mt-2 text-danger">
+    <input type="text" id="fundsInput" autocomplete="off" class="form-control" formControlName="funds" placeholder="Ingrese la cantidad">
+    <mat-error class="text-danger m-2" *ngIf="isValidfield('funds')">
       {{ messageFieldError('funds') }}
-    </div>
+    </mat-error>
   </div>
   <div class="d-flex justify-content-between">
     <button mat-button type="submit" class="btn btn-secondary" (click)="withdrawFunds()" [disabled]="formFunds.invalid">Retirar</button>
     <button mat-button type="submit" class="btn btn-primary" (click)="depositFunds()" [disabled]="formFunds.invalid">Depositar</button>
   </div>
 </form>
+
+<hr>
 
 <app-list-coin-user class="mt-3"
 [coins]="wallet?.coins!"

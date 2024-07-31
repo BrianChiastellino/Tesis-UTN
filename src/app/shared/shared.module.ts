@@ -8,7 +8,11 @@ import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmOperationDialogComponent } from './dialog/confirm-operation-dialog/confirm-operation-dialog.component';
 import { ConfirmTransactionDialogComponent } from './confirm-transaction-dialog/confirm-transaction-dialog.component';
-import { MatMenuModule } from '@angular/material/menu'; // Importa el módulo para el menú
+import { MatMenuModule } from '@angular/material/menu';
+import { ListTransactionsComponent } from './list-transactions/list-transactions.component';
+import { TransactionTypePipe } from './pipe/transactionType.pipe';
+import { UserEliminated } from './pipe/user-eliminated.pipe';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -18,17 +22,22 @@ import { MatMenuModule } from '@angular/material/menu'; // Importa el módulo pa
     EditUserDialogComponent,
     ConfirmOperationDialogComponent,
     ConfirmTransactionDialogComponent,
+    ListTransactionsComponent,
+    TransactionTypePipe,
+    UserEliminated
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ButtonModule,
     ReactiveFormsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSortModule,
   ],
   exports:[
     NavBarComponent,
-    SearchCoinComponent
+    SearchCoinComponent,
+    ListTransactionsComponent,
   ],
   providers: [
   ],

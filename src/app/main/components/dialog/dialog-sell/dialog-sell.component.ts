@@ -10,7 +10,7 @@ import { Operation } from '../../../../models/enum/dialog.enum';
 import { Observable, filter } from 'rxjs';
 import { Transaction } from '../../../../admin/models/transaction.models';
 import { TransactionType } from '../../../../admin/models/enum/transaction.enum';
-import { TransactionsService } from '../../../../admin/services/transactions.service';
+import { TransactionsService } from '../../../../shared/services/transactions.service';
 import { environment } from '../../../../../environments/environment';
 import { ConfirmTransactionDialogComponent } from '../../../../shared/confirm-transaction-dialog/confirm-transaction-dialog.component';
 
