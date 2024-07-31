@@ -1,7 +1,5 @@
 <shared-nav-bar></shared-nav-bar>
 
-mensaje de error cuando hace mal el login, // resetar input fondos
-
 <div class="container mt-5 d-flex justify-content-center">
   <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
     <div class="card-body">
@@ -14,7 +12,7 @@ mensaje de error cuando hace mal el login, // resetar input fondos
           <mat-label>Email</mat-label>
           <input type="text" matInput placeholder="Usuario" formControlName="email">
           <mat-error *ngIf="isValidfield('email')">
-            Mail invalido
+            Ingrese un email valido
           </mat-error>
         </mat-form-field>
 
@@ -25,7 +23,7 @@ mensaje de error cuando hace mal el login, // resetar input fondos
             <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
           <mat-error *ngIf="isValidfield('password')">
-            Contraseña invalida
+            Ingrese una contraseña valida
           </mat-error>
         </mat-form-field>
 

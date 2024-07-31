@@ -23,9 +23,9 @@ export class RegisterPageComponent  {
 
     name: ['', [Validators.required, CustomValidators.noNumbers(), CustomValidators.noSymbols()]],
     email: ['', [Validators.required, Validators.pattern( CustomValidators.emailPattern)]],
-    document: ['', [Validators.required, CustomValidators.onlyNumbers(), CustomValidators.noSymbols()]],
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.pattern(CustomValidators.passwordPattern), Validators.min(8)]],
+    document: ['', [Validators.required, CustomValidators.onlyNumbers(), CustomValidators.noSymbols(), Validators.minLength(7), Validators.maxLength(10)]],
+    username: ['', [Validators.required, Validators.minLength(5)]],
+    password: ['', [Validators.required, Validators.pattern(CustomValidators.passwordPattern), Validators.minLength(7)]],
     admin: [false],
 
   })
@@ -81,46 +81,8 @@ export class RegisterPageComponent  {
   }
 
   public messageField(field: string): string | null {
-    const errors: ValidationErrors | null = CustomHelpers.getFieldErrors(field, this.registerForm);
+    return CustomHelpers.messageFieldFormEditOrRegister( field, this.registerForm );
 
-    if (!errors) return null;
-
-    const errorMessages: { [key: string]: { [key: string]: string } } = {
-      name: {
-        required: 'Ingrese un nombre válido',
-        hasSymbols: 'Ingrese un nombre válido',
-        hasNumbers: 'Ingrese un nombre válido',
-      },
-      email: {
-        required: 'Ingrese un email válido',
-        pattern: 'El email no tiene un formato válido'
-      },
-      document: {
-        required: 'Ingrese un documento válido',
-        hasSymbols: 'Ingrese un documento válido',
-        hasLetters: 'Ingrese un documento válido'
-      },
-      username: {
-        required: 'Ingrese un nombre de usuario válido',
-      },
-      password: {
-        required: 'Ingrese una contraseña válida',
-        minlength: `La contraseña debe tener al menos ${errors['minlength']?.requiredLength} caracteres`,
-        pattern: 'La contraseña debe contener al menos una letra mayuscula, un número y un símbolo'
-      }
-    };
-
-    const fieldErrors = errorMessages[field];
-
-    if (!fieldErrors) return 'Campo inválido';
-
-    for (const errorKey in errors) {
-      if (fieldErrors[errorKey]) {
-        return fieldErrors[errorKey];
-      }
-    }
-
-    return 'Campo inválido';
   }
 
 

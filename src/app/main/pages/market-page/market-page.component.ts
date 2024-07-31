@@ -35,10 +35,7 @@ export class MarketPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.getUserFromLocalStorage();
-    this.getCoinGeckoTest();
     this.getWallet();
-    // this.getCoinGecko();
-
   }
 
   public sendCoinBuy(coin: CoinGecko): void {
@@ -72,28 +69,5 @@ export class MarketPageComponent implements OnInit {
     )
     .subscribe();
   }
-
-
-  private getCoinGeckoTest(): void {
-
-    this.coinGeckoService.coinGeckoTest()
-      .pipe(
-        tap(() => console.log('Coins cargadas con exito')),
-      )
-      .subscribe(coins => this.coinsGecko = coins);
-
-  }
-
-  private getCoinGecko(): void {
-
-    this.coinGeckoService.coinsGecko()
-      .pipe(
-        tap(data => console.log({ data })),
-      )
-      .subscribe(coins => this.coinsGecko = coins);
-
-  }
-
-
 
 }

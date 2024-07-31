@@ -34,7 +34,7 @@ export class BuyCoinGeckoComponent implements OnInit {
         this.openDialog(this.wallet!, coin);
       }
       else if ((this.wallet?.funds! <= 0 || !this.wallet) && coin) {
-        this.toastService.showError('Error', 'Fondos insuficientes!')
+        this.toastService.showError('Error', 'Fondos insuficientes. Depostita dinero en tu billetera')
       }
 
     });

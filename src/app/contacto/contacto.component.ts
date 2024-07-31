@@ -50,28 +50,30 @@ export class ContactComponent implements OnInit {
 
   public messageFieldError ( field: string ) : string | null{
 
-    const errors: ValidationErrors | null = CustomHelpers.getFieldErrors(field, this.contactForm);
+    return CustomHelpers.messageFieldFormEditOrRegister( field, this.contactForm)
 
-    if (errors) {
-      for (const key of Object.keys(errors)) {
-        switch (key) {
+    // const errors: ValidationErrors | null = CustomHelpers.getFieldErrors(field, this.contactForm);
 
-          case 'required':
-            return 'Este campo es requerido';
+    // if (errors) {
+    //   for (const key of Object.keys(errors)) {
+    //     switch (key) {
 
-          case 'pattern':
-            return 'Ingrese un mail valido';
+    //       case 'required':
+    //         return 'Este campo es requerido';
 
-          case 'hasNumbers':
-            return 'Nombre invalido';
+    //       case 'pattern':
+    //         return 'Ingrese un mail valido';
 
-          case 'hasSymbols':
-            return 'Nombre invalido';
-        }
-      }
-    }
+    //       case 'hasNumbers':
+    //         return 'Nombre invalido';
 
-    return null;
+    //       case 'hasSymbols':
+    //         return 'Nombre invalido';
+    //     }
+    //   }
+    // }
+
+    // return null;
 
   }
 

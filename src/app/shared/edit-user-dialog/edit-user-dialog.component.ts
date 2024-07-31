@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../auth/models/user.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../../auth/services/auth.service';
 import { filter, Observable, pipe, switchMap, tap } from 'rxjs';
 import { ToastService } from '../services/toast.service';
 import { CustomValidators } from '../validators/custom-validators';
+import { CustomHelpers } from '../helpers/custom-helpers';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -22,9 +23,9 @@ export class EditUserDialogComponent implements OnInit {
 
     name: ['', [Validators.required, CustomValidators.noNumbers(), CustomValidators.noSymbols()]],
     email: ['', [Validators.required, Validators.pattern( CustomValidators.emailPattern)]],
-    document: ['', [Validators.required, CustomValidators.onlyNumbers(), CustomValidators.noSymbols()]],
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.pattern(CustomValidators.passwordPattern)]],
+    document: ['', [Validators.required, CustomValidators.onlyNumbers(), CustomValidators.noSymbols(), Validators.minLength(7), Validators.maxLength(10)]],
+    username: ['', [Validators.required, Validators.minLength(5)]],
+    password: ['', [Validators.required, Validators.pattern(CustomValidators.passwordPattern), Validators.minLength(7)]],
     admin: [false],
 
   })
@@ -91,41 +92,22 @@ export class EditUserDialogComponent implements OnInit {
     ).subscribe(data => this.dialogRef.close(!!data));
   }
 
-
-
-
   public showPassword () : void {
     this.hidePassword = !this.hidePassword;
   }
 
   public isValidfield( field: string ): boolean | null {
-
-    return this.editForm.get(field)!.invalid && this.editForm.get(field)!.touched;
-
+    return CustomHelpers.isValidField( field, this.editForm );
   }
 
 
-  public getFieldError ( field: string ) : string | null {
-
-    if ( !this.editForm.controls[field] ) return null;
-
-    const errors = this.editForm.controls[field].errors || {};
-
-    for ( const key of Object.keys(errors) ) {
-
-      switch (key) {
-
-        case 'required':
-          return 'Este campo es requerido';
-
-
-      }
-
-    }
-
-    return null;
-
+  public messageField(field:string) : string | null {
+    return CustomHelpers.messageFieldFormEditOrRegister( field, this.editForm );
   }
+
+
+
+
 
 
 

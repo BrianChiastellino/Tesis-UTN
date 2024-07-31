@@ -26,7 +26,7 @@
           <mat-label>Asunto</mat-label>
           <input type="text" matInput formControlName="subject" placeholder="Asunto">
           <mat-error *ngIf="isValidField('subject')">
-            {{ messageFieldError('subject') }}
+            Este campo es requerido
           </mat-error>
         </mat-form-field>
 
@@ -34,7 +34,7 @@
           <mat-label>Mensaje</mat-label>
           <textarea matInput formControlName="message" placeholder="Mensaje" rows="5"></textarea>
           <mat-error *ngIf="isValidField('message')">
-            {{ messageFieldError('message') }}
+            Este campo es requerido
           </mat-error>
         </mat-form-field>
 

@@ -16,7 +16,7 @@
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="name" placeholder="Nombre">
       <mat-error *ngIf="isValidfield('name')">
-        Introduce un nombre válido
+        {{ messageField('name') }}
       </mat-error>
     </mat-form-field>
 
@@ -24,7 +24,7 @@
       <mat-label>Email</mat-label>
       <input matInput formControlName="email" placeholder="Email">
       <mat-error *ngIf="isValidfield('email')">
-        Introduce un email válido
+        {{ messageField('email') }}
       </mat-error>
     </mat-form-field>
 
@@ -32,7 +32,7 @@
       <mat-label>Documento</mat-label>
       <input matInput formControlName="document" placeholder="Documento">
       <mat-error *ngIf="isValidfield('document')">
-        Introduce un documento válido
+        {{ messageField('document') }}
       </mat-error>
     </mat-form-field>
 
@@ -40,7 +40,7 @@
       <mat-label>Nombre de usuario</mat-label>
       <input matInput formControlName="username" placeholder="Nombre de usuario">
       <mat-error *ngIf="isValidfield('username')">
-        Introduce un nombre de usuario válido
+        {{ messageField('username') }}
       </mat-error>
     </mat-form-field>
 
@@ -51,7 +51,7 @@
         <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
       <mat-error *ngIf="isValidfield('password')">
-        La contraseña es requerida
+        {{ messageField('password') }}
       </mat-error>
     </mat-form-field>
 
